@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="pl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bar Gwar - Klimat / Ludzie / Koktajle</title>
+    <link rel="stylesheet" href="css/style.css">
+    <!-- PDF.js - MUST be loaded before main.js or handled correctly -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.16.105/pdf.min.js"></script>
+    <script>
+        // PDF.js worker setup
+        pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.16.105/pdf.worker.min.js';
+
+        // Google Maps Global Buffer
+        window.initMap = function () {
+            window.isGoogleMapsLoaded = true;
+            if (window.onMapsLoadedCallback) {
+                window.onMapsLoadedCallback();
+            }
+        };
+    </script>
+</head>
+
+<body>
+
+    <!-- NAV -->
+    <nav class="navbar">
+        <a href="#" class="logo">
+            <img src="images/Logotypy/Wektor/Gwar_logotype_light_no-bg.svg" alt="Bar Gwar Logo">
+        </a>
+        <div id="weather-widget" class="weather-nav" style="display:none;">
+            <span class="weather-icon"></span>
+            <span class="weather-temp"></span>
+        </div>
+        <div class="hamburger">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+        <ul class="nav-links">
+            <li><a href="#about">O NAS</a></li>
+            <li><a href="menu.html">MENU</a></li>
+            <li><a href="promotions.html">PROMOCJE</a></li>
+            <li><a href="#gallery">GALERIA</a></li>
+            <li><a href="#reservation">REZERWACJA</a></li>
+            <li><a href="#contact">KONTAKT</a></li>
+        </ul>
+    </nav>
+
+    <!-- HERO -->
+    <header class="hero">
+        <img src="images/Logotypy/Wektor/Gwar_logotype_light+shadow_no-bg.svg" alt="Bar Gwar" class="hero-logo">
+        <p>Klimat / Ludzie / Koktajle</p>
+    </header>
+
+    <!-- ABOUT -->
+    <section id="about">
+        <div class="container">
+            <h2>O NAS</h2>
+            <div class="about-content">
+                <div class="about-text">
+                    <p>Gwar to Twój przystanek przy Kładce Bernatka. Miejsce tętniące życiem, stworzone z pasji do
+                        autorskich koktajli i niezobowiązującej atmosfery. Tu sezonowe smaki spotykają się z miejską
+                        energią.</p>
+                    <p>Niezależnie czy wpadasz na szybkie espresso, świętujesz z ekipą, czy szukasz idealnego tła do
+                        rozmów, nasza załoga zadba o to, byś czuł się jak u siebie. Wpadnij, spróbuj, zostań na dłużej.
+                    </p>
+                </div>
+                <div class="about-image"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- GALLERY (INSTAGRAM CAROUSEL) -->
+    <section id="gallery">
+        <div class="container">
+            <h2 style="margin-bottom:0.5rem;">
+                <a href="https://instagram.com/bar_gwar" target="_blank"
+                    style="text-decoration:none; color:var(--primary-color);">INSTAGRAM <span
+                        style="font-size:0.5em; vertical-align:middle;">@bar_gwar</span></a>
+            </h2>
+            <p
+                style="text-align:center; color:#666; font-family:var(--font-heading); font-size:1.5rem; margin-top:0; margin-bottom:2rem;">
+                GALERIA</p>
+            <div class="carousel-container">
+                <!-- Placeholders resembling Insta posts -->
+                <div class="carousel-item insta-post"
+                    style="background-image: url('data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22300%22 height=%22300%22><rect width=%22100%25%22 height=%22100%25%22 fill=%22%23222%22/><text x=%2250%25%22 y=%2250%25%22 fill=%22%23444%22 text-anchor=%22middle%22 dy=%22.3em%22>POST 1</text></svg>')">
+                </div>
+                <div class="carousel-item insta-post"
+                    style="background-image: url('data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22300%22 height=%22300%22><rect width=%22100%25%22 height=%22100%25%22 fill=%22%23222%22/><text x=%2250%25%22 y=%2250%25%22 fill=%22%23444%22 text-anchor=%22middle%22 dy=%22.3em%22>POST 2</text></svg>')">
+                </div>
+                <div class="carousel-item insta-post"
+                    style="background-image: url('data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22300%22 height=%22300%22><rect width=%22100%25%22 height=%22100%25%22 fill=%22%23222%22/><text x=%2250%25%22 y=%2250%25%22 fill=%22%23444%22 text-anchor=%22middle%22 dy=%22.3em%22>POST 3</text></svg>')">
+                </div>
+                <div class="carousel-item insta-post"
+                    style="background-image: url('data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22300%22 height=%22300%22><rect width=%22100%25%22 height=%22100%25%22 fill=%22%23222%22/><text x=%2250%25%22 y=%2250%25%22 fill=%22%23444%22 text-anchor=%22middle%22 dy=%22.3em%22>POST 4</text></svg>')">
+                </div>
+                <div class="carousel-item insta-post"
+                    style="background-image: url('data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22300%22 height=%22300%22><rect width=%22100%25%22 height=%22100%25%22 fill=%22%23222%22/><text x=%2250%25%22 y=%2250%25%22 fill=%22%23444%22 text-anchor=%22middle%22 dy=%22.3em%22>POST 5</text></svg>')">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- REVIEWS (GOOGLE CAROUSEL) -->
+    <section id="reviews">
+        <div class="container">
+            <h2>OPINIE GOOGLE</h2>
+            <div class="carousel-container">
+                <div class="carousel-item review-card">
+                    <div class="stars">★★★★★</div>
+                    <div class="review-text">"Najlepsze drinki w mieście! Klimat nie do podrobienia, a obsługa to
+                        złoto."</div>
+                    <div class="review-author">- Anna K.</div>
+                </div>
+                <div class="carousel-item review-card">
+                    <div class="stars">★★★★★</div>
+                    <div class="review-text">"Super miejsce na spotkanie ze znajomymi. Muzyka, wystrój, wszystko gra."
+                    </div>
+                    <div class="review-author">- Piotr W.</div>
+                </div>
+                <div class="carousel-item review-card">
+                    <div class="stars">★★★★★</div>
+                    <div class="review-text">"Bardzo polecam! Drinki autorskie to mistrzostwo świata."</div>
+                    <div class="review-author">- Magda L.</div>
+                </div>
+                <div class="carousel-item review-card">
+                    <div class="stars">★★★★★</div>
+                    <div class="review-text">"Luźna atmosfera i profesjonalne podejście barmanów. Wrócę na pewno."</div>
+                    <div class="review-author">- Tomek S.</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- RESERVATION -->
+    <section id="reservation">
+        <div class="container">
+            <h2>REZERWACJA</h2>
+            <form id="reservation-form" class="reservation-form"
+                action="https://script.google.com/macros/s/AKfycbwkNZ4OXsfd1OASznLF7xAxgaeGaNq71QplNXnIiUfRuQz_d8bh5rG8QlRbPeu534_smQ/exec"
+                method="POST">
+                <div class="form-group">
+                    <label for="name">Imię i Nazwisko</label>
+                    <input type="text" id="name" name="name" required>
+                </div>
+                <div class="form-group">
+                    <label for="date">Data</label>
+                    <input type="date" id="date" name="date" required>
+                </div>
+                <div class="form-group">
+                    <label>Godzina</label>
+                    <div style="display:flex; gap:10px;">
+                        <select id="hour" name="hour" required
+                            style="flex:1; padding:10px; background:black; border:1px solid #333; color:white; font-family:var(--font-body); font-size:1rem; color-scheme:dark;">
+                            <option value="" disabled selected>Godz</option>
+                            <!-- JS will populate -->
+                        </select>
+                        <select id="minute" name="minute" required
+                            style="flex:1; padding:10px; background:black; border:1px solid #333; color:white; font-family:var(--font-body); font-size:1rem; color-scheme:dark;">
+                            <option value="00">00</option>
+                            <option value="15">15</option>
+                            <option value="30">30</option>
+                            <option value="45">45</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>Liczba osób</label>
+                    <!-- SELECT MODE -->
+                    <select id="pax-select" name="pax" required
+                        style="width:100%; padding:10px; background:black; border:1px solid #333; color:white; font-family:var(--font-body); font-size:1rem; color-scheme:dark;">
+                        <option value="" disabled selected>Wybierz</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
+                        <option value="6">6</option>
+                        <option value="7">7</option>
+                        <option value="8">8</option>
+                        <option value="9">9</option>
+                        <option value="10">10</option>
+                        <option value="12">12</option>
+                        <option value="15">15</option>
+                        <option value="custom">Inna liczba...</option>
+                    </select>
+                    <!-- MANUAL INPUT MODE -->
+                    <input type="number" id="pax-input" min="1" placeholder="Wpisz liczbę osób" style="display:none;"
+                        autocomplete="off">
+                </div>
+                <div class="form-group">
+                    <label for="phone">Telefon</label>
+                    <input type="tel" id="phone" name="phone" required>
+                </div>
+                <button type="submit" class="btn-submit">WYŚLIJ ZGŁOSZENIE</button>
+                <div id="form-status" style="margin-top:20px; text-align:center; display:none;"></div>
+            </form>
+        </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section id="contact">
+        <div class="container">
+            <h2>KONTAKT</h2>
+            <div class="contact-content">
+                <div class="contact-info">
+                    <p><strong>Adres:</strong> Mostowa 8, 31-051 Kraków</p>
+
+                    <!-- MINI MAP -->
+                    <div id="contact-map"
+                        style="width:100%; max-width:400px; height:200px; background:#222; margin:20px auto; border:1px solid #333;">
+                    </div>
+
+                    <!-- TRAVEL TIME WIDGET -->
+                    <div id="travel-time-section" class="travel-time-container" style="display:none;">
+                        <a id="travel-link" href="#" target="_blank" class="travel-btn">
+                            📍 WYZNACZ TRASĘ <span id="time-estimate" class="time-badge">...</span>
+                        </a>
+                    </div>
+
+                    <p><strong>Telefon:</strong> +48 453 433 852</p>
+                    <p><strong>Email:</strong> gwar@gwar.bar</p>
+                    <br>
+                    <p><strong>Godziny otwarcia:</strong></p>
+                    <p>Pon - Czw: 12:00 - 00:00</p>
+                    <p>Pt - Sob: 12:00 - 02:45</p>
+                    <p>Niedz: 11:00 - 23:00</p>
+                </div>
+                <div class="social-links">
+                    <a href="https://instagram.com/bar_gwar" target="_blank">INSTAGRAM</a>
+                    <a href="https://www.facebook.com/RestauracjaKawiarniaBarGwar/" target="_blank">FACEBOOK</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <img src="images/Logotypy/Wektor/Gwar_logotype_green_no-bg.svg" alt="Bar Gwar" class="footer-logo">
+        <p>&copy; 2026 Bar Gwar. Wszelkie prawa zastrzeżone.</p>
+    </footer>
+
+    <!-- Google Maps API -->
+    <script
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDHS1YkQvLke6n18kjP3IxdhZq5-7fsc9c&libraries=places&v=weekly&callback=initMap"
+        async defer></script>
+
+    <!-- LIGHTBOX -->
+    <div id="lightbox">
+        <div class="close-btn">&times;</div>
+        <img id="lightbox-img" src="" alt="View Fullscreen">
+    </div>
+
+    <script type="module" src="js/main.js"></script>
+</body>
+
+</html>

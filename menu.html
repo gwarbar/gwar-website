@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="pl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bar Gwar - Menu</title>
+    <link rel="stylesheet" href="css/style.css">
+    <!-- PDF.js -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.16.105/pdf.min.js"></script>
+    <script>
+        pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.16.105/pdf.worker.min.js';
+    </script>
+</head>
+
+<body>
+
+    <!-- NAV -->
+    <nav class="navbar">
+        <a href="index.html" class="logo">
+            <img src="images/Logotypy/Wektor/Gwar_logotype_light_no-bg.svg" alt="Bar Gwar Logo">
+        </a>
+        <div class="hamburger">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+        <ul class="nav-links">
+            <li><a href="index.html#about">O NAS</a></li>
+            <li><a href="menu.html" class="active">MENU</a></li>
+            <li><a href="promotions.html">PROMOCJE</a></li>
+            <li><a href="index.html#gallery">GALERIA</a></li>
+            <li><a href="index.html#reservation">REZERWACJA</a></li>
+            <li><a href="index.html#contact">KONTAKT</a></li>
+        </ul>
+    </nav>
+
+    <!-- MENU SECTION -->
+    <section id="menu" style="padding-top: 120px;"> <!-- Added padding for fixed nav -->
+        <div class="container">
+            <h2>MENU</h2>
+            <div class="menu-controls">
+                <div class="flag-btn active" data-lang="pl">
+                    <img src="images/pl.png" alt="PL">
+                </div>
+                <div class="flag-btn" data-lang="en">
+                    <img src="images/en.png" alt="EN">
+                </div>
+            </div>
+            <div id="pdfContainer"></div>
+        </div>
+    </section>
+
+    <footer>
+        <img src="images/Logotypy/Wektor/Gwar_logotype_green_no-bg.svg" alt="Bar Gwar" class="footer-logo">
+        <p>&copy; 2026 Bar Gwar. Wszelkie prawa zastrzeżone.</p>
+    </footer>
+
+    <script type="module" src="js/main.js"></script>
+</body>
+
+</html>
