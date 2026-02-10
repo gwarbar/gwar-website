@@ -233,67 +233,22 @@ function loadGoogleReviewsLegacy(container) {
  * TRAVEL TIME API
  * Uses Distance Matrix Service to calculate time from user to Bar Gwar
  */
+/**
+ * TRAVEL TIME API
+ * Simplified: No geolocation, just static link to Google Maps
+ */
 export async function loadTravelTime() {
-    console.log('[GWAR-API] loadTravelTime starting...');
+    console.log('[GWAR-API] loadTravelTime starting (Simplified mode)');
     const section = document.getElementById('travel-time-section');
-    const timeBadge = document.getElementById('time-estimate');
     const travelLink = document.getElementById('travel-link');
 
-    if (!section || !timeBadge || !travelLink) return;
+    if (!section || !travelLink) return;
 
-    // Default link to Gmaps in case geolocation fails
-    const destCoords = "50.0483,19.9455";
-    travelLink.href = `https://www.google.com/maps/dir/?api=1&destination=${destCoords}`;
+    // Set static link to the specific Google Maps place
+    travelLink.href = 'https://www.google.com/maps/place/Bar+Gwar/@50.0480326,19.9445998,18z/data=!4m17!1m10!4m9!1m4!2m2!1d19.9639321!2d50.0541475!4e1!1m3!2m2!1d19.9455!2d50.0483!3m5!1s0x47165bdfaaf2021b:0x960543b90ef2cad3!8m2!3d50.0480326!4d19.9460358!16s%2Fg%2F11kq00tlpl?entry=ttu&g_ep=EgoyMDI2MDIwNC4wIKXMDSoASAFQAw%3D%3D';
 
-    if (!navigator.geolocation) {
-        console.warn('[GWAR-API] Geolocation not supported by browser');
-        section.style.display = 'block';
-        return;
-    }
-
-    navigator.geolocation.getCurrentPosition(async (position) => {
-        const userLat = position.coords.latitude;
-        const userLng = position.coords.longitude;
-
-        console.log(`[GWAR-API] User coordinates: ${userLat}, ${userLng}`);
-
-        // Finalize travel link with origin for better Gmaps behavior
-        travelLink.href = `https://www.google.com/maps/dir/?api=1&origin=${userLat},${userLng}&destination=${destCoords}`;
-
-        try {
-            if (!window.google || !window.google.maps) return;
-
-            const service = new google.maps.DistanceMatrixService();
-
-            service.getDistanceMatrix({
-                origins: [{ lat: userLat, lng: userLng }],
-                destinations: [{ lat: 50.0483, lng: 19.9455 }],
-                travelMode: google.maps.TravelMode.DRIVING, // Default to driving
-                unitSystem: google.maps.UnitSystem.METRIC,
-            }, (response, status) => {
-                if (status === 'OK' && response.rows[0].elements[0].status === 'OK') {
-                    const duration = response.rows[0].elements[0].duration.text;
-                    console.log(`[GWAR-API] Travel time found: ${duration}`);
-                    timeBadge.textContent = duration;
-                    section.style.display = 'block';
-                } else {
-                    console.warn('[GWAR-API] Distance Matrix failed:', status);
-                    section.style.display = 'block'; // Still show button without time
-                }
-            });
-        } catch (error) {
-            console.error('[GWAR-API] Travel Time Error:', error);
-            section.style.display = 'block';
-        }
-
-    }, (error) => {
-        console.warn('[GWAR-API] Geolocation permission denied or failed:', error.message);
-        section.style.display = 'block'; // Show button even if time is unknown
-    }, {
-        enableHighAccuracy: false,
-        timeout: 5000,
-        maximumAge: 0
-    });
+    // Show button immediately
+    section.style.display = 'block';
 }
 
 /**

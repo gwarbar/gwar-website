@@ -1,4 +1,5 @@
 import { loadInstagramFeed, loadGoogleReviews, loadTravelTime, loadWeather } from './api.js?v=13';
+import { TRANSLATIONS } from './translations.js';
 
 
 // PDF Handling
@@ -155,9 +156,10 @@ document.addEventListener('DOMContentLoaded', () => {
     const initContactMap = () => {
         const mapDiv = document.getElementById('contact-map');
         if (mapDiv && window.google) {
-            const position = { lat: 50.0483, lng: 19.9455 }; // Mostowa 8
+            // Updated coordinates from Google Maps link
+            const position = { lat: 50.0480326, lng: 19.9460358 };
             const map = new google.maps.Map(mapDiv, {
-                zoom: 15,
+                zoom: 18, // Zoomed in closer for better detail
                 center: position,
                 disableDefaultUI: true, // Clean look
                 styles: [
@@ -265,22 +267,43 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
 
-function setLanguage(lang) {
-    if (currentLang === lang) return;
+// Use a more robust language switching mechanism
+window.setLanguage = setLanguage;
+
+async function setLanguage(lang) {
+    if (currentLang === lang && !pdfContainer) return; // Skip if same lang and no PDF re-render needed
+
     currentLang = lang;
+    localStorage.setItem('gwar_language', lang); // Save preference
 
     // Update UI active state
     document.querySelectorAll('.flag-btn').forEach(btn => {
-        btn.classList.toggle('active', btn.dataset.lang === lang);
+        const isActive = btn.dataset.lang === lang;
+        btn.classList.toggle('active', isActive);
+        btn.style.opacity = isActive ? '1' : '0.5'; // Visual feedback
     });
 
-    const url = (lang === 'pl') ? 'pdf/menu_pl.pdf' : 'pdf/menu_en.pdf';
-    loadPDF(url);
-}
+    // Translate Text Content
+    const t = TRANSLATIONS[lang];
+    if (t) {
+        document.querySelectorAll('[data-i18n]').forEach(el => {
+            const key = el.dataset.i18n;
+            if (t[key]) {
+                if (el.tagName === 'INPUT' || el.tagName === 'TEXTAREA') {
+                    el.placeholder = t[key];
+                } else {
+                    el.textContent = t[key];
+                }
+            }
+        });
+    }
 
-// Make setLanguage global so inline HTML clicks work (if keeping that pattern) 
-// or better, bind it in JS. Let's bind in JS.
-window.setLanguage = setLanguage; // For backward compatibility if needed
+    // PDF Reload (only if on a page with PDF)
+    if (pdfContainer) {
+        const url = (lang === 'pl') ? 'pdf/menu_pl.pdf' : 'pdf/menu_en.pdf';
+        await loadPDF(url);
+    }
+}
 
 function initPDF() {
     // Bind click events for flags if they exist
@@ -291,43 +314,53 @@ function initPDF() {
         });
     });
 
-    // Initial load
-    setLanguage('pl');
+    // Initial load from storage or default
+    const savedLang = localStorage.getItem('gwar_language') || 'pl';
+    setLanguage(savedLang);
 }
 
-function loadPDF(url) {
+let currentPdfUrl = null;
+
+async function loadPDF(url) {
     if (!pdfContainer) return;
 
-    pdfContainer.innerHTML = '<div style="color:white; text-align:center; padding:20px;">Ładowanie menu...</div>';
+    // Avoid reloading if same URL (unless forced, but here we assume simple switch)
+    // Actually simpler to just reload to be safe with language changes
 
-    // Check if pdfjsLib is loaded
+    currentPdfUrl = url;
+    pdfContainer.innerHTML = '<div style="color:white; text-align:center; padding:20px;">' +
+        (currentLang === 'en' ? 'Loading menu...' : 'Ładowanie menu...') + '</div>';
+
     if (typeof pdfjsLib === 'undefined') {
         console.error('PDF.js library not loaded');
-        pdfContainer.innerHTML = '<div style="color:red; text-align:center;">Błąd ładowania silnika PDF.</div>';
         return;
     }
 
-    pdfjsLib.getDocument(url).promise.then(pdf => {
+    try {
+        const pdf = await pdfjsLib.getDocument(url).promise;
         pdfDoc = pdf;
         pdfContainer.innerHTML = ""; // Clear loader
+
+        // Render pages sequentially to ensure order
         for (let i = 1; i <= pdf.numPages; i++) {
-            renderPage(i);
+            await renderPage(i);
         }
-    }).catch(err => {
+    } catch (err) {
         console.error("PDF load error:", err);
-        pdfContainer.innerHTML = `<div style="color:red; text-align:center;">Nie udało się załadować PDF: ${url}</div>`;
-    });
+        pdfContainer.innerHTML = `<div style="color:red; text-align:center;">Failed to load PDF</div>`;
+    }
 }
 
-function renderPage(num) {
-    pdfDoc.getPage(num).then(page => {
-        // Calculate scale to fit container width
+async function renderPage(num) {
+    try {
+        const page = await pdfDoc.getPage(num);
+
+        // Calculate scale
         const containerWidth = pdfContainer.clientWidth || window.innerWidth;
         const unscaledViewport = page.getViewport({ scale: 1 });
-        const scale = (containerWidth - 20) / unscaledViewport.width; // -20 for padding safety
+        const scale = (containerWidth - 20) / unscaledViewport.width;
         const viewport = page.getViewport({ scale: scale });
 
-        // HiDPI rendering
         const outputScale = window.devicePixelRatio || 1;
 
         const canvas = document.createElement('canvas');
@@ -335,30 +368,49 @@ function renderPage(num) {
 
         canvas.width = Math.floor(viewport.width * outputScale);
         canvas.height = Math.floor(viewport.height * outputScale);
-
         canvas.style.width = viewport.width + 'px';
         canvas.style.height = viewport.height + 'px';
+        canvas.style.marginBottom = '20px'; // Add some spacing between pages
 
         const transform = outputScale !== 1
             ? [outputScale, 0, 0, outputScale, 0, 0]
             : null;
 
-        pdfContainer.appendChild(canvas);
+        // wrapper for canvas to center it
+        const wrapper = document.createElement('div');
+        wrapper.style.display = 'flex';
+        wrapper.style.justifyContent = 'center';
+        wrapper.style.width = '100%';
+        wrapper.appendChild(canvas);
 
-        page.render({
+        pdfContainer.appendChild(wrapper);
+
+        await page.render({
             canvasContext: ctx,
             viewport: viewport,
             transform: transform
-        });
-    });
+        }).promise;
+
+    } catch (e) {
+        console.error("Error rendering page " + num, e);
+    }
 }
 
 // Handle resize
+// Handle resize with persistence check
 let resizeTimeout;
+let lastWidth = window.innerWidth;
+
 window.addEventListener('resize', () => {
+    // Ignore vertical resize (address bar on mobile)
+    if (window.innerWidth === lastWidth) return;
+    lastWidth = window.innerWidth;
+
     clearTimeout(resizeTimeout);
     resizeTimeout = setTimeout(() => {
-        const url = (currentLang === 'pl') ? 'pdf/menu_pl.pdf' : 'pdf/menu_en.pdf';
-        loadPDF(url);
-    }, 150);
+        if (pdfDoc && currentPdfUrl) {
+            // Reloading the PDF is the safest way to ensure proper rescale
+            loadPDF(currentPdfUrl);
+        }
+    }, 250);
 });

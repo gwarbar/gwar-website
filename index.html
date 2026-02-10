@@ -38,6 +38,18 @@
         <a href="#" class="logo">
             <img src="images/Logotypy/Wektor/Gwar_logotype_light_no-bg.svg" alt="Bar Gwar Logo">
         </a>
+
+        <!-- Language Switcher Desktop/Mobile -->
+        <div class="lang-switch"
+            style="display:flex; gap:10px; margin-left:auto; margin-right:20px; align-items:center;">
+            <div class="flag-btn active" data-lang="pl" style="cursor:pointer; opacity:1;">
+                <img src="images/pl.png" alt="PL" style="width:24px; height:auto;">
+            </div>
+            <div class="flag-btn" data-lang="en" style="cursor:pointer; opacity:0.5;">
+                <img src="images/en.png" alt="EN" style="width:24px; height:auto;">
+            </div>
+        </div>
+
         <div id="weather-widget" class="weather-nav" style="display:none;">
             <span class="weather-icon"></span>
             <span class="weather-temp"></span>
@@ -48,31 +60,33 @@
             <span></span>
         </div>
         <ul class="nav-links">
-            <li><a href="#about">O NAS</a></li>
-            <li><a href="menu.html">MENU</a></li>
-            <li><a href="promotions.html">PROMOCJE</a></li>
-            <li><a href="#gallery">GALERIA</a></li>
-            <li><a href="#reservation">REZERWACJA</a></li>
-            <li><a href="#contact">KONTAKT</a></li>
+            <li><a href="#about" data-i18n="nav_about">O NAS</a></li>
+            <li><a href="menu.html" data-i18n="nav_menu">MENU</a></li>
+            <li><a href="promotions.html" data-i18n="nav_promotions">PROMOCJE</a></li>
+            <li><a href="#gallery" data-i18n="nav_gallery">GALERIA</a></li>
+            <li><a href="#reservation" data-i18n="nav_reservation">REZERWACJA</a></li>
+            <li><a href="#contact" data-i18n="nav_contact">KONTAKT</a></li>
         </ul>
     </nav>
 
     <!-- HERO -->
     <header class="hero">
         <img src="images/Logotypy/Wektor/Gwar_logotype_light+shadow_no-bg.svg" alt="Bar Gwar" class="hero-logo">
-        <p>Klimat / Ludzie / Koktajle</p>
+        <p data-i18n="hero_slogan">Klimat / Ludzie / Koktajle</p>
     </header>
 
     <!-- ABOUT -->
     <section id="about">
         <div class="container">
-            <h2>O NAS</h2>
+            <h2 data-i18n="about_title">O NAS</h2>
             <div class="about-content">
                 <div class="about-text">
-                    <p>Gwar to Twój przystanek przy Kładce Bernatka. Miejsce tętniące życiem, stworzone z pasji do
+                    <p data-i18n="about_p1">Gwar to Twój przystanek przy Kładce Bernatka. Miejsce tętniące życiem,
+                        stworzone z pasji do
                         autorskich koktajli i niezobowiązującej atmosfery. Tu sezonowe smaki spotykają się z miejską
                         energią.</p>
-                    <p>Niezależnie czy wpadasz na szybkie espresso, świętujesz z ekipą, czy szukasz idealnego tła do
+                    <p data-i18n="about_p2">Niezależnie czy wpadasz na szybkie espresso, świętujesz z ekipą, czy szukasz
+                        idealnego tła do
                         rozmów, nasza załoga zadba o to, byś czuł się jak u siebie. Wpadnij, spróbuj, zostań na dłużej.
                     </p>
                 </div>
@@ -86,11 +100,12 @@
         <div class="container">
             <h2 style="margin-bottom:0.5rem;">
                 <a href="https://instagram.com/bar_gwar" target="_blank"
-                    style="text-decoration:none; color:var(--primary-color);">INSTAGRAM <span
+                    style="text-decoration:none; color:var(--primary-color);"><span
+                        data-i18n="social_insta">INSTAGRAM</span> <span
                         style="font-size:0.5em; vertical-align:middle;">@bar_gwar</span></a>
             </h2>
-            <p
-                style="text-align:center; color:#666; font-family:var(--font-heading); font-size:1.5rem; margin-top:0; margin-bottom:2rem;">
+            <p style="text-align:center; color:#666; font-family:var(--font-heading); font-size:1.5rem; margin-top:0; margin-bottom:2rem;"
+                data-i18n="gallery_title">
                 GALERIA</p>
             <div class="carousel-container">
                 <!-- Placeholders resembling Insta posts -->
@@ -116,7 +131,7 @@
     <!-- REVIEWS (GOOGLE CAROUSEL) -->
     <section id="reviews">
         <div class="container">
-            <h2>OPINIE GOOGLE</h2>
+            <h2 data-i18n="reviews_title">OPINIE GOOGLE</h2>
             <div class="carousel-container">
                 <div class="carousel-item review-card">
                     <div class="stars">★★★★★</div>
@@ -147,24 +162,24 @@
     <!-- RESERVATION -->
     <section id="reservation">
         <div class="container">
-            <h2>REZERWACJA</h2>
+            <h2 data-i18n="reservation_title">REZERWACJA</h2>
             <form id="reservation-form" class="reservation-form"
                 action="https://script.google.com/macros/s/AKfycbwkNZ4OXsfd1OASznLF7xAxgaeGaNq71QplNXnIiUfRuQz_d8bh5rG8QlRbPeu534_smQ/exec"
                 method="POST">
                 <div class="form-group">
-                    <label for="name">Imię i Nazwisko</label>
+                    <label for="name" data-i18n="form_name">Imię i Nazwisko</label>
                     <input type="text" id="name" name="name" required>
                 </div>
                 <div class="form-group">
-                    <label for="date">Data</label>
+                    <label for="date" data-i18n="form_date">Data</label>
                     <input type="date" id="date" name="date" required>
                 </div>
                 <div class="form-group">
-                    <label>Godzina</label>
+                    <label data-i18n="form_time">Godzina</label>
                     <div style="display:flex; gap:10px;">
                         <select id="hour" name="hour" required
                             style="flex:1; padding:10px; background:black; border:1px solid #333; color:white; font-family:var(--font-body); font-size:1rem; color-scheme:dark;">
-                            <option value="" disabled selected>Godz</option>
+                            <option value="" disabled selected>Start</option>
                             <!-- JS will populate -->
                         </select>
                         <select id="minute" name="minute" required
@@ -177,11 +192,11 @@
                     </div>
                 </div>
                 <div class="form-group">
-                    <label>Liczba osób</label>
+                    <label data-i18n="form_pax">Liczba osób</label>
                     <!-- SELECT MODE -->
                     <select id="pax-select" name="pax" required
                         style="width:100%; padding:10px; background:black; border:1px solid #333; color:white; font-family:var(--font-body); font-size:1rem; color-scheme:dark;">
-                        <option value="" disabled selected>Wybierz</option>
+                        <option value="" disabled selected data-i18n="form_pax_placeholder">Wybierz</option>
                         <option value="2">2</option>
                         <option value="3">3</option>
                         <option value="4">4</option>
@@ -193,17 +208,17 @@
                         <option value="10">10</option>
                         <option value="12">12</option>
                         <option value="15">15</option>
-                        <option value="custom">Inna liczba...</option>
+                        <option value="custom" data-i18n="form_pax_custom">Inna liczba...</option>
                     </select>
                     <!-- MANUAL INPUT MODE -->
-                    <input type="number" id="pax-input" min="1" placeholder="Wpisz liczbę osób" style="display:none;"
-                        autocomplete="off">
+                    <input type="number" id="pax-input" min="1" placeholder="Wpisz liczbę osób"
+                        data-i18n="form_pax_input_placeholder" style="display:none;" autocomplete="off">
                 </div>
                 <div class="form-group">
-                    <label for="phone">Telefon</label>
+                    <label for="phone" data-i18n="form_phone">Telefon</label>
                     <input type="tel" id="phone" name="phone" required>
                 </div>
-                <button type="submit" class="btn-submit">WYŚLIJ ZGŁOSZENIE</button>
+                <button type="submit" class="btn-submit" data-i18n="form_submit">WYŚLIJ ZGŁOSZENIE</button>
                 <div id="form-status" style="margin-top:20px; text-align:center; display:none;"></div>
             </form>
         </div>
@@ -212,10 +227,10 @@
     <!-- CONTACT -->
     <section id="contact">
         <div class="container">
-            <h2>KONTAKT</h2>
+            <h2 data-i18n="contact_title">KONTAKT</h2>
             <div class="contact-content">
                 <div class="contact-info">
-                    <p><strong>Adres:</strong> Mostowa 8, 31-051 Kraków</p>
+                    <p><strong data-i18n="contact_address">Adres:</strong> Mostowa 8, 31-051 Kraków</p>
 
                     <!-- MINI MAP -->
                     <div id="contact-map"
@@ -225,21 +240,22 @@
                     <!-- TRAVEL TIME WIDGET -->
                     <div id="travel-time-section" class="travel-time-container" style="display:none;">
                         <a id="travel-link" href="#" target="_blank" class="travel-btn">
-                            📍 WYZNACZ TRASĘ <span id="time-estimate" class="time-badge">...</span>
+                            <span data-i18n="travel_btn">📍 WYZNACZ TRASĘ</span>
                         </a>
                     </div>
 
-                    <p><strong>Telefon:</strong> +48 453 433 852</p>
-                    <p><strong>Email:</strong> gwar@gwar.bar</p>
+                    <p><strong data-i18n="contact_phone">Telefon:</strong> +48 453 433 852</p>
+                    <p><strong data-i18n="contact_email">Email:</strong> gwar@gwar.bar</p>
                     <br>
-                    <p><strong>Godziny otwarcia:</strong></p>
-                    <p>Pon - Czw: 12:00 - 00:00</p>
-                    <p>Pt - Sob: 12:00 - 02:45</p>
-                    <p>Niedz: 11:00 - 23:00</p>
+                    <p><strong data-i18n="contact_hours">Godziny otwarcia:</strong></p>
+                    <p data-i18n="contact_mon_thu">Pon - Czw: 12:00 - 00:00</p>
+                    <p data-i18n="contact_fri_sat">Pt - Sob: 12:00 - 02:45</p>
+                    <p data-i18n="contact_sun">Niedz: 11:00 - 23:00</p>
                 </div>
                 <div class="social-links">
-                    <a href="https://instagram.com/bar_gwar" target="_blank">INSTAGRAM</a>
-                    <a href="https://www.facebook.com/RestauracjaKawiarniaBarGwar/" target="_blank">FACEBOOK</a>
+                    <a href="https://instagram.com/bar_gwar" target="_blank" data-i18n="social_insta">INSTAGRAM</a>
+                    <a href="https://www.facebook.com/bargwar?locale=pl_PL" target="_blank"
+                        data-i18n="social_fb">FACEBOOK</a>
                 </div>
             </div>
         </div>
@@ -247,7 +263,7 @@
 
     <footer>
         <img src="images/Logotypy/Wektor/Gwar_logotype_green_no-bg.svg" alt="Bar Gwar" class="footer-logo">
-        <p>&copy; 2026 Bar Gwar. Wszelkie prawa zastrzeżone.</p>
+        <p>&copy; 2026 Bar Gwar. <span data-i18n="footer_rights">Wszelkie prawa zastrzeżone.</span></p>
     </footer>
 
     <!-- Google Maps API -->
