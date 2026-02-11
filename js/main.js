@@ -84,6 +84,10 @@ document.addEventListener('DOMContentLoaded', () => {
                 if (response.ok) {
                     const result = await response.json();
                     if (result.result === 'success') {
+                        // Google Ads Conversion tracking
+                        if (typeof window.gtag_report_conversion === 'function') {
+                            window.gtag_report_conversion();
+                        }
                         statusDiv.innerHTML = '<span style="color:var(--primary-color);">Potwierdzono, odezwiemy się.</span>';
                         statusDiv.style.display = 'block';
                         form.reset();

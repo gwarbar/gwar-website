@@ -11,6 +11,23 @@
 
         gtag('config', 'AW-17300910083');
     </script>
+    <script>
+        function gtag_report_conversion(url) {
+            var callback = function () {
+                if (typeof (url) != 'undefined') {
+                    window.location = url;
+                }
+            };
+            gtag('event', 'conversion', {
+                'send_to': 'AW-17300910083/ratYCPr75fYbEIPg27lA',
+                'value': 5.0,
+                'currency': 'PLN',
+                'event_callback': callback
+            });
+            return false;
+        }
+    </script>
+    <link rel="icon" type="image/png" href="images/Logotypy/PNG/Gwar_logotype_green_no-bg.png">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Bar Gwar - Klimat / Ludzie / Koktajle</title>
