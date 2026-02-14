@@ -83,19 +83,33 @@
             const GAS_URL = "https://script.google.com/macros/s/AKfycbyTGNpqW-ZnzVnfvVUvUqktVu-Ctex0M1qfWdZgEJcXK2px9TzwL5akGNUPwSPqD790nA/exec";
             const fullUrl = `${GAS_URL}?confirm=${encodeURIComponent(confirmId)}&email=${encodeURIComponent(email)}&date=${encodeURIComponent(date)}&time=${encodeURIComponent(time)}`;
 
-            // Wywołanie skryptu w tle, aby iOS nie próbował otwierać aplikacji Google Drive
-            fetch(fullUrl, { mode: 'no-cors' })
-                .then(() => {
-                    icon.textContent = "✅";
-                    icon.style.color = "#00ff00";
-                    statusText.textContent = "Rezerwacja potwierdzona!";
+            // Wywołanie skryptu w tle
+            fetch(fullUrl)
+                .then(response => response.text())
+                .then(result => {
                     loader.style.display = "none";
+                    console.log("GAS Result:", result);
+
+                    if (result.includes("SUCCESS")) {
+                        icon.textContent = "✅";
+                        icon.style.color = "#00ff00";
+                        statusText.textContent = "Rezerwacja potwierdzona!";
+                    } else if (result.includes("ALREADY_CONFIRMED")) {
+                        icon.textContent = "ℹ️";
+                        icon.style.color = "#00ff00";
+                        statusText.textContent = "Ta rezerwacja była już potwierdzona.";
+                    } else if (result.includes("INVALID")) {
+                        icon.textContent = "❓";
+                        statusText.textContent = "Nieprawidłowy link.";
+                    } else {
+                        throw new Error(result);
+                    }
                 })
                 .catch(err => {
-                    console.error(err);
+                    console.error("Fetch Error:", err);
                     icon.textContent = "❌";
                     icon.style.color = "red";
-                    statusText.textContent = "Wystąpił błąd sieci.";
+                    statusText.textContent = "Wystąpił błąd.";
                     loader.style.display = "none";
                 });
         } else {
