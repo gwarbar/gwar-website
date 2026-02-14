@@ -1,33 +1,109 @@
 <!DOCTYPE html>
-<html>
+<html lang="pl">
 
 <head>
     <meta charset="UTF-8">
-    <title>Potwierdzanie...</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Potwierdzanie Rezerwacji | GWAR</title>
+    <style>
+        body {
+            background-color: #000;
+            color: #fff;
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+            text-align: center;
+        }
+
+        .container {
+            padding: 20px;
+        }
+
+        .status-icon {
+            font-size: 60px;
+            margin-bottom: 20px;
+            transition: all 0.3s;
+        }
+
+        #status-text {
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .loader {
+            border: 4px solid #222;
+            border-top: 4px solid #00ff00;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+            margin: 20px auto;
+        }
+
+        @keyframes spin {
+            0% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div id="icon" class="status-icon">⏳</div>
+        <div id="status-text">Potwierdzanie rezerwacji...</div>
+        <div id="loader" class="loader"></div>
+        <p id="details-text" style="color: #888; font-size: 1rem; margin-top: 20px;"></p>
+    </div>
+
     <script>
         const params = new URLSearchParams(window.location.search);
-
-        const confirm = params.get("confirm");
+        const confirmId = params.get("confirm");
         const email = params.get("email");
         const date = params.get("date");
         const time = params.get("time");
 
-        const GAS_URL = "https://script.google.com/macros/s/AKfycbyTGNpqW-ZnzVnfvVUvUqktVu-Ctex0M1qfWdZgEJcXK2px9TzwL5akGNUPwSPqD790nA/exec";
+        const statusText = document.getElementById('status-text');
+        const icon = document.getElementById('icon');
+        const loader = document.getElementById('loader');
+        const details = document.getElementById('details-text');
 
-        if (confirm) {
-            window.location.href =
-                GAS_URL +
-                "?confirm=" + encodeURIComponent(confirm) +
-                "&email=" + encodeURIComponent(email) +
-                "&date=" + encodeURIComponent(date) +
-                "&time=" + encodeURIComponent(time);
+        if (confirmId) {
+            details.textContent = `${date} godz. ${time}`;
+
+            const GAS_URL = "https://script.google.com/macros/s/AKfycbyTGNpqW-ZnzVnfvVUvUqktVu-Ctex0M1qfWdZgEJcXK2px9TzwL5akGNUPwSPqD790nA/exec";
+            const fullUrl = `${GAS_URL}?confirm=${encodeURIComponent(confirmId)}&email=${encodeURIComponent(email)}&date=${encodeURIComponent(date)}&time=${encodeURIComponent(time)}`;
+
+            // Wywołanie skryptu w tle, aby iOS nie próbował otwierać aplikacji Google Drive
+            fetch(fullUrl, { mode: 'no-cors' })
+                .then(() => {
+                    icon.textContent = "✅";
+                    icon.style.color = "#00ff00";
+                    statusText.textContent = "Rezerwacja potwierdzona!";
+                    loader.style.display = "none";
+                })
+                .catch(err => {
+                    console.error(err);
+                    icon.textContent = "❌";
+                    icon.style.color = "red";
+                    statusText.textContent = "Wystąpił błąd sieci.";
+                    loader.style.display = "none";
+                });
+        } else {
+            icon.textContent = "❓";
+            statusText.textContent = "Brak parametrów rezerwacji.";
+            loader.style.display = "none";
         }
     </script>
-</head>
-
-<body style="font-family:Arial;text-align:center;margin-top:50px;">
-    <h2>Potwierdzanie rezerwacji...</h2>
-    <p>Proszę czekać.</p>
 </body>
 
 </html>
