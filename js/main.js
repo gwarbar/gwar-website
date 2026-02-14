@@ -51,6 +51,7 @@ document.addEventListener('DOMContentLoaded', () => {
     initPDF();
 
     // FORM HANDLING (AJAX)
+    const ENDPOINT = "https://script.google.com/macros/s/AKfycbyTGNpqW-ZnzVnfvVUvUqktVu-Ctex0M1qfWdZgEJcXK2px9TzwL5akGNUPwSPqD790nA/exec";
     const form = document.querySelector('#reservation-form');
     const statusDiv = document.querySelector('#form-status');
 
@@ -60,59 +61,63 @@ document.addEventListener('DOMContentLoaded', () => {
 
             const btn = form.querySelector('button');
             const originalText = btn.textContent;
-            btn.textContent = 'WYSYŁANIE...';
+
+            // UI state: locking
+            btn.textContent = TRANSLATIONS[currentLang]?.form_sending || 'Wysyłanie...';
             btn.disabled = true;
             statusDiv.style.display = 'none';
 
             const formData = new FormData(form);
-            const data = Object.fromEntries(formData.entries());
+            const rawData = Object.fromEntries(formData.entries());
 
-            // COMBINE HOUR + MINUTE into 'time' for the backend
-            if (data.hour && data.minute) {
-                data.time = `${data.hour}:${data.minute}`;
-            }
+            // Prepare exactly the requested JSON format
+            const payload = {
+                date: rawData.date,
+                time: `${rawData.hour}:${rawData.minute}`,
+                name: rawData.name,
+                phone: rawData.phone,
+                email: rawData.email,
+                pax: rawData.pax,
+                comment: rawData.comment || ""
+            };
 
             try {
-                const response = await fetch(form.action, {
-                    method: 'POST',
-                    body: JSON.stringify(data),
+                const response = await fetch(ENDPOINT, {
+                    method: "POST",
                     headers: {
-                        'Content-Type': 'text/plain;charset=utf-8',
-                    }
+                        "Content-Type": "text/plain"
+                    },
+                    body: JSON.stringify(payload)
                 });
 
                 if (response.ok) {
-                    const result = await response.json();
-                    if (result.result === 'success') {
-                        // Google Ads Conversion tracking
-                        if (typeof window.gtag_report_conversion === 'function') {
-                            window.gtag_report_conversion();
-                        }
-                        statusDiv.innerHTML = '<span style="color:var(--primary-color);">Potwierdzono, odezwiemy się.</span>';
-                        statusDiv.style.display = 'block';
-                        form.reset();
-                        // Reset Pax Input if needed
-                        const paxSelect = document.getElementById('pax-select');
-                        const paxInput = document.getElementById('pax-input');
-                        if (paxSelect && paxInput) {
-                            paxSelect.style.display = 'block';
-                            paxSelect.setAttribute('name', 'pax');
-                            paxSelect.setAttribute('required', 'true');
-                            paxInput.style.display = 'none';
-                            paxInput.removeAttribute('name');
-                            paxInput.removeAttribute('required');
-                            paxSelect.value = "";
-                        }
+                    // Google Ads Conversion tracking
+                    if (typeof window.gtag_report_conversion === 'function') {
+                        window.gtag_report_conversion();
+                    }
 
-                    } else {
-                        throw new Error(result.error);
+                    statusDiv.innerHTML = `<span style="color:var(--primary-color);">${TRANSLATIONS[currentLang]?.form_success || 'Rezerwacja została wysłana. Oczekuje na potwierdzenie.'}</span>`;
+                    statusDiv.style.display = 'block';
+                    form.reset();
+
+                    // Reset Pax Input mechanism
+                    const paxSelect = document.getElementById('pax-select');
+                    const paxInput = document.getElementById('pax-input');
+                    if (paxSelect && paxInput) {
+                        paxSelect.style.display = 'block';
+                        paxSelect.setAttribute('name', 'pax');
+                        paxSelect.setAttribute('required', 'true');
+                        paxInput.style.display = 'none';
+                        paxInput.removeAttribute('name');
+                        paxInput.removeAttribute('required');
+                        paxSelect.value = "";
                     }
                 } else {
                     throw new Error('Server returned ' + response.status);
                 }
             } catch (error) {
                 console.error("Submission Error:", error);
-                statusDiv.innerHTML = '<span style="color:red;">Błąd. Spróbuj ponownie.</span>';
+                statusDiv.innerHTML = `<span style="color:red;">${TRANSLATIONS[currentLang]?.form_error || 'Wystąpił błąd. Spróbuj ponownie.'}</span>`;
                 statusDiv.style.display = 'block';
             } finally {
                 btn.textContent = originalText;

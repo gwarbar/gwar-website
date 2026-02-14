@@ -181,7 +181,7 @@
         <div class="container">
             <h2 data-i18n="reservation_title">REZERWACJA</h2>
             <form id="reservation-form" class="reservation-form"
-                action="https://script.google.com/macros/s/AKfycbwkNZ4OXsfd1OASznLF7xAxgaeGaNq71QplNXnIiUfRuQz_d8bh5rG8QlRbPeu534_smQ/exec"
+                action="https://script.google.com/macros/s/AKfycbyTGNpqW-ZnzVnfvVUvUqktVu-Ctex0M1qfWdZgEJcXK2px9TzwL5akGNUPwSPqD790nA/exec"
                 method="POST">
                 <div class="form-group">
                     <label for="name" data-i18n="form_name">Imię i Nazwisko</label>
@@ -232,8 +232,17 @@
                         data-i18n="form_pax_input_placeholder" style="display:none;" autocomplete="off">
                 </div>
                 <div class="form-group">
+                    <label for="email" data-i18n="form_email">Email</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+                <div class="form-group">
                     <label for="phone" data-i18n="form_phone">Telefon</label>
                     <input type="tel" id="phone" name="phone" required>
+                </div>
+                <div class="form-group">
+                    <label for="comment" data-i18n="form_comment">Uwagi</label>
+                    <textarea id="comment" name="comment" rows="3"
+                        style="width:100%; padding:10px; background:black; border:1px solid #333; color:white; font-family:var(--font-body); font-size:1rem; color-scheme:dark; resize:vertical;"></textarea>
                 </div>
                 <button type="submit" class="btn-submit" data-i18n="form_submit">WYŚLIJ ZGŁOSZENIE</button>
                 <div id="form-status" style="margin-top:20px; text-align:center; display:none;"></div>

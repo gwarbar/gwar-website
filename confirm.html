@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Potwierdzanie...</title>
+    <script>
+        const params = new URLSearchParams(window.location.search);
+
+        const confirm = params.get("confirm");
+        const email = params.get("email");
+        const date = params.get("date");
+        const time = params.get("time");
+
+        const GAS_URL = "https://script.google.com/macros/s/AKfycbyTGNpqW-ZnzVnfvVUvUqktVu-Ctex0M1qfWdZgEJcXK2px9TzwL5akGNUPwSPqD790nA/exec";
+
+        if (confirm) {
+            window.location.href =
+                GAS_URL +
+                "?confirm=" + encodeURIComponent(confirm) +
+                "&email=" + encodeURIComponent(email) +
+                "&date=" + encodeURIComponent(date) +
+                "&time=" + encodeURIComponent(time);
+        }
+    </script>
+</head>
+
+<body style="font-family:Arial;text-align:center;margin-top:50px;">
+    <h2>Potwierdzanie rezerwacji...</h2>
+    <p>Proszę czekać.</p>
+</body>
+
+</html>
