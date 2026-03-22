@@ -29,8 +29,8 @@ export async function loadInstagramFeed() {
                 height = post.sizes.large.height;
             }
 
-            // Handle Video Thumbnails
-            if (post.mediaType === 'VIDEO' && post.thumbnailUrl) {
+            // Handle Video Thumbnails ONLY if we don't already have a valid imgUrl (from Behold sizes)
+            if (post.mediaType === 'VIDEO' && post.thumbnailUrl && !imgUrl) {
                 imgUrl = post.thumbnailUrl;
             }
 
