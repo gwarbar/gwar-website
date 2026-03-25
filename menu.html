@@ -34,6 +34,17 @@
             <span></span>
             <span></span>
         </div>
+
+        <!-- Language Switcher -->
+        <div class="lang-switch"
+            style="display:flex; gap:10px; margin-left:auto; margin-right:20px; align-items:center;">
+            <div class="flag-btn" data-lang="pl" title="Polski" style="cursor:pointer;">
+                <img src="https://flagcdn.com/w40/pl.png" alt="PL" style="width:24px; height:auto;">
+            </div>
+            <div class="flag-btn" data-lang="en" title="English" style="cursor:pointer;">
+                <img src="https://flagcdn.com/w40/gb.png" alt="EN" style="width:24px; height:auto;">
+            </div>
+        </div>
         <ul class="nav-links">
             <li><a href="index.html#about" data-i18n="nav_about">O NAS</a></li>
             <li><a href="menu.html" class="active" data-i18n="nav_menu">MENU</a></li>
@@ -45,24 +56,1103 @@
     </nav>
 
     <!-- MENU SECTION -->
-    <section id="menu" style="padding-top: 120px;"> <!-- Added padding for fixed nav -->
+    <section id="menu" style="padding-top: 120px; background-color: #000; color: #fff;">
         <div class="container">
-            <h2 data-i18n="nav_menu">MENU</h2>
-            <div class="menu-controls">
-                <div class="flag-btn active" data-lang="pl">
-                    <img src="images/pl.png" alt="PL">
+            <h2 data-i18n="nav_menu" style="margin-bottom: 20px;">MENU</h2>
+
+            <div class="menu-lang-switcher"
+                style="display: flex; justify-content: center; gap: 15px; margin-bottom: 40px; padding: 15px; background: rgba(255,255,255,0.05); border-radius: 10px;">
+                <div class="flag-btn" data-lang="pl" title="Polski" style="cursor:pointer;">
+                    <img src="https://flagcdn.com/w40/pl.png" alt="PL" style="width:32px; height:auto;">
+                </div>
+                <div class="flag-btn" data-lang="en" title="English" style="cursor:pointer;">
+                    <img src="https://flagcdn.com/w40/gb.png" alt="EN" style="width:32px; height:auto;">
+                </div>
+                <div class="flag-btn" data-lang="de" title="Deutsch" style="cursor:pointer;">
+                    <img src="https://flagcdn.com/w40/de.png" alt="DE" style="width:32px; height:auto;">
+                </div>
+                <div class="flag-btn" data-lang="fr" title="Français" style="cursor:pointer;">
+                    <img src="https://flagcdn.com/w40/fr.png" alt="FR" style="width:32px; height:auto;">
+                </div>
+                <div class="flag-btn" data-lang="es" title="Español" style="cursor:pointer;">
+                    <img src="https://flagcdn.com/w40/es.png" alt="ES" style="width:32px; height:auto;">
+                </div>
+                <div class="flag-btn" data-lang="ua" title="Українська" style="cursor:pointer;">
+                    <img src="https://flagcdn.com/w40/ua.png" alt="UA" style="width:32px; height:auto;">
                 </div>
             </div>
-            <div id="pdfContainer"></div>
-        </div>
+
+            <style>
+                .menu-category {
+                    margin-bottom: 60px;
+                }
+
+                .menu-category-title {
+                    color: var(--primary-color);
+                    font-family: var(--font-heading);
+                    font-size: 2.5rem;
+                    border-bottom: 1px solid #333;
+                    padding-bottom: 10px;
+                    margin-bottom: 30px;
+                    text-transform: uppercase;
+                }
+
+                .menu-grid {
+                    display: grid;
+                    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+                    gap: 30px;
+                }
+
+                .menu-item {
+                    background: #111;
+                    padding: 20px;
+                    border-left: 3px solid var(--primary-color);
+                }
+
+                .menu-item-header {
+                    display: flex;
+                    justify-content: space-between;
+                    align-items: flex-start;
+                    margin-bottom: 8px;
+                }
+
+                .menu-item-name {
+                    font-weight: bold;
+                    text-transform: uppercase;
+                    margin: 0;
+                    font-size: 1.1rem;
+                }
+
+                .menu-item-price {
+                    color: var(--primary-color);
+                    font-weight: bold;
+                    margin-left: 10px;
+                    white-space: nowrap;
+                }
+
+                .menu-item-desc {
+                    color: #aaa;
+                    font-size: 0.9rem;
+                    font-style: italic;
+                    margin: 0;
+                    line-height: 1.4;
+                }
+
+                .menu-sub-section {
+                    color: #666;
+                    text-transform: uppercase;
+                    margin: 40px 0 20px 0;
+                    font-size: 1.2rem;
+                    letter-spacing: 1px;
+                }
+            </style>
+
+            <!-- GWARNA WIOSNA -->
+            <div id="pdfContainer" style="display: none; width: 100%; max-width: 800px; margin: 0 auto;"></div>
+
+            <div id="htmlMenuContainer">
+                <!-- MENU SHORTCUTS -->
+                <div id="menuShortcutsContainer"
+                    style="display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; margin-bottom: 40px; position: sticky; top: 80px; z-index: 10; padding: 10px 0; background: rgba(0,0,0,0.85); backdrop-filter: blur(5px);">
+                </div>
+
+                <div class="menu-category">
+                    <h3 class="menu-category-title">GWARNA WIOSNA (Koktajle Autorskie)</h3>
+                    <div class="menu-grid">
+                        <div class="menu-item">
+                            <div class="menu-item-header">
+                                <h4 class="menu-item-name">Blue Velvet</h4>
+                                <span class="menu-item-price">39 PLN</span>
+                            </div>
+                            <p class="menu-item-desc">Jägermeister / Bergamotto Fantastico / syrop fiołkowy / sok z
+                                cytryny
+                                / napar z lawendy</p>
+                        </div>
+                        <div class="menu-item">
+                            <div class="menu-item-header">
+                                <h4 class="menu-item-name">Rozylia</h4>
+                                <span class="menu-item-price">38 PLN</span>
+                            </div>
+                            <p class="menu-item-desc">Martini Fiero / Eden Sprissetto / syrop różany / sok z limonki /
+                                sok z
+                                cytryny / świeża bazylia / Prosecco</p>
+                        </div>
+                        <div class="menu-item">
+                            <div class="menu-item-header">
+                                <h4 class="menu-item-name">Kiwi Express</h4>
+                                <span class="menu-item-price">43 PLN</span>
+                            </div>
+                            <p class="menu-item-desc">Gin / likier z kwiatu bzu / syrop yuzu / purée z kiwi / sok z
+                                limonki
+                                / bitter pomarańczowy / woda gazowana</p>
+                        </div>
+                        <div class="menu-item">
+                            <div class="menu-item-header">
+                                <h4 class="menu-item-name">GWARbena</h4>
+                                <span class="menu-item-price">41 PLN</span>
+                            </div>
+                            <p class="menu-item-desc">Gin / Syrop brzoskwiniowy / syrop z werbeny / sok z limonki</p>
+                        </div>
+                        <div class="menu-item">
+                            <div class="menu-item-header">
+                                <h4 class="menu-item-name">Bursztyn</h4>
+                                <span class="menu-item-price">38 PLN</span>
+                            </div>
+                            <p class="menu-item-desc">Wódka morelowa / likier zielony melon / purée morelowe / sok z
+                                cytryny
+                                / lemon soda / bitter pomarańczowy</p>
+                        </div>
+                        <div class="menu-item">
+                            <div class="menu-item-header">
+                                <h4 class="menu-item-name">Banana Mama</h4>
+                                <span class="menu-item-price">38 PLN</span>
+                            </div>
+                            <p class="menu-item-desc">Wódka z granatu / likier bananowy / purée truskawkowe / syrop
+                                bananowy
+                                / sok z cytryny / prosecco / woda gazowana</p>
+                        </div>
+                        <div class="menu-item">
+                            <div class="menu-item-header">
+                                <h4 class="menu-item-name">Aloha</h4>
+                                <span class="menu-item-price">40 PLN</span>
+                            </div>
+                            <p class="menu-item-desc">Gin / Martini Bianco / syrop z moreli japońskiej / syrop z
+                                zielonego
+                                jabłka / Aloe Vera / sok z cytryny / mięta</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- SPRITZ MENU -->
+                <div class="menu-category">
+                    <h3 class="menu-category-title">SPRITZ MENU</h3>
+                    <div class="menu-grid">
+                        <div class="menu-item">
+                            <div class="menu-item-header">
+                                <h4 class="menu-item-name">Spinello Spritz</h4>
+                                <span class="menu-item-price">33 PLN</span>
+                            </div>
+                            <p class="menu-item-desc">Spinello / tonic / pomarańcza</p>
+                        </div>
+                        <div class="menu-item">
+                            <div class="menu-item-header">
+                                <h4 class="menu-item-name">Aperol Spritz</h4>
+                                <span class="menu-item-price">33 PLN</span>
+                            </div>
+                            <p class="menu-item-desc">Aperol / prosecco / woda gazowana / pomarańcza</p>
+                        </div>
+                        <div class="menu-item">
+                            <div class="menu-item-header">
+                                <h4 class="menu-item-name">Campari Spritz</h4>
+                                <span class="menu-item-price">33 PLN</span>
+                            </div>
+                            <p class="menu-item-desc">Campari / prosecco / woda gazowana / pomarańcza</p>
+                        </div>
+                        <div class="menu-item">
+                            <div class="menu-item-header">
+                                <h4 class="menu-item-name">Eden Spritz</h4>
+                                <span class="menu-item-price">33 PLN</span>
+                            </div>
+                            <p class="menu-item-desc">Eden sprisetto / prosecco / woda gazowana / żurawina</p>
+                        </div>
+                        <div class="menu-item">
+                            <div class="menu-item-header">
+                                <h4 class="menu-item-name">Limoncello Spritz</h4>
+                                <span class="menu-item-price">33 PLN</span>
+                            </div>
+                            <p class="menu-item-desc">Limoncello / prosecco / woda gazowana / cytryna</p>
+                        </div>
+                        <div class="menu-item">
+                            <div class="menu-item-header">
+                                <h4 class="menu-item-name">Hugo Spritz</h4>
+                                <span class="menu-item-price">34 PLN</span>
+                            </div>
+                            <p class="menu-item-desc">Prosecco / likier z kwiatów bzu / limonka / mięta / woda gazowana
+                            </p>
+                        </div>
+                        <div class="menu-item">
+                            <div class="menu-item-header">
+                                <h4 class="menu-item-name">Sezonowy Spritz</h4>
+                                <span class="menu-item-price">33 PLN</span>
+                            </div>
+                            <p class="menu-item-desc">Zapytaj na barze!</p>
+                        </div>
+                        <div class="menu-item">
+                            <div class="menu-item-header">
+                                <h4 class="menu-item-name">Aperol Spritz 0%</h4>
+                                <span class="menu-item-price">29 PLN</span>
+                            </div>
+                            <p class="menu-item-desc">Aperol 0% / prosecco 0% / woda gazowana / pomarańcza</p>
+                        </div>
+                        <div class="menu-item">
+                            <div class="menu-item-header">
+                                <h4 class="menu-item-name">Hugo Spritz 0%</h4>
+                                <span class="menu-item-price">29 PLN</span>
+                            </div>
+                            <p class="menu-item-desc">Prosecco 0% / syrop z bzu / limonka / mięta / woda gazowana</p>
+                        </div>
+                        <div class="menu-item">
+                            <div class="menu-item-header">
+                                <h4 class="menu-item-name">Limoncello Spritz 0%</h4>
+                                <span class="menu-item-price">29 PLN</span>
+                            </div>
+                            <p class="menu-item-desc">Limoncello 0% / prosecco 0% / woda gazowana / cytryna</p>
+                        </div>
+                        <div class="menu-item">
+                            <div class="menu-item-header">
+                                <h4 class="menu-item-name">Campari Spritz 0%</h4>
+                                <span class="menu-item-price">29 PLN</span>
+                            </div>
+                            <p class="menu-item-desc">Campari 0% / prosecco 0% / woda gazowana / pomarańcza</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- GWAR KOKTAJLE -->
+                <div class="menu-category">
+                    <h3 class="menu-category-title">GWAR KOKTAJLE</h3>
+                    <div class="menu-grid">
+                        <div class="menu-item">
+                            <div class="menu-item-header">
+                                <h4 class="menu-item-name">Old Fashioned</h4>
+                                <span class="menu-item-price">34 PLN</span>
+                            </div>
+                            <p class="menu-item-desc">Whisky / bitters / syrop cukrowy</p>
+                        </div>
+                        <div class="menu-item">
+                            <div class="menu-item-header">
+                                <h4 class="menu-item-name">Moscow Mule</h4>
+                                <span class="menu-item-price">33 PLN</span>
+                            </div>
+                            <p class="menu-item-desc">Wódka / piwo imbirowe / sok z limonki</p>
+                        </div>
+                        <div class="menu-item">
+                            <div class="menu-item-header">
+                                <h4 class="menu-item-name">Negroni</h4>
+                                <span class="menu-item-price">34 PLN</span>
+                            </div>
+                            <p class="menu-item-desc">Gin / campari / lucano wermut</p>
+                        </div>
+                        <div class="menu-item">
+                            <div class="menu-item-header">
+                                <h4 class="menu-item-name">Sour</h4>
+                                <span class="menu-item-price">33 PLN</span>
+                            </div>
+                            <p class="menu-item-desc">Wybrany alkohol / syrop cukrowy / sok z cytryny / białko jaja /
+                                bitters</p>
+                        </div>
+                        <div class="menu-item">
+                            <div class="menu-item-header">
+                                <h4 class="menu-item-name">Mimoza</h4>
+                                <span class="menu-item-price">28 PLN</span>
+                            </div>
+                            <p class="menu-item-desc">Prosecco / sok świeżo wyciskany z pomarańczy</p>
+                        </div>
+                        <div class="menu-item">
+                            <div class="menu-item-header">
+                                <h4 class="menu-item-name">Piña Colada</h4>
+                                <span class="menu-item-price">37 PLN</span>
+                            </div>
+                            <p class="menu-item-desc">Rum / likier kokosowy / syrop kokosowy / świeży ananas / mleczko
+                                bez
+                                laktozy</p>
+                        </div>
+                        <div class="menu-item">
+                            <div class="menu-item-header">
+                                <h4 class="menu-item-name">Long Island Iced Tea</h4>
+                                <span class="menu-item-price">37 PLN</span>
+                            </div>
+                            <p class="menu-item-desc">Wódka / tequila / rum / gin / triple Sec / sok z cytryny / cola
+                            </p>
+                        </div>
+                        <div class="menu-item">
+                            <div class="menu-item-header">
+                                <h4 class="menu-item-name">Sex on the beach</h4>
+                                <span class="menu-item-price">32 PLN</span>
+                            </div>
+                            <p class="menu-item-desc">Wódka żurawinowa / malibu / sok ananasowy / likier brzoskwiniowy /
+                                sok
+                                pomarańczowy</p>
+                        </div>
+                        <div class="menu-item">
+                            <div class="menu-item-header">
+                                <h4 class="menu-item-name">Mojito</h4>
+                                <span class="menu-item-price">31 PLN</span>
+                            </div>
+                            <p class="menu-item-desc">Rum / limonka / woda gazowana / mięta / cukier brązowy</p>
+                        </div>
+                        <div class="menu-item">
+                            <div class="menu-item-header">
+                                <h4 class="menu-item-name">Geisha</h4>
+                                <span class="menu-item-price">33 PLN</span>
+                            </div>
+                            <p class="menu-item-desc">Wódka malinowa / tłoczony sok jabłkowy / sok z cytryny / syrop
+                                liczi /
+                                jabłko</p>
+                        </div>
+                        <div class="menu-item">
+                            <div class="menu-item-header">
+                                <h4 class="menu-item-name">Zombie</h4>
+                                <span class="menu-item-price">37 PLN</span>
+                            </div>
+                            <p class="menu-item-desc">Rum złoty / rum ciemny / rum jasny / sok z limonki / puree z
+                                marakui /
+                                sok pomarańczowy / sok ananasowy</p>
+                        </div>
+                        <div class="menu-item">
+                            <div class="menu-item-header">
+                                <h4 class="menu-item-name">Porn Star Martini</h4>
+                                <span class="menu-item-price">37 PLN</span>
+                            </div>
+                            <p class="menu-item-desc">Wódka infuzowana wanilią / puree z marakui / syrop waniliowy / sok
+                                z
+                                limonki / passoa / prosecco</p>
+                        </div>
+                        <div class="menu-item">
+                            <div class="menu-item-header">
+                                <h4 class="menu-item-name">Margarita Classic</h4>
+                                <span class="menu-item-price">32 PLN</span>
+                            </div>
+                            <p class="menu-item-desc">Tequila / triple Sec / sok z limonki</p>
+                        </div>
+                        <div class="menu-item">
+                            <div class="menu-item-header">
+                                <h4 class="menu-item-name">Cosmopolitan</h4>
+                                <span class="menu-item-price">29 PLN</span>
+                            </div>
+                            <p class="menu-item-desc">Wódka / sok z limonki / sok żurawinowy / triple Sec</p>
+                        </div>
+                        <div class="menu-item">
+                            <div class="menu-item-header">
+                                <h4 class="menu-item-name">Espresso Martini</h4>
+                                <span class="menu-item-price">36 PLN</span>
+                            </div>
+                            <p class="menu-item-desc">Wódka / Lucano amaro / espresso</p>
+                        </div>
+                        <div class="menu-item">
+                            <div class="menu-item-header">
+                                <h4 class="menu-item-name">Gwar</h4>
+                                <span class="menu-item-price">36 PLN</span>
+                            </div>
+                            <p class="menu-item-desc">Biały rum / cytrynówka gwarówka / sok tłoczony jabłkowy / puree z
+                                marakui / blue curaçao / białko jaja</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- KOKTAJLE BEZALKOHOLOWE -->
+                <div class="menu-category">
+                    <h3 class="menu-category-title">KOKTAJLE BEZALKOHOLOWE</h3>
+                    <div class="menu-grid">
+                        <div class="menu-item">
+                            <div class="menu-item-header">
+                                <h4 class="menu-item-name">Mojito Virgin</h4>
+                                <span class="menu-item-price">25 PLN</span>
+                            </div>
+                            <p class="menu-item-desc">Limonka / mięta / cukier trzcinowy / woda gazowana / sprite</p>
+                        </div>
+                        <div class="menu-item">
+                            <div class="menu-item-header">
+                                <h4 class="menu-item-name">Mimoza Virgin</h4>
+                                <span class="menu-item-price">25 PLN</span>
+                            </div>
+                            <p class="menu-item-desc">Prosecco bezalkoholowe / sok świeżo wyciskany z pomarańczy</p>
+                        </div>
+                        <div class="menu-item">
+                            <div class="menu-item-header">
+                                <h4 class="menu-item-name">Hugo Virgin</h4>
+                                <span class="menu-item-price">29 PLN</span>
+                            </div>
+                            <p class="menu-item-desc">Prosecco bezalkoholowe / syrop z bzu / limonka / mięta / woda
+                                gazowana
+                            </p>
+                        </div>
+                        <div class="menu-item">
+                            <div class="menu-item-header">
+                                <h4 class="menu-item-name">Negroni 0%</h4>
+                                <span class="menu-item-price">32 PLN</span>
+                            </div>
+                            <p class="menu-item-desc">Gin 0% / Wermut 0% / Campari 0%</p>
+                        </div>
+                    </div>
+                </div>
+
+
+
+                <!-- PIWA -->
+                <div class="menu-category">
+                    <h3 class="menu-category-title">PIWA</h3>
+                    <div class="menu-sub-section">LANE:</div>
+                    <div class="menu-grid">
+                        <div class="menu-item">
+                            <div class="menu-item-header">
+                                <h4 class="menu-item-name">Miłosław Pilsner</h4>
+                                <span class="menu-item-price">18 PLN</span>
+                            </div>
+                        </div>
+                        <div class="menu-item">
+                            <div class="menu-item-header">
+                                <h4 class="menu-item-name">Litovel Pszenica</h4>
+                                <span class="menu-item-price">19 PLN</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="menu-sub-section">BUTELKOWE:</div>
+                    <div class="menu-grid">
+                        <div class="menu-item">
+                            <div class="menu-item-header">
+                                <h4 class="menu-item-name">Wawrzyniec Marcowe</h4>
+                                <span class="menu-item-price">22 PLN</span>
+                            </div>
+                        </div>
+                        <div class="menu-item">
+                            <div class="menu-item-header">
+                                <h4 class="menu-item-name">Miłosław IPA</h4>
+                                <span class="menu-item-price">22 PLN</span>
+                            </div>
+                        </div>
+                        <div class="menu-item">
+                            <div class="menu-item-header">
+                                <h4 class="menu-item-name">Wawrzyniec Polski Lager</h4>
+                                <span class="menu-item-price">24 PLN</span>
+                            </div>
+                        </div>
+                        <div class="menu-item">
+                            <div class="menu-item-header">
+                                <h4 class="menu-item-name">Corona</h4>
+                                <span class="menu-item-price">22 PLN</span>
+                            </div>
+                        </div>
+                        <div class="menu-item">
+                            <div class="menu-item-header">
+                                <h4 class="menu-item-name">Staropolskie Porter 180</h4>
+                                <span class="menu-item-price">25 PLN</span>
+                            </div>
+                        </div>
+                        <div class="menu-item">
+                            <div class="menu-item-header">
+                                <h4 class="menu-item-name">Litovel Cerny Citron</h4>
+                                <span class="menu-item-price">21 PLN</span>
+                            </div>
+                        </div>
+                        <div class="menu-item">
+                            <div class="menu-item-header">
+                                <h4 class="menu-item-name">Bestbir Mango Ananas</h4>
+                                <span class="menu-item-price">21 PLN</span>
+                            </div>
+                        </div>
+                        <div class="menu-item">
+                            <div class="menu-item-header">
+                                <h4 class="menu-item-name">Bestbir Malina Pigwa</h4>
+                                <span class="menu-item-price">21 PLN</span>
+                            </div>
+                        </div>
+                        <div class="menu-item">
+                            <div class="menu-item-header">
+                                <h4 class="menu-item-name">Bestbir Brzoskwinia</h4>
+                                <span class="menu-item-price">21 PLN</span>
+                            </div>
+                        </div>
+                        <div class="menu-item">
+                            <div class="menu-item-header">
+                                <h4 class="menu-item-name">Litovel Cerny Citron 0,5%</h4>
+                                <span class="menu-item-price">19 PLN</span>
+                            </div>
+                        </div>
+                        <div class="menu-item">
+                            <div class="menu-item-header">
+                                <h4 class="menu-item-name">Prozdrowotne Lager Bezalkoholowy</h4>
+                                <span class="menu-item-price">22 PLN</span>
+                            </div>
+                        </div>
+                        <div class="menu-item">
+                            <div class="menu-item-header">
+                                <h4 class="menu-item-name">Miłosław Bezalkoholowe Yerba Mate & Marakuja</h4>
+                                <span class="menu-item-price">21 PLN</span>
+                            </div>
+                        </div>
+                        <div class="menu-item">
+                            <div class="menu-item-header">
+                                <h4 class="menu-item-name">Miłosław Bezalkoholowe Matcha & Yuzu</h4>
+                                <span class="menu-item-price">21 PLN</span>
+                            </div>
+                        </div>
+                        <div class="menu-item">
+                            <div class="menu-item-header">
+                                <h4 class="menu-item-name">Miłosław Bezalkoholowe IPA</h4>
+                                <span class="menu-item-price">21 PLN</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- WINA -->
+                <div class="menu-category">
+                    <h3 class="menu-category-title">WINA (125ml / 250ml / 750ml)</h3>
+
+                    <div class="menu-sub-section">MUSUJĄCE:</div>
+                    <div class="menu-grid">
+                        <div class="menu-item">
+                            <div class="menu-item-header">
+                                <h4 class="menu-item-name">Prosecco</h4>
+                                <span class="menu-item-price">19 / 34 / 90 PLN</span>
+                            </div>
+                        </div>
+                        <div class="menu-item">
+                            <div class="menu-item-header">
+                                <h4 class="menu-item-name">Frizzante Nave de Oro</h4>
+                                <span class="menu-item-price">25 / 44 / 130 PLN</span>
+                            </div>
+                            <p class="menu-item-desc">Organiczne, białe / różowe</p>
+                        </div>
+                    </div>
+
+                    <div class="menu-sub-section">BIAŁE:</div>
+                    <div class="menu-grid">
+                        <div class="menu-item">
+                            <div class="menu-item-header">
+                                <h4 class="menu-item-name">Wino domu</h4>
+                                <span class="menu-item-price">18 / 32 / 80 PLN</span>
+                            </div>
+                        </div>
+                        <div class="menu-item">
+                            <div class="menu-item-header">
+                                <h4 class="menu-item-name">Grechetto IGT</h4>
+                                <span class="menu-item-price">21 / 39 / 115 PLN</span>
+                            </div>
+                            <p class="menu-item-desc">Naturalne</p>
+                        </div>
+                        <div class="menu-item">
+                            <div class="menu-item-header">
+                                <h4 class="menu-item-name">Michel Torino Torrontes</h4>
+                                <span class="menu-item-price">28 / 50 / 150 PLN</span>
+                            </div>
+                        </div>
+                        <div class="menu-item">
+                            <div class="menu-item-header">
+                                <h4 class="menu-item-name">Moderna Chardonnay sur lie</h4>
+                                <span class="menu-item-price">33 / 60 / 190 PLN</span>
+                            </div>
+                        </div>
+                        <div class="menu-item">
+                            <div class="menu-item-header">
+                                <h4 class="menu-item-name">Salicorno Malvasia</h4>
+                                <span class="menu-item-price">220 PLN</span>
+                            </div>
+                            <p class="menu-item-desc">Naturalne pomarańczowe (butelka)</p>
+                        </div>
+                    </div>
+
+                    <div class="menu-sub-section">CZERWONE:</div>
+                    <div class="menu-grid">
+                        <div class="menu-item">
+                            <div class="menu-item-header">
+                                <h4 class="menu-item-name">Gocce Rosse</h4>
+                                <span class="menu-item-price">21 / 39 / 115 PLN</span>
+                            </div>
+                            <p class="menu-item-desc">Naturalne</p>
+                        </div>
+                        <div class="menu-item">
+                            <div class="menu-item-header">
+                                <h4 class="menu-item-name">Michel Torino Malbec</h4>
+                                <span class="menu-item-price">28 / 50 / 150 PLN</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- SHOTY I GWARÓWKA -->
+                <div class="menu-category">
+                    <h3 class="menu-category-title">SHOTY (Cena za 1 szt. / Cena za tacę (6 szt.))
+                    </h3>
+                    <div class="menu-grid">
+                        <div class="menu-item">
+                            <div class="menu-item-header">
+                                <h4 class="menu-item-name">Pszczółka</h4>
+                                <span class="menu-item-price">11 / 55 PLN</span>
+                            </div>
+                            <p class="menu-item-desc">wódka / sour / imbir</p>
+                        </div>
+                        <div class="menu-item">
+                            <div class="menu-item-header">
+                                <h4 class="menu-item-name">Gwarówka Malina</h4>
+                                <span class="menu-item-price">13 PLN / 65 PLN</span>
+                            </div>
+                        </div>
+                        <div class="menu-item">
+                            <div class="menu-item-header">
+                                <h4 class="menu-item-name">Gwarówka Gruszka</h4>
+                                <span class="menu-item-price">13 PLN / 65 PLN</span>
+                            </div>
+                        </div>
+                        <div class="menu-item">
+                            <div class="menu-item-header">
+                                <h4 class="menu-item-name">Gwarówka Cytryna</h4>
+                                <span class="menu-item-price">13 PLN / 65 PLN</span>
+                            </div>
+                        </div>
+                        <div class="menu-item">
+                            <div class="menu-item-header">
+                                <h4 class="menu-item-name">Gwarówka Wiśnia</h4>
+                                <span class="menu-item-price">13 PLN / 65 PLN</span>
+                            </div>
+                        </div>
+                        <div class="menu-item">
+                            <div class="menu-item-header">
+                                <h4 class="menu-item-name">Gwarówka Mango & Marakuja</h4>
+                                <span class="menu-item-price">13 PLN / 65 PLN</span>
+                            </div>
+                        </div>
+                        <div class="menu-item">
+                            <div class="menu-item-header">
+                                <h4 class="menu-item-name">Gwarówka Owocowo-Ziołowa</h4>
+                                <span class="menu-item-price">13 PLN / 65 PLN</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ALKOHOLE MOCNE -->
+                <div class="menu-category">
+                    <h3 class="menu-category-title">ALKOHOLE MOCNE (40ml)</h3>
+
+                    <div class="menu-sub-section">WÓDKA:</div>
+                    <div class="menu-grid">
+                        <div class="menu-item">
+                            <div class="menu-item-header">
+                                <h4 class="menu-item-name">Wyborowa</h4><span class="menu-item-price">15 PLN</span>
+                            </div>
+                        </div>
+                        <div class="menu-item">
+                            <div class="menu-item-header">
+                                <h4 class="menu-item-name">Palikot Ziemniak</h4><span class="menu-item-price">18
+                                    PLN</span>
+                            </div>
+                        </div>
+                        <div class="menu-item">
+                            <div class="menu-item-header">
+                                <h4 class="menu-item-name">Palikot Jęczmień</h4><span class="menu-item-price">18
+                                    PLN</span>
+                            </div>
+                        </div>
+                        <div class="menu-item">
+                            <div class="menu-item-header">
+                                <h4 class="menu-item-name">Finlandia</h4><span class="menu-item-price">16 PLN</span>
+                            </div>
+                        </div>
+                        <div class="menu-item">
+                            <div class="menu-item-header">
+                                <h4 class="menu-item-name">Belvedere</h4><span class="menu-item-price">29 PLN</span>
+                            </div>
+                        </div>
+                        <div class="menu-item">
+                            <div class="menu-item-header">
+                                <h4 class="menu-item-name">Żubrówka Bison Grass</h4><span class="menu-item-price">15
+                                    PLN</span>
+                            </div>
+                        </div>
+                        <div class="menu-item">
+                            <div class="menu-item-header">
+                                <h4 class="menu-item-name">Grappa</h4><span class="menu-item-price">17 PLN</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="menu-sub-section">WHISKY:</div>
+                    <div class="menu-grid">
+                        <div class="menu-item">
+                            <div class="menu-item-header">
+                                <h4 class="menu-item-name">Jameson</h4><span class="menu-item-price">21 PLN</span>
+                            </div>
+                        </div>
+                        <div class="menu-item">
+                            <div class="menu-item-header">
+                                <h4 class="menu-item-name">Tenjaku Japanese Whisky</h4><span class="menu-item-price">25
+                                    PLN</span>
+                            </div>
+                        </div>
+                        <div class="menu-item">
+                            <div class="menu-item-header">
+                                <h4 class="menu-item-name">Jack Daniel’s Tennessee</h4><span class="menu-item-price">23
+                                    PLN</span>
+                            </div>
+                        </div>
+                        <div class="menu-item">
+                            <div class="menu-item-header">
+                                <h4 class="menu-item-name">Chivas Regal 12YO</h4><span class="menu-item-price">28
+                                    PLN</span>
+                            </div>
+                        </div>
+                        <div class="menu-item">
+                            <div class="menu-item-header">
+                                <h4 class="menu-item-name">Chivas Regal 18YO</h4><span class="menu-item-price">44
+                                    PLN</span>
+                            </div>
+                        </div>
+                        <div class="menu-item">
+                            <div class="menu-item-header">
+                                <h4 class="menu-item-name">Woodford Reserve</h4><span class="menu-item-price">34
+                                    PLN</span>
+                            </div>
+                        </div>
+                        <div class="menu-item">
+                            <div class="menu-item-header">
+                                <h4 class="menu-item-name">Paprocky single malt</h4><span class="menu-item-price">29
+                                    PLN</span>
+                            </div>
+                        </div>
+                        <div class="menu-item">
+                            <div class="menu-item-header">
+                                <h4 class="menu-item-name">Paprocky single barrel</h4><span class="menu-item-price">33
+                                    PLN</span>
+                            </div>
+                        </div>
+                        <div class="menu-item">
+                            <div class="menu-item-header">
+                                <h4 class="menu-item-name">Glenmorangie Original</h4><span class="menu-item-price">36
+                                    PLN</span>
+                            </div>
+                        </div>
+                        <div class="menu-item">
+                            <div class="menu-item-header">
+                                <h4 class="menu-item-name">Lagavulin 8YO</h4><span class="menu-item-price">48 PLN</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="menu-sub-section">GIN:</div>
+                    <div class="menu-grid">
+                        <div class="menu-item">
+                            <div class="menu-item-header">
+                                <h4 class="menu-item-name">Beefeater</h4><span class="menu-item-price">18 PLN</span>
+                            </div>
+                        </div>
+                        <div class="menu-item">
+                            <div class="menu-item-header">
+                                <h4 class="menu-item-name">Gordons Pink</h4><span class="menu-item-price">18 PLN</span>
+                            </div>
+                        </div>
+                        <div class="menu-item">
+                            <div class="menu-item-header">
+                                <h4 class="menu-item-name">Bombay</h4><span class="menu-item-price">25 PLN</span>
+                            </div>
+                        </div>
+                        <div class="menu-item">
+                            <div class="menu-item-header">
+                                <h4 class="menu-item-name">Tenjaku Japanese Gin</h4><span class="menu-item-price">23
+                                    PLN</span>
+                            </div>
+                        </div>
+                        <div class="menu-item">
+                            <div class="menu-item-header">
+                                <h4 class="menu-item-name">Dictador Colombian Orthodoxy</h4><span
+                                    class="menu-item-price">32
+                                    PLN</span>
+                            </div>
+                        </div>
+                        <div class="menu-item">
+                            <div class="menu-item-header">
+                                <h4 class="menu-item-name">Jonston Dry</h4><span class="menu-item-price">29 PLN</span>
+                            </div>
+                        </div>
+                        <div class="menu-item">
+                            <div class="menu-item-header">
+                                <h4 class="menu-item-name">Jonston Fresh Yuzu</h4><span class="menu-item-price">30
+                                    PLN</span>
+                            </div>
+                        </div>
+                        <div class="menu-item">
+                            <div class="menu-item-header">
+                                <h4 class="menu-item-name">Jonston Kind of Blue</h4><span class="menu-item-price">29
+                                    PLN</span>
+                            </div>
+                        </div>
+                        <div class="menu-item">
+                            <div class="menu-item-header">
+                                <h4 class="menu-item-name">Cieleśnica Compote Gin</h4><span class="menu-item-price">39
+                                    PLN</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="menu-sub-section">RUM:</div>
+                    <div class="menu-grid">
+                        <div class="menu-item">
+                            <div class="menu-item-header">
+                                <h4 class="menu-item-name">Bacardi Silver</h4>
+                                <span class="menu-item-price">18 PLN</span>
+                            </div>
+                        </div>
+                        <div class="menu-item">
+                            <div class="menu-item-header">
+                                <h4 class="menu-item-name">Bacardi Dark</h4>
+                                <span class="menu-item-price">18 PLN</span>
+                            </div>
+                        </div>
+                        <div class="menu-item">
+                            <div class="menu-item-header">
+                                <h4 class="menu-item-name">Bacardi Spiced</h4>
+                                <span class="menu-item-price">18 PLN</span>
+                            </div>
+                        </div>
+                        <div class="menu-item">
+                            <div class="menu-item-header">
+                                <h4 class="menu-item-name">Legacy Caribbean Rum</h4><span class="menu-item-price">31
+                                    PLN</span>
+                            </div>
+                        </div>
+                        <div class="menu-item">
+                            <div class="menu-item-header">
+                                <h4 class="menu-item-name">Dictador 12YO</h4><span class="menu-item-price">36 PLN</span>
+                            </div>
+                        </div>
+                        <div class="menu-item">
+                            <div class="menu-item-header">
+                                <h4 class="menu-item-name">Dictador 20YO</h4><span class="menu-item-price">52 PLN</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="menu-sub-section">TEQUILA:</div>
+                    <div class="menu-grid">
+                        <div class="menu-item">
+                            <div class="menu-item-header">
+                                <h4 class="menu-item-name">El Jimador Plata</h4><span class="menu-item-price">22
+                                    PLN</span>
+                            </div>
+                        </div>
+                        <div class="menu-item">
+                            <div class="menu-item-header">
+                                <h4 class="menu-item-name">El Jimador Reposado</h4><span class="menu-item-price">23
+                                    PLN</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- KAWA I HERBATA -->
+                <div class="menu-category">
+                    <h3 class="menu-category-title">KAWA / HERBATA</h3>
+                    <div class="menu-grid">
+                        <div class="menu-item">
+                            <div class="menu-item-header">
+                                <h4 class="menu-item-name">Espresso</h4>
+                                <span class="menu-item-price">9 PLN</span>
+                            </div>
+                        </div>
+                        <div class="menu-item">
+                            <div class="menu-item-header">
+                                <h4 class="menu-item-name">Espresso macchiato</h4>
+                                <span class="menu-item-price">9 PLN</span>
+                            </div>
+                        </div>
+                        <div class="menu-item">
+                            <div class="menu-item-header">
+                                <h4 class="menu-item-name">Espresso doppio</h4>
+                                <span class="menu-item-price">13 PLN</span>
+                            </div>
+                        </div>
+                        <div class="menu-item">
+                            <div class="menu-item-header">
+                                <h4 class="menu-item-name">Americano</h4>
+                                <span class="menu-item-price">13 PLN</span>
+                            </div>
+                        </div>
+                        <div class="menu-item">
+                            <div class="menu-item-header">
+                                <h4 class="menu-item-name">Americano z mlekiem</h4>
+                                <span class="menu-item-price">13 PLN</span>
+                            </div>
+                        </div>
+                        <div class="menu-item">
+                            <div class="menu-item-header">
+                                <h4 class="menu-item-name">Cappuccino</h4>
+                                <span class="menu-item-price">14 PLN</span>
+                            </div>
+                        </div>
+                        <div class="menu-item">
+                            <div class="menu-item-header">
+                                <h4 class="menu-item-name">Cappuccino duże</h4>
+                                <span class="menu-item-price">16 PLN</span>
+                            </div>
+                        </div>
+                        <div class="menu-item">
+                            <div class="menu-item-header">
+                                <h4 class="menu-item-name">Flat white</h4>
+                                <span class="menu-item-price">16 PLN</span>
+                            </div>
+                        </div>
+                        <div class="menu-item">
+                            <div class="menu-item-header">
+                                <h4 class="menu-item-name">Classic latte</h4>
+                                <span class="menu-item-price">14 PLN</span>
+                            </div>
+                        </div>
+                        <div class="menu-item">
+                            <div class="menu-item-header">
+                                <h4 class="menu-item-name">Czekolada</h4>
+                                <span class="menu-item-price">18 PLN</span>
+                            </div>
+                        </div>
+                        <div class="menu-item">
+                            <div class="menu-item-header">
+                                <h4 class="menu-item-name">Kawa mrożona</h4>
+                                <span class="menu-item-price">21 PLN</span>
+                            </div>
+                        </div>
+                        <div class="menu-item">
+                            <div class="menu-item-header">
+                                <h4 class="menu-item-name">Espresso Tonic</h4>
+                                <span class="menu-item-price">18 PLN</span>
+                            </div>
+                        </div>
+                        <div class="menu-item">
+                            <div class="menu-item-header">
+                                <h4 class="menu-item-name">Espresso Orange</h4>
+                                <span class="menu-item-price">19 PLN</span>
+                            </div>
+                        </div>
+                        <div class="menu-item">
+                            <div class="menu-item-header">
+                                <h4 class="menu-item-name">Herbata Ronnefeldt</h4>
+                                <span class="menu-item-price">15 PLN</span>
+                            </div>
+                        </div>
+                    </div>
+                    <p style="margin-top: 20px; font-size: 0.8rem; color: #666;">*Mleko standardowe / bez laktozy /
+                        owsiane
+                        w cenie</p>
+                </div>
+
+                <!-- NAPOJE BEZALKOHOLOWE -->
+                <div class="menu-category">
+                    <h3 class="menu-category-title">BEZALKOHOLOWE</h3>
+                    <div class="menu-grid">
+                        <div class="menu-item">
+                            <div class="menu-item-header">
+                                <h4 class="menu-item-name">Lemoniada Klasyczna</h4>
+                                <span class="menu-item-price">18 PLN</span>
+                            </div>
+                        </div>
+                        <div class="menu-item">
+                            <div class="menu-item-header">
+                                <h4 class="menu-item-name">Lemoniada Truskawkowa</h4>
+                                <span class="menu-item-price">18 PLN</span>
+                            </div>
+                        </div>
+                        <div class="menu-item">
+                            <div class="menu-item-header">
+                                <h4 class="menu-item-name">Lemoniada Marakuja</h4>
+                                <span class="menu-item-price">18 PLN</span>
+                            </div>
+                        </div>
+                        <div class="menu-item">
+                            <div class="menu-item-header">
+                                <h4 class="menu-item-name">Sok wyciskany z pomarańczy</h4>
+                                <span class="menu-item-price">19 PLN</span>
+                            </div>
+                        </div>
+                        <div class="menu-item">
+                            <div class="menu-item-header">
+                                <h4 class="menu-item-name">Kinga Pienińska niegazowana</h4>
+                                <span class="menu-item-price">11 PLN</span>
+                            </div>
+                        </div>
+                        <div class="menu-item">
+                            <div class="menu-item-header">
+                                <h4 class="menu-item-name">Kinga Pienińska gazowana</h4>
+                                <span class="menu-item-price">11 PLN</span>
+                            </div>
+                        </div>
+                        <div class="menu-item">
+                            <div class="menu-item-header">
+                                <h4 class="menu-item-name">Coca-Cola</h4>
+                                <span class="menu-item-price">12 PLN</span>
+                            </div>
+                        </div>
+                        <div class="menu-item">
+                            <div class="menu-item-header">
+                                <h4 class="menu-item-name">Coca-Cola Zero</h4>
+                                <span class="menu-item-price">12 PLN</span>
+                            </div>
+                        </div>
+                        <div class="menu-item">
+                            <div class="menu-item-header">
+                                <h4 class="menu-item-name">Sprite</h4>
+                                <span class="menu-item-price">12 PLN</span>
+                            </div>
+                        </div>
+                        <div class="menu-item">
+                            <div class="menu-item-header">
+                                <h4 class="menu-item-name">Tonic</h4>
+                                <span class="menu-item-price">12 PLN</span>
+                            </div>
+                        </div>
+                        <div class="menu-item">
+                            <div class="menu-item-header">
+                                <h4 class="menu-item-name">Red Bull</h4>
+                                <span class="menu-item-price">16 PLN</span>
+                            </div>
+                        </div>
+                        <div class="menu-item">
+                            <div class="menu-item-header">
+                                <h4 class="menu-item-name">Red Bull Zero</h4>
+                                <span class="menu-item-price">16 PLN</span>
+                            </div>
+                        </div>
+                        <div class="menu-item">
+                            <div class="menu-item-header">
+                                <h4 class="menu-item-name">Brzoskwiniowa herbata mrożona</h4>
+                                <span class="menu-item-price">18 PLN</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- SNACKI -->
+                <div class="menu-category">
+                    <h3 class="menu-category-title">SNACKI</h3>
+                    <div class="menu-grid">
+                        <div class="menu-item">
+                            <div class="menu-item-header">
+                                <h4 class="menu-item-name">Oliwki</h4><span class="menu-item-price">13 PLN</span>
+                            </div>
+                        </div>
+                        <div class="menu-item">
+                            <div class="menu-item-header">
+                                <h4 class="menu-item-name">Papryczki</h4><span class="menu-item-price">16 PLN</span>
+                            </div>
+                        </div>
+                        <div class="menu-item">
+                            <div class="menu-item-header">
+                                <h4 class="menu-item-name">Orzeszki</h4><span class="menu-item-price">14 PLN</span>
+                            </div>
+                        </div>
+                        <div class="menu-item">
+                            <div class="menu-item-header">
+                                <h4 class="menu-item-name">Chipsy</h4><span class="menu-item-price">14 PLN</span>
+                            </div>
+                        </div>
+                        <div class="menu-item">
+                            <div class="menu-item-header">
+                                <h4 class="menu-item-name">Nachosy</h4><span class="menu-item-price">23 PLN</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div> <!-- htmlMenuContainer -->
+        </div> <!-- container -->
     </section>
 
-    <footer>
-        <img src="images/Logotypy/Wektor/Gwar_logotype_green_no-bg.svg" alt="Bar Gwar" class="footer-logo">
-        <p>&copy; 2026 Bar Gwar. <span data-i18n="footer_rights">Wszelkie prawa zastrzeżone.</span></p>
+    <!-- FOOTER -->
+    <footer style="background-color: #000; color: #fff; padding: 50px 0; border-top: 1px solid #333;">
+        <div class="container" style="text-align: center;">
+            <p>&copy; 2024 Bar Gwar. Wszystkie prawa zastrzeżone.</p>
+        </div>
     </footer>
 
-    <script type="module" src="js/main.js"></script>
+    <script type="module" src="js/main.js?v=refresh1"></script>
 </body>
 
 </html>

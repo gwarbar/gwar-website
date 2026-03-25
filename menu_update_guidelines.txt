@@ -1,0 +1,17 @@
+# Wytyczne do aktualizacji Menu Bar Gwar
+
+1. ZAWSZE weryfikuj składniki z plikiem PDF, nawet jeśli na pierwszy rzut oka ich nie widać. Używaj narzędzi do czytania stron i zrzutów ekranu, aby mieć 100% pewności.
+2. MAKSYMALNA GRANULARNOŚĆ: Każdy smak, marka produktu i wariant (np. 0%, różne pojemności) musi być osobną pozycją `menu-item`. Nie grupuj pozycji za pomocą ukośników "/" w nazwie, jeśli można je rozdzielić.
+3. ALKOHOLE MOCNE: Podawaj markę i wariant (np. "Bacardi Silver", "Bacardi Dark").
+4. KATEGORYZACJA WIN: Dziel wina na sekcje: MUSUJĄCE, BIAŁE, CZERWONE. Usuń sekcję "Różowe", jeśli menu ich nie przewiduje.
+5. KAWA I NAPOJE:
+   - Nie dodawaj dopisków o dopłacie za mleko roślinne – wszystkie opcje są w tej samej cenie.
+   - Każdy rodzaj kawy (Espresso, Macchiato, Doppio itd.) ma być osobną pozycją.
+   - Usuwaj marketingowe dopiski typu "(KAWA MOTT)" lub "(Autorski)", chyba że są wymagane w nazwie produktu.
+6. SHOTY: 
+   - Rozdzielaj smaki nalewek (Gwarówka) na osobne pozycje. Formaty "Shot" i "Taca" również mogą być osobnymi pozycjami.
+   - ZAWSZE dodawaj wyjaśnienie pod tytułem kategorii: "Cena za 1 szt. / Cena za tacę (6 szt.)".
+7. SPRITZ 0%: Każdy wariant bezalkoholowy (Aperol 0%, Hugo 0% itd.) ma być osobną pozycją z listą składników.
+8. FORMATOWANIE: Zachowaj strukturę HTML z klasami `menu-category`, `menu-sub-section`, `menu-grid` i `menu-item`.
+9. SEO I META: Pamiętaj o tagach Google Tag Manager w sekcji <head>.
+10. JĘZYK: Obecnie strona obsługuje tylko język polski (przyciski EN zostały usunięte).

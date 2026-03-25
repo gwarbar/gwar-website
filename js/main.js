@@ -1,10 +1,10 @@
 import { loadInstagramFeed, loadGoogleReviews, loadTravelTime, loadWeather } from './api.js?v=13';
-import { TRANSLATIONS } from './translations.js';
-
+import { TRANSLATIONS, MENU_DICTIONARY } from './translations.js?v=refresh1';
 
 // PDF Handling
 let pdfDoc = null;
-let currentLang = null;
+let currentLang = localStorage.getItem('gwar_language') || 'pl';
+let currentMenuLang = localStorage.getItem('gwar_menu_language') || 'pl';
 
 const pdfContainer = document.getElementById('pdfContainer');
 
@@ -277,23 +277,23 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
 // Use a more robust language switching mechanism
-window.setLanguage = setLanguage;
+window.setLanguage = setSiteLanguage;
 
-async function setLanguage(lang) {
-    if (currentLang === lang && !pdfContainer) return; // Skip if same lang and no PDF re-render needed
+async function setSiteLanguage(lang, init = false) {
+    if (currentLang === lang && !pdfContainer && !init) return;
 
     currentLang = lang;
-    localStorage.setItem('gwar_language', lang); // Save preference
+    localStorage.setItem('gwar_language', lang);
 
-    // Update UI active state
-    document.querySelectorAll('.flag-btn').forEach(btn => {
-        const isActive = btn.dataset.lang === lang;
+    // Update active state ONLY for navbar flags
+    document.querySelectorAll('.lang-switch .flag-btn').forEach(btn => {
+        const isActive = btn.dataset.lang === currentLang;
         btn.classList.toggle('active', isActive);
-        btn.style.opacity = isActive ? '1' : '0.5'; // Visual feedback
+        btn.style.opacity = isActive ? '1' : '0.5';
     });
 
-    // Translate Text Content
-    const t = TRANSLATIONS[lang];
+    // Translate Text Content (UI)
+    const t = TRANSLATIONS[currentLang];
     if (t) {
         document.querySelectorAll('[data-i18n]').forEach(el => {
             const key = el.dataset.i18n;
@@ -306,27 +306,223 @@ async function setLanguage(lang) {
             }
         });
     }
+}
 
-    // PDF Reload (only if on a page with PDF)
-    if (pdfContainer) {
-        // Enforce Polish menu for now as English version is outdated/unfinished
-        const url = 'pdf/menu_pl.pdf';
-        await loadPDF(url);
+function setMenuLanguage(lang) {
+    currentMenuLang = lang;
+    localStorage.setItem('gwar_menu_language', lang);
+
+    // Update active state ONLY for menu flags
+    document.querySelectorAll('.menu-lang-switcher .flag-btn').forEach(btn => {
+        const isActive = btn.dataset.lang === lang;
+        btn.classList.toggle('active', isActive);
+        btn.style.opacity = isActive ? '1' : '0.5';
+    });
+
+    const htmlMenuContainer = document.getElementById('htmlMenuContainer');
+    if (lang === 'pl') {
+        if (htmlMenuContainer) htmlMenuContainer.style.display = 'none';
+        if (pdfContainer) {
+            pdfContainer.style.display = 'block';
+            if (currentPdfUrl !== 'pdf/menu_pl.pdf') {
+                loadPDF('pdf/menu_pl.pdf');
+            }
+        }
+    } else {
+        if (pdfContainer) pdfContainer.style.display = 'none';
+        if (htmlMenuContainer) {
+            htmlMenuContainer.style.display = 'block';
+            translateMenu(lang);
+        }
+    }
+}
+
+function translateMenu(lang) {
+    const dict = MENU_DICTIONARY;
+    const targets = document.querySelectorAll('.menu-item-desc, .menu-category-title, .menu-sub-section, .menu-item-name');
+
+    if (!dict) return;
+
+    // Usuń istniejące tagi z komentarzami przed translacją
+    document.querySelectorAll('.comment-tag').forEach(tag => tag.remove());
+
+    targets.forEach(el => {
+        // Save original Polish if not already saved
+        if (!el.getAttribute('data-original-pl')) {
+            el.setAttribute('data-original-pl', el.textContent.trim());
+        }
+
+        let text = el.getAttribute('data-original-pl');
+
+        if (lang === 'pl') {
+            el.textContent = text;
+            return;
+        }
+
+        // Apply translations from dictionary
+        // Sort keys by length descending to avoid partial matches (e.g. "sok z cytryny" before "sok")
+        const sortedPlKeys = Object.keys(dict).sort((a, b) => b.length - a.length);
+
+        for (const pl of sortedPlKeys) {
+            const translations = dict[pl];
+            if (translations[lang]) {
+                // Escape special characters for regex
+                let escapedPl = pl.replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&');
+                // Replace spaces in the dictionary key with a regex that matches any whitespace (space, newline, tab)
+                escapedPl = escapedPl.replace(/\s+/g, '\\s+');
+
+                // Use a simple global replacement - the descending sort handles nested terms
+                const regex = new RegExp(escapedPl, 'gi');
+                text = text.replace(regex, translations[lang]);
+            }
+        }
+
+        let tagText = null;
+        if (lang !== 'pl' && el.classList.contains('menu-item-name')) {
+            const originalPl = el.getAttribute('data-original-pl').toLowerCase();
+
+            // Check if it's not a cocktail
+            const catContainer = el.closest('.menu-category');
+            const catTitleEl = catContainer ? catContainer.querySelector('.menu-category-title') : null;
+            const catTitle = catTitleEl ? (catTitleEl.getAttribute('data-original-pl') || catTitleEl.textContent) : '';
+
+            const isCocktail = catTitle.match(/KOKTAJLE/i);
+
+            if (!isCocktail) {
+                if (originalPl.includes('polsk')) {
+                    if (lang === 'en') tagText = 'Polish';
+                    else if (lang === 'de') tagText = 'Polnisch';
+                    else if (lang === 'fr') tagText = 'Polonais';
+                    else if (lang === 'es') tagText = 'Polaco';
+                    else if (lang === 'ua') tagText = 'Польське';
+                } else if (originalPl.includes('kraft') || originalPl.includes('craft') || originalPl.includes('rzemieśl')) {
+                    if (lang === 'en') tagText = 'Craft';
+                    else if (lang === 'de') tagText = 'Handwerk';
+                    else if (lang === 'fr') tagText = 'Artisanal';
+                    else if (lang === 'es') tagText = 'Artesanal';
+                    else if (lang === 'ua') tagText = 'Крафтове';
+                }
+            }
+        }
+
+        el.textContent = text;
+
+        // Append UI comment tag if matched conditions
+        if (tagText) {
+            const span = document.createElement('span');
+            span.className = 'comment-tag';
+            span.style.color = '#ff69b4';
+            span.style.fontSize = '0.7em';
+            span.style.padding = '1px 6px';
+            span.style.marginLeft = '12px';
+            span.style.fontStyle = 'italic';
+            span.style.fontWeight = 'normal';
+            span.style.border = '1px solid #ff69b4';
+            span.style.borderRadius = '4px';
+            span.style.verticalAlign = 'middle';
+            span.textContent = tagText;
+            el.appendChild(span);
+        }
+    });
+
+    // Generate Shortcut Navigation
+    const shortcutsContainer = document.getElementById('menuShortcutsContainer');
+    if (shortcutsContainer && lang !== 'pl') {
+        shortcutsContainer.innerHTML = '';
+        const categories = document.querySelectorAll('#htmlMenuContainer .menu-category');
+
+        categories.forEach((cat, index) => {
+            const titleEl = cat.querySelector('.menu-category-title');
+            if (!titleEl) return;
+
+            // Generate unique id for the category anchor
+            if (!cat.id) {
+                cat.id = 'menu-category-' + index;
+            }
+
+            const btn = document.createElement('button');
+            btn.textContent = titleEl.textContent.split('(')[0].trim();
+            btn.style.padding = '8px 16px';
+            btn.style.background = 'transparent';
+            btn.style.color = '#fff';
+            btn.style.border = '1px solid #444';
+            btn.style.borderRadius = '20px';
+            btn.style.cursor = 'pointer';
+            btn.style.fontSize = '0.85rem';
+            btn.style.transition = 'all 0.3s ease';
+            btn.style.whiteSpace = 'nowrap';
+            btn.dataset.active = 'false';
+
+            btn.addEventListener('mouseenter', () => {
+                if (btn.dataset.active !== 'true') {
+                    btn.style.borderColor = 'var(--primary-color)';
+                }
+            });
+            btn.addEventListener('mouseleave', () => {
+                if (btn.dataset.active !== 'true') {
+                    btn.style.borderColor = '#444';
+                }
+            });
+
+            btn.addEventListener('click', () => {
+                const navHeight = document.querySelector('.navbar')?.offsetHeight || 80;
+                const stickyHeight = shortcutsContainer.offsetHeight || 0;
+                const yOffset = -navHeight - stickyHeight - 20;
+                const y = cat.getBoundingClientRect().top + window.scrollY + yOffset;
+                window.scrollTo({ top: y, behavior: 'smooth' });
+            });
+
+            shortcutsContainer.appendChild(btn);
+        });
+
+        // Use IntersectionObserver to highlight current active category
+        if (window._menuIntersectionObserver) {
+            window._menuIntersectionObserver.disconnect();
+        }
+
+        window._menuIntersectionObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const activeIndex = Array.from(categories).indexOf(entry.target);
+                    const buttons = shortcutsContainer.querySelectorAll('button');
+                    buttons.forEach((b, i) => {
+                        if (i === activeIndex) {
+                            b.style.borderColor = 'var(--primary-color)';
+                            b.style.color = 'var(--primary-color)';
+                            b.dataset.active = 'true';
+                        } else {
+                            b.style.borderColor = '#444';
+                            b.style.color = '#fff';
+                            b.dataset.active = 'false';
+                        }
+                    });
+                }
+            });
+        }, { rootMargin: '-180px 0px -60% 0px' });
+
+        categories.forEach(cat => window._menuIntersectionObserver.observe(cat));
     }
 }
 
 function initPDF() {
-    // Bind click events for flags if they exist
+    // Bind click events for all flags
     document.querySelectorAll('.flag-btn').forEach(btn => {
         btn.addEventListener('click', (e) => {
-            const lang = e.currentTarget.dataset.lang;
-            setLanguage(lang);
+            const btnEl = e.currentTarget;
+            const lang = btnEl.dataset.lang;
+
+            // If the flag is in the special menu switcher, only change menu
+            if (btnEl.closest('.menu-lang-switcher')) {
+                setMenuLanguage(lang);
+            } else {
+                setSiteLanguage(lang);
+            }
         });
     });
 
-    // Initial load from storage or default
-    const savedLang = localStorage.getItem('gwar_language') || 'pl';
-    setLanguage(savedLang);
+    // Initial load (forces translation with flag 'true' for initial render)
+    setSiteLanguage(currentLang, true);
+    setMenuLanguage(currentMenuLang);
 }
 
 let currentPdfUrl = null;
