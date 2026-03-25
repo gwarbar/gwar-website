@@ -389,7 +389,7 @@ function translateMenu(lang) {
             const isCocktail = catTitle.match(/KOKTAJLE/i);
 
             if (!isCocktail) {
-                const explicitPolish = ['polsk', 'moderna', 'wawrzyniec', 'miłosław', 'prozdrowotne', 'wyborowa', 'palikot', 'belvedere', 'żubrówka', 'paprocky', 'jonston', 'cieleśnica', 'dictador 12', 'dictador 20', 'bestbir'];
+                const explicitPolish = ['polsk', 'moderna', 'wawrzyniec', 'miłosław', 'prozdrowotne', 'wyborowa', 'palikot', 'belvedere', 'żubrówka', 'paprocky', 'jonston', 'cieleśnica', 'dictador 12', 'dictador 20', 'bestbir', 'legacy'];
 
                 if (explicitPolish.some(kw => originalPl.includes(kw))) {
                     if (lang === 'en') tagText = 'Polish';
