@@ -1097,6 +1097,13 @@ export const MENU_DICTIONARY = {
         "es": "Litovel Limón Negro 0%",
         "ua": "Litovel Чорний Лимон 0%"
     },
+    "*Mleko standardowe / bez laktozy / owsiane w cenie": {
+        "en": "*Standard / lactose-free / oat milk included in price",
+        "de": "*Standard- / laktosefreie / Hafermilch im Preis inbegriffen",
+        "fr": "*Lait standard / sans lactose / d'avoine inclus dans le prix",
+        "es": "*Leche estándar / sin lactosa / de avena incluida en el precio",
+        "ua": "*Стандартне / безлактозне / вівсяне молоко у вартості"
+    },
     "purée z kiwi": {
         "en": "kiwi puree",
         "de": "Kiwipüree",

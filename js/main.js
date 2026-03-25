@@ -339,7 +339,7 @@ function setMenuLanguage(lang) {
 
 function translateMenu(lang) {
     const dict = MENU_DICTIONARY;
-    const targets = document.querySelectorAll('.menu-item-desc, .menu-category-title, .menu-sub-section, .menu-item-name');
+    const targets = document.querySelectorAll('.menu-item-desc, .menu-category-title, .menu-sub-section, .menu-item-name, .menu-note');
 
     if (!dict) return;
 
