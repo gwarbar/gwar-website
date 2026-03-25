@@ -309,7 +309,8 @@ async function setLanguage(lang) {
 
     // PDF Reload (only if on a page with PDF)
     if (pdfContainer) {
-        const url = (lang === 'pl') ? 'pdf/menu_pl.pdf' : 'pdf/menu_en.pdf';
+        // Enforce Polish menu for now as English version is outdated/unfinished
+        const url = 'pdf/menu_pl.pdf';
         await loadPDF(url);
     }
 }
