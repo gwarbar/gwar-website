@@ -4,7 +4,7 @@ import { TRANSLATIONS, MENU_DICTIONARY } from './translations.js?v=refresh1';
 // PDF Handling
 let pdfDoc = null;
 let currentLang = localStorage.getItem('gwar_language') || 'pl';
-let currentMenuLang = localStorage.getItem('gwar_menu_language') || 'pl';
+let currentMenuLang = 'pl'; // forced default for aesthetics
 
 const pdfContainer = document.getElementById('pdfContainer');
 
