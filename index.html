@@ -150,28 +150,32 @@
         <div class="container">
             <h2 data-i18n="reviews_title">OPINIE GOOGLE</h2>
             <div class="carousel-container">
-                <div class="carousel-item review-card">
+                <a href="https://search.google.com/local/reviews?placeid=ChIJGwLyqt9bFkcR08ryDrlDBZY" target="_blank"
+                    class="carousel-item review-card" style="text-decoration:none; color:inherit;">
                     <div class="stars">★★★★★</div>
                     <div class="review-text">"Najlepsze drinki w mieście! Klimat nie do podrobienia, a obsługa to
                         złoto."</div>
                     <div class="review-author">- Anna K.</div>
-                </div>
-                <div class="carousel-item review-card">
+                </a>
+                <a href="https://search.google.com/local/reviews?placeid=ChIJGwLyqt9bFkcR08ryDrlDBZY" target="_blank"
+                    class="carousel-item review-card" style="text-decoration:none; color:inherit;">
                     <div class="stars">★★★★★</div>
                     <div class="review-text">"Super miejsce na spotkanie ze znajomymi. Muzyka, wystrój, wszystko gra."
                     </div>
                     <div class="review-author">- Piotr W.</div>
-                </div>
-                <div class="carousel-item review-card">
+                </a>
+                <a href="https://search.google.com/local/reviews?placeid=ChIJGwLyqt9bFkcR08ryDrlDBZY" target="_blank"
+                    class="carousel-item review-card" style="text-decoration:none; color:inherit;">
                     <div class="stars">★★★★★</div>
                     <div class="review-text">"Bardzo polecam! Drinki autorskie to mistrzostwo świata."</div>
                     <div class="review-author">- Magda L.</div>
-                </div>
-                <div class="carousel-item review-card">
+                </a>
+                <a href="https://search.google.com/local/reviews?placeid=ChIJGwLyqt9bFkcR08ryDrlDBZY" target="_blank"
+                    class="carousel-item review-card" style="text-decoration:none; color:inherit;">
                     <div class="stars">★★★★★</div>
                     <div class="review-text">"Luźna atmosfera i profesjonalne podejście barmanów. Wrócę na pewno."</div>
                     <div class="review-author">- Tomek S.</div>
-                </div>
+                </a>
             </div>
         </div>
     </section>
@@ -265,7 +269,7 @@
                             src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2562.339487440445!2d19.94384717730999!3d50.04832561611736!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47165bdfaaf2021b%3A0x960543b90ef2cad3!2sBar%20Gwar!5e0!3m2!1spl!2spl!4v1718041000000!5m2!1spl!2spl" 
                             width="100%" 
                             height="100%" 
-                            style="border:0; filter: grayscale(1) invert(0.9) hue-rotate(170deg);" 
+                            style="border:0;" 
                             allowfullscreen="" 
                             loading="lazy" 
                             referrerpolicy="no-referrer-when-downgrade">
@@ -301,8 +305,10 @@
         <p>&copy; 2026 Bar Gwar. <span data-i18n="footer_rights">Wszelkie prawa zastrzeżone.</span></p>
     </footer>
 
-
-
+    <!-- Google Maps API (REQUIRED FOR REVIEWS) -->
+    <script
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDHS1YkQvLke6n18kjP3IxdhZq5-7fsc9c&libraries=places&v=weekly&callback=initMap"
+        async defer></script>
     <!-- LIGHTBOX -->
     <div id="lightbox">
         <div class="close-btn">&times;</div>

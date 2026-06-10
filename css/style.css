@@ -505,7 +505,6 @@ canvas {
 }
 
 .map-wrapper iframe {
-  filter: grayscale(1) invert(0.9) hue-rotate(170deg);
   border-radius: 4px;
 }
 
