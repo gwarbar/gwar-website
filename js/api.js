@@ -113,19 +113,24 @@ export async function loadGoogleReviews() {
         console.log('[GWAR-API] Place data received:', place);
 
         if (place.reviews && place.reviews.length > 0) {
-            console.log(`[GWAR-API] Found ${place.reviews.length} reviews. Filtering for 5 stars...`);
-            container.innerHTML = '';
-
-            // Filter: Only 5-star reviews
-            const reviews = place.reviews
-                .filter(review => Math.round(review.rating || 0) === 5)
-                .sort((a, b) => (b.rating || 0) - (a.rating || 0));
+            // Filter: Prefer 5-star, but take anything 4+ if none found to stay "fresh"
+            let reviews = place.reviews
+                .filter(review => (review.rating || 0) >= 5)
+                .sort((a, b) => (b.publishTime || 0) - (a.publishTime || 0));
 
             if (reviews.length === 0) {
-                console.warn('[GWAR-API] No 5-star reviews found in the latest sample.');
+                console.warn('[GWAR-API] No 5-star reviews. Relaxing filter to 4+ stars...');
+                reviews = place.reviews
+                    .filter(review => (review.rating || 0) >= 4)
+                    .sort((a, b) => (b.publishTime || 0) - (a.publishTime || 0));
+            }
+
+            if (reviews.length === 0) {
+                console.warn('[GWAR-API] Still no reviews found in sample.');
                 return;
             }
 
+            container.innerHTML = ''; // ONLY CLEAR IF WE HAVE DATA
             reviews.forEach((review, index) => {
                 const author = review.authorAttribution;
                 console.log(`[GWAR-API] Review ${index + 1} author:`, author);
@@ -191,11 +196,22 @@ function loadGoogleReviewsLegacy(container) {
         if (status === google.maps.places.PlacesServiceStatus.OK && place && place.reviews) {
             container.innerHTML = '';
 
-            // Filter: Only 5-star reviews
-            const reviews = place.reviews
-                .filter(review => Math.round(review.rating) === 5)
+            // Filter: Prefer 5-star, then 4+
+            let reviews = place.reviews
+                .filter(review => (review.rating || 0) >= 5)
+                .sort((a, b) => (b.time || 0) - (a.time || 0))
                 .slice(0, 5);
 
+            if (reviews.length === 0) {
+                reviews = place.reviews
+                    .filter(review => (review.rating || 0) >= 4)
+                    .sort((a, b) => (b.time || 0) - (a.time || 0))
+                    .slice(0, 5);
+            }
+
+            if (reviews.length === 0) return;
+
+            container.innerHTML = '';
             reviews.forEach(review => {
                 const card = document.createElement('a');
                 card.className = 'carousel-item review-card';
