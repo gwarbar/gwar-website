@@ -1,54 +1,88 @@
-/* 
-   GOOGLE APPS SCRIPT CODE
-   1. Go to https://script.google.com/
-   2. Click "New Project"
-   3. Paste this code into the editor (replace existing code)
-   4. Save (Cmd+S)
-   5. Click "Deploy" -> "New Deployment"
-   6. Select type: "Web App"
-   7. Description: "Email Service"
-   8. Execute as: "Me" (your email)
-   9. Who has access: "Anyone" (IMPORTANT!)
-   10. Click "Deploy"
-   11. Copy the "Web App URL" (starts with https://script.google.com/macros/s/...)
-   12. Paste that URL into index.html action attribute
-*/
+/*************************************************
+  KONFIGURACJA
+*************************************************/
+const ADMIN_EMAIL = "gwar@gwar.bar";
+const IOS_BRIDGE_URL = "https://bar.gwar.bar/confirm.html";
 
+
+/*************************************************
+  NOWA REZERWACJA
+*************************************************/
 function doPost(e) {
-    try {
-        const data = JSON.parse(e.postData.contents);
+  try {
+    const data = JSON.parse(e.postData.contents);
+    const reservationId = Date.now().toString();
 
-        // Email Config
-        const recipient = "gwar@gwar.bar"; // CHANGE THIS if needed
-        const subject = "Nowa Rezerwacja (Strona WWW)";
+    const confirmLink =
+      `${IOS_BRIDGE_URL}?confirm=${reservationId}` +
+      `&email=${encodeURIComponent(data.email)}` +
+      `&date=${encodeURIComponent(data.date)}` +
+      `&time=${encodeURIComponent(data.time)}`;
 
-        const body = `
-      Nowa rezerwacja ze strony:
-      --------------------------
-      Imię i Nazwisko: ${data.name}
-      Data: ${data.date}
-      Godzina: ${data.time}
-      Liczba osób: ${data.pax}
-      Telefon: ${data.phone}
-      
-      --------------------------
-      Wysłano automatycznie.
-    `;
+    const commentLine = data.comment ? `\nUwagi: ${data.comment}` : "";
 
-        MailApp.sendEmail(recipient, subject, body);
+    const whatsappMessage =
+      `NOWA REZERWACJA\n\n` +
+      `${data.date} ${data.time}\n` +
+      `${data.pax} osób\n` +
+      `${data.name}\n` +
+      `Tel: ${data.phone}` +
+      commentLine;
 
-        return ContentService.createTextOutput(JSON.stringify({ 'result': 'success' }))
-            .setMimeType(ContentService.MimeType.JSON);
+    const whatsappLink = "https://wa.me/?text=" + encodeURIComponent(whatsappMessage);
 
-    } catch (error) {
-        return ContentService.createTextOutput(JSON.stringify({ 'result': 'error', 'error': error.toString() }))
-            .setMimeType(ContentService.MimeType.JSON);
-    }
+    const adminBody =
+      `NOWA REZERWACJA\n\n` +
+      `Imię: ${data.name}\n` +
+      `Telefon: ${data.phone}\n` +
+      `Email: ${data.email}\n` +
+      `Data: ${data.date} ${data.time}\n` +
+      `Osoby: ${data.pax}\n` +
+      `Komentarz: ${data.comment || "Brak"}\n\n` +
+      `----------------------------------\n\n` +
+      `POTWIERDZENIE:\n${confirmLink}\n\n` +
+      `----------------------------------\n\n` +
+      `WHATSAPP:\n${whatsappLink}`;
+
+    GmailApp.sendEmail(ADMIN_EMAIL, `Nowa Rezerwacja – ${data.date} ${data.time}`, adminBody, {
+        from: "gwar@gwar.bar", name: "GWAR", replyTo: "gwar@gwar.bar"
+    });
+
+    GmailApp.sendEmail(data.email, "Rezerwacja otrzymana", `Dziękujemy za rezerwację.\n\nTwoja rezerwacja została przyjęta i oczekuje na potwierdzenie.\n\nGWAR`, {
+        from: "gwar@gwar.bar", name: "GWAR", replyTo: "gwar@gwar.bar"
+    });
+
+    return ContentService.createTextOutput("OK").setMimeType(ContentService.MimeType.TEXT);
+  } catch (error) {
+    return ContentService.createTextOutput("ERROR: " + error.toString()).setMimeType(ContentService.MimeType.TEXT);
+  }
 }
 
-// Handle OPTIONS for CORS (Preflight)
-function doOptions(e) {
-    var output = ContentService.createTextOutput("");
-    output.setMimeType(ContentService.MimeType.TEXT);
-    return output;
+/*************************************************
+  POTWIERDZENIE (Zwraca TEKST dla Bridge)
+*************************************************/
+function doGet(e) {
+  if (!e.parameter.confirm) return ContentService.createTextOutput("INVALID");
+
+  const reservationId = e.parameter.confirm;
+  const clientEmail = e.parameter.email;
+  const date = e.parameter.date;
+  const time = e.parameter.time;
+
+  const cache = CacheService.getScriptCache();
+  const alreadyConfirmed = cache.get(reservationId);
+
+  if (alreadyConfirmed) return ContentService.createTextOutput("ALREADY_CONFIRMED");
+
+  cache.put(reservationId, "CONFIRMED", 86400);
+
+  GmailApp.sendEmail(clientEmail, "Rezerwacja potwierdzona", `Twoja rezerwacja została potwierdzona.\n\nZapraszamy ${date} ${time}.\n\nDo zobaczenia!\nGWAR`, {
+      from: "gwar@gwar.bar", name: "GWAR", replyTo: "gwar@gwar.bar"
+  });
+
+  return ContentService.createTextOutput("SUCCESS").setMimeType(ContentService.MimeType.TEXT);
+}
+
+function doOptions() {
+  return ContentService.createTextOutput("").setMimeType(ContentService.MimeType.TEXT);
 }
