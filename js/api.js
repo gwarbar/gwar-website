@@ -132,7 +132,7 @@ export async function loadGoogleReviews() {
 
                 const card = document.createElement('a');
                 card.className = 'carousel-item review-card';
-                card.href = author?.uri || author?.photoUri || `https://search.google.com/local/reviews?placeid=ChIJGwLyqt9bFkcR08ryDrlDBZY`;
+                card.href = `https://www.google.com/maps/place/Bar+Gwar/@50.048033,19.946036,15z/data=!4m8!3m7!1s0x47165bdfaaf2021b:0x960543b90ef2cad3!8m2!3d50.0480326!4d19.9460358!9m1!1b1!16s%2Fg%2F11kq00tlpl?hl=pl&entry=ttu&g_ep=EgoyMDI2MDYwMy4xIKXMDSoASAFQAw%3D%3D`;
                 card.target = '_blank';
                 card.style.textDecoration = 'none';
                 card.style.color = 'inherit';
@@ -199,7 +199,7 @@ function loadGoogleReviewsLegacy(container) {
             reviews.forEach(review => {
                 const card = document.createElement('a');
                 card.className = 'carousel-item review-card';
-                card.href = review.author_url || `https://search.google.com/local/reviews?placeid=ChIJGwLyqt9bFkcR08ryDrlDBZY`;
+                card.href = `https://www.google.com/maps/place/Bar+Gwar/@50.048033,19.946036,15z/data=!4m8!3m7!1s0x47165bdfaaf2021b:0x960543b90ef2cad3!8m2!3d50.0480326!4d19.9460358!9m1!1b1!16s%2Fg%2F11kq00tlpl?hl=pl&entry=ttu&g_ep=EgoyMDI2MDYwMy4xIKXMDSoASAFQAw%3D%3D`;
                 card.target = '_blank';
                 card.style.textDecoration = 'none';
                 card.style.color = 'inherit';
