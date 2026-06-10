@@ -132,7 +132,7 @@ export async function loadGoogleReviews() {
 
                 const card = document.createElement('a');
                 card.className = 'carousel-item review-card';
-                card.href = author?.uri || '#';
+                card.href = `https://search.google.com/local/reviews?placeid=ChIJGwLyqt9bFkcR08ryDrlDBZY`;
                 card.target = '_blank';
                 card.style.textDecoration = 'none';
                 card.style.color = 'inherit';
@@ -199,7 +199,7 @@ function loadGoogleReviewsLegacy(container) {
             reviews.forEach(review => {
                 const card = document.createElement('a');
                 card.className = 'carousel-item review-card';
-                card.href = review.author_url || '#';
+                card.href = `https://search.google.com/local/reviews?placeid=ChIJGwLyqt9bFkcR08ryDrlDBZY`;
                 card.target = '_blank';
                 card.style.textDecoration = 'none';
                 card.style.color = 'inherit';

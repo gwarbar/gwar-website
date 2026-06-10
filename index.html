@@ -258,9 +258,18 @@
                 <div class="contact-info">
                     <p><strong data-i18n="contact_address">Adres:</strong> Mostowa 8, 31-051 Kraków</p>
 
-                    <!-- MINI MAP -->
-                    <div id="contact-map"
-                        style="width:100%; max-width:400px; height:200px; background:#222; margin:20px auto; border:1px solid #333;">
+                    <!-- MINI MAP (EMBED IFRAME) -->
+                    <div class="map-wrapper"
+                        style="width:100%; max-width:400px; height:250px; background:#222; margin:20px auto; border:1px solid #333; overflow:hidden;">
+                        <iframe 
+                            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2562.339487440445!2d19.94384717730999!3d50.04832561611736!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47165bdfaaf2021b%3A0x960543b90ef2cad3!2sBar%20Gwar!5e0!3m2!1spl!2spl!4v1718041000000!5m2!1spl!2spl" 
+                            width="100%" 
+                            height="100%" 
+                            style="border:0; filter: grayscale(1) invert(0.9) hue-rotate(170deg);" 
+                            allowfullscreen="" 
+                            loading="lazy" 
+                            referrerpolicy="no-referrer-when-downgrade">
+                        </iframe>
                     </div>
 
                     <!-- TRAVEL TIME WIDGET -->
@@ -292,10 +301,7 @@
         <p>&copy; 2026 Bar Gwar. <span data-i18n="footer_rights">Wszelkie prawa zastrzeżone.</span></p>
     </footer>
 
-    <!-- Google Maps API -->
-    <script
-        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDHS1YkQvLke6n18kjP3IxdhZq5-7fsc9c&libraries=places&v=weekly&callback=initMap"
-        async defer></script>
+
 
     <!-- LIGHTBOX -->
     <div id="lightbox">
