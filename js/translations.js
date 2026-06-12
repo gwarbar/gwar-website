@@ -160,7 +160,8 @@ export const TRANSLATIONS = {
         "menu_soft_drinks": "SOFT DRINKS",
         "menu_snacks": "SNACKS",
         "menu_beers_draught": "DRAUGHT:",
-        "menu_beers_bottled": "BOTTLED:"
+        "menu_beers_bottled": "BOTTLED:",
+        "summer_menu_title": "GWAR SUMMER 2026 (Signature Cocktails)"
     },
     "de": {
         "nav_about": "ÜBER UNS",
@@ -181,7 +182,8 @@ export const TRANSLATIONS = {
         "menu_soft_drinks": "ERFRISCHUNGSGETRÄNKE",
         "menu_snacks": "SNACKS",
         "menu_beers_draught": "VOM FASS:",
-        "menu_beers_bottled": "FLASCHENBIER:"
+        "menu_beers_bottled": "FLASCHENBIER:",
+        "summer_menu_title": "GWAR SOMMER 2026 (Signatur-Cocktails)"
     },
     "fr": {
         "nav_about": "À PROPOS",
@@ -202,7 +204,8 @@ export const TRANSLATIONS = {
         "menu_soft_drinks": "BOISSONS FRAÎCHES",
         "menu_snacks": "SNACKS",
         "menu_beers_draught": "PRESSION:",
-        "menu_beers_bottled": "EN BOUTEILLE:"
+        "menu_beers_bottled": "EN BOUTEILLE:",
+        "summer_menu_title": "GWAR ÉTÉ 2026 (Cocktails Signature)"
     },
     "es": {
         "nav_about": "SOBRE NOSOTROS",
@@ -223,7 +226,8 @@ export const TRANSLATIONS = {
         "menu_soft_drinks": "REFRESCOS",
         "menu_snacks": "SNACKS",
         "menu_beers_draught": "DE BARRIL:",
-        "menu_beers_bottled": "EN BOTELLA:"
+        "menu_beers_bottled": "EN BOTELLA:",
+        "summer_menu_title": "GWAR VERANO 2026 (Cócteles de la casa)"
     },
     "ua": {
         "nav_about": "ПРО НАС",
@@ -244,7 +248,8 @@ export const TRANSLATIONS = {
         "menu_soft_drinks": "НАПОЇ",
         "menu_snacks": "СНЕКИ",
         "menu_beers_draught": "РОЗЛИВНЕ:",
-        "menu_beers_bottled": "ПЛЯШКОВЕ:"
+        "menu_beers_bottled": "ПЛЯШКОВЕ:",
+        "summer_menu_title": "ГВАР ЛІТО 2026 (Авторські коктейлі)"
     }
 };
 
@@ -298,6 +303,63 @@ export const MENU_DICTIONARY = {
         "es": "naranja",
         "ua": "апельсин"
     },
+    "Gwarne Lato": {
+        "en": "Sultry Summer",
+        "de": "Gwar-Sommer",
+        "fr": "L'Été Gwar",
+        "es": "Verano Gwar",
+        "ua": "Gwar-Літо"
+    },
+    // Summer Drinks Ingredients
+    "Rum biały / Passoa / kordial limonkowy / purée z mango / syrop falernum / sok z cytryny": {
+        "en": "White rum / Passoa / lime cordial / mango purée / falernum syrup / lemon juice",
+        "de": "Weißer Rum / Passoa / Limetten-Cordial / Mangopüree / Falernum-Sirup / Zitronensaft",
+        "fr": "Rhum blanc / Passoa / cordial de lime / purée de mangue / sirop de falernum / jus de citron",
+        "es": "Ron blanco / Passoa / cordial de lima / purée de mango / sirope de falernum / zumo de limón",
+        "ua": "Білий ром / Passoa / лаймовий кордіал / пюре манго / сироп фалернум / лимонний сік"
+    },
+    "Gin / syrop z moreli japońskiej / syrop z zielonej herbaty / napar z zielonej herbaty / sok z cytryny / mięta": {
+        "en": "Gin / Japanese apricot syrup / green tea syrup / green tea infusion / lemon juice / mint",
+        "de": "Gin / Japanischer Aprikosensirup / Grünteesirup / Grüntee-Aufguss / Zitronensaft / Minze",
+        "fr": "Gin / sirop d'abricot japonais / sirop de thé vert / infusion de thé vert / jus de citron / menthe",
+        "es": "Ginebra / sirope de albaricoque japonés / sirope de té verde / infusión de té verde / zumo de limón / menta",
+        "ua": "Джин / сироп японського абрикоса / сироп зеленого чаю / настій зеленого чаю / лимонний сік / м'ята"
+    },
+    "Wódka ananasowa / Gin ananasowy / syrop liczi / sok z limonki / mięta / Prosecco": {
+        "en": "Pineapple vodka / pineapple gin / lychee syrup / lime juice / mint / Prosecco",
+        "de": "Ananas-Wodka / Ananas-Gin / Litschi-Sirup / Limettensaft / Minze / Prosecco",
+        "fr": "Vodka à l'ananas / Gin à l'ananas / sirop de litchi / jus de lime / menthe / Prosecco",
+        "es": "Vodka de piña / Ginebra de piña / sirope de lichi / zumo de lima / menta / Prosecco",
+        "ua": "Ананасова горілка / ананасовий джин / сироп лічі / сік лайма / м'ята / Просекко"
+    },
+    "Jim Beam / Martini Fiero / purée z ananasa / kordial ananasowy / pianka CBD": {
+        "en": "Jim Beam / Martini Fiero / pineapple purée / pineapple cordial / CBD foam",
+        "de": "Jim Beam / Martini Fiero / Ananaspüree / Ananas-Cordial / CBD-Schaum",
+        "fr": "Jim Beam / Martini Fiero / purée d'ananas / cordial d'ananas / mousse CBD",
+        "es": "Jim Beam / Martini Fiero / purée de piña / cordial de piña / espuma CBD",
+        "ua": "Jim Beam / Martini Fiero / пюре ананаса / ананасовий кордіал / пінка CBD"
+    },
+    "Wódka morelowa / likier zielony melon / purée morelowe / sok z cytryny / lemon soda / bitter pomarańczowy": {
+        "en": "Apricot vodka / green melon liqueur / apricot purée / lemon juice / lemon soda / orange bitter",
+        "de": "Aprikosen-Wodka / grüner Melonenlikör / Aprikosenpüree / Zitronensaft / Zitronenlimonade / Orangenbitter",
+        "fr": "Vodka à l'abricot / liqueur de melon vert / purée d'abricot / jus de citron / soda au citron / bitter à l'orange",
+        "es": "Vodka de albaricoque / licor de melón verde / purée de albaricoque / zumo de limón / soda de limón / bitter de naranja",
+        "ua": "Абрикосова горілка / лікер зелена диня / абрикосове пюре / лимонний сік / лимонна сода / апельсиновий біттер"
+    },
+    "Aperol / Triple Sec / Aperitivo Eden / Grenadyna / sok z arbuza / sok z cytryny / tonik różowy": {
+        "en": "Aperol / Triple Sec / Aperitivo Eden / Grenadine / watermelon juice / lemon juice / pink tonic",
+        "de": "Aperol / Triple Sec / Aperitivo Eden / Grenadine / Wassermelonensaft / Zitronensaft / rosa Tonic",
+        "fr": "Aperol / Triple Sec / Aperitivo Eden / Grenadine / jus de pastèque / jus de citron / tonic rose",
+        "es": "Aperol / Triple Sec / Aperitivo Eden / Granadina / zumo de sandía / zumo de limón / tónica rosa",
+        "ua": "Aperol / Triple Sec / Aperitivo Eden / Гренадин / кавуновий сік / лимонний сік / рожевий тонік"
+    },
+    "Rum malinowy / likier z czarnego bzu / Aperitivo Eden / purée malinowe / sok z limonki / tonik elderflower": {
+        "en": "Raspberry rum / elderflower liqueur / Aperitivo Eden / raspberry purée / lime juice / elderflower tonic",
+        "de": "Himbeer-Rum / Holunderblütenlikör / Aperitivo Eden / Himbeerpüree / Limettensaft / Holunderblütentonic",
+        "fr": "Rhum à la framboise / liqueur de sureau / Aperitivo Eden / purée de framboise / jus de lime / tonic fleur de sureau",
+        "es": "Ron de frambuesa / licor de saúco / Aperitivo Eden / purée de frambuesa / zumo de lima / tónica de flor de saúco",
+        "ua": "Малиновий ром / лікер бузини / Aperitivo Eden / малинове пюре / сік лайма / тонік бузини"
+    },
     "żurawina": {
         "en": "cranberry",
         "de": "Cranberry",
@@ -318,6 +380,13 @@ export const MENU_DICTIONARY = {
         "fr": "fruit de la passion",
         "es": "maracuyá",
         "ua": "маракуйя"
+    },
+    "arbuzowa": {
+        "en": "watermelon",
+        "de": "Wassermelone",
+        "fr": "pastèque",
+        "es": "sandía",
+        "ua": "кавунова"
     },
     "ananas": {
         "en": "pineapple",
@@ -775,12 +844,12 @@ export const MENU_DICTIONARY = {
         "ua": "безалкогольне"
     },
 
-    "GWARNA WIOSNA (Koktajle Autorskie)": {
-        "en": "GWAR SPRING (Signature Cocktails)",
-        "de": "GWAR FRÜHLING (Signatur-Cocktails)",
-        "fr": "GWAR PRINTEMPS (Cocktails Signature)",
-        "es": "GWAR PRIMAVERA (Cócteles de la casa)",
-        "ua": "ГВАР ВЕСНА (Авторські коктейлі)"
+    "GWARNE LATO 2026 (Koktajle Autorskie)": {
+        "en": "GWAR SUMMER 2026 (Signature Cocktails)",
+        "de": "GWAR SOMMER 2026 (Signatur-Cocktails)",
+        "fr": "GWAR ÉTÉ 2026 (Cocktails Signature)",
+        "es": "GWAR VERANO 2026 (Cócteles de la casa)",
+        "ua": "ГВАР ЛІТО 2026 (Авторські коктейлі)"
     },
     "SPRITZ MENU": {
         "en": "SPRITZ MENU",
@@ -908,19 +977,19 @@ export const MENU_DICTIONARY = {
         "es": "Vermut",
         "ua": "Вермут"
     },
-    "Kinga Pienińska niegazowana": {
-        "en": "Kinga Pienińska still",
-        "de": "Kinga Pienińska still",
-        "fr": "Kinga Pienińska plate",
-        "es": "Kinga Pienińska sin gas",
-        "ua": "Kinga Pienińska негазована"
+    "Staropolanka niegazowana": {
+        "en": "Staropolanka still water",
+        "de": "Staropolanka stilles Wasser",
+        "fr": "Staropolanka eau plate",
+        "es": "Staropolanka agua sin gas",
+        "ua": "Старополянка негазована (вода)"
     },
-    "Kinga Pienińska gazowana": {
-        "en": "Kinga Pienińska sparkling",
-        "de": "Kinga Pienińska mit Kohlensäure",
-        "fr": "Kinga Pienińska gazeuse",
-        "es": "Kinga Pienińska con gas",
-        "ua": "Kinga Pienińska газована"
+    "Staropolanka gazowana": {
+        "en": "Staropolanka sparkling water",
+        "de": "Staropolanka Sprudelwasser",
+        "fr": "Staropolanka eau gazeuse",
+        "es": "Staropolanka agua con gas",
+        "ua": "Старополянка газована (вода)"
     },
     "Brzoskwiniowa herbata mrożona": {
         "en": "Peach iced tea",
@@ -1215,5 +1284,250 @@ export const MENU_DICTIONARY = {
         "fr": "Noix",
         "es": "Frutos secos",
         "ua": "Горішки"
+    },
+    "Brumble": {
+        "en": "Brumble",
+        "de": "Brumble",
+        "fr": "Brumble",
+        "es": "Brumble",
+        "ua": "Брамбл"
+    },
+    "Gin / likier jeżynowy / syrop cukrowy / sok z cytryny": {
+        "en": "Gin / blackberry liqueur / sugar syrup / lemon juice",
+        "de": "Gin / Brombeerlikör / Zuckersirup / Zitronensaft",
+        "fr": "Gin / liqueur de mûre / sirop de sucre / jus de citron",
+        "es": "Ginebra / licor de mora / sirope de azúcar / zumo de limón",
+        "ua": "Джин / ожиновий лікер / цукровий сироп / лимонний сік"
+    },
+    "Tequila Sunrise": {
+        "en": "Tequila Sunrise",
+        "de": "Tequila Sunrise",
+        "fr": "Tequila Sunrise",
+        "es": "Tequila Sunrise",
+        "ua": "Текіла Санрайз"
+    },
+    "Tequila złota / sok pomarańczowy / grenadyna": {
+        "en": "Gold tequila / orange juice / grenadine",
+        "de": "Gold-Tequila / Orangensaft / Grenadine",
+        "fr": "Tequila gold / jus d'orange / grenadine",
+        "es": "Tequila dorado / zumo de naranja / granadina",
+        "ua": "Золота текіла / апельсиновий сік / гренадин"
+    },
+    "Tom Collins": {
+        "en": "Tom Collins",
+        "de": "Tom Collins",
+        "fr": "Tom Collins",
+        "es": "Tom Collins",
+        "ua": "Том Коллінз"
+    },
+    "Gin / syrop cukrowy / sok z cytryny / woda gazowana": {
+        "en": "Gin / sugar syrup / lemon juice / sparkling water",
+        "de": "Gin / Zuckersirup / Zitronensaft / Sprudelwasser",
+        "fr": "Gin / sirop de sucre / jus de citron / eau gazeuse",
+        "es": "Ginebra / sirope de azúcar / zumo de limón / agua con gas",
+        "ua": "Джин / цукровий сироп / лимонний сік / газована вода"
+    },
+    "Mar-a-Mango": {
+        "en": "Mar-a-Mango",
+        "de": "Mar-a-Mango",
+        "fr": "Mar-a-Mango",
+        "es": "Mar-a-Mango",
+        "ua": "Мар-а-Манго"
+    },
+    "Rum biały / Passoa / kordiał limonkowy / pulpa z mango / syrop falernum / sok z cytryny": {
+        "en": "White rum / Passoa / lime cordial / mango pulp / falernum syrup / lemon juice",
+        "de": "Weißer Rum / Passoa / Limetten-Cordial / Mangofleisch / Falernum-Sirup / Zitronensaft",
+        "fr": "Rhum blanc / Passoa / cordial de lime / pulpe de mangue / sirop de falernum / jus de citron",
+        "es": "Ron blanco / Passoa / cordial de lima / pulpa de mango / sirope de falernum / zumo de limón",
+        "ua": "Білий ром / Passoa / лаймовий кордіал / пульпа манго / сироп фалернум / лимонний сік"
+    },
+    "Japoński Ogród": {
+        "en": "Japanese Garden",
+        "de": "Japanischer Garten",
+        "fr": "Jardin Japonais",
+        "es": "Jardín Japonés",
+        "ua": "Японський сад"
+    },
+    "Zalicz mnie": {
+        "en": "Check me out",
+        "de": "Check mich aus",
+        "fr": "Regarde-moi",
+        "es": "Check me out",
+        "ua": "Залічи мене"
+    },
+    "Wódka ananasowa / Gin ananasowy / syrop liczi / sok z limonki / mięta / Prosecco": {
+        "en": "Pineapple vodka / pineapple gin / lychee syrup / lime juice / mint / Prosecco",
+        "de": "Ananas-Wodka / Ananas-Gin / Litschisirup / Limettensaft / Minze / Prosecco",
+        "fr": "Vodka ananas / Gin ananas / sirop de litchi / jus de lime / menthe / Prosecco",
+        "es": "Vodka de piña / Ginebra de piña / sirope de lichi / zumo de lima / menta / Prosecco",
+        "ua": "Ананасова горілка / ананасовий джин / сироп лічі / сік лайма / м'ята / Просекко"
+    },
+    "Cannabis Whisky Ananas": {
+        "en": "Cannabis Whisky Pineapple",
+        "de": "Cannabis Whisky Ananas",
+        "fr": "Cannabis Whisky Ananas",
+        "es": "Cannabis Whisky Piña",
+        "ua": "Каннабіс Віскі Ананас"
+    },
+    "Jim Beam / Martini Fiero / purée z ananasa / kordiał ananasowy / pianka CBD": {
+        "en": "Jim Beam / Martini Fiero / pineapple purée / pineapple cordial / CBD foam",
+        "de": "Jim Beam / Martini Fiero / Ananaspüree / Ananas-Cordial / CBD-Schaum",
+        "fr": "Jim Beam / Martini Fiero / purée d'ananas / cordial d'ananas / mousse CBD",
+        "es": "Jim Beam / Martini Fiero / puré de piña / cordial de piña / espuma CBD",
+        "ua": "Jim Beam / Martini Fiero / пюре ананаса / ананасовий кордіал / пінка CBD"
+    },
+    "Ultrafiolet": {
+        "en": "Ultraviolet",
+        "de": "Ultraviolett",
+        "fr": "Ultraviolet",
+        "es": "Ultravioleta",
+        "ua": "Ультрафіолет"
+    },
+    "Gin / Maraschino / likier z czarnego bzu / syrop fiołkowy / sok z grejpfruta / sok z cytryny / białko": {
+        "en": "Gin / Maraschino / elderflower liqueur / violet syrup / grapefruit juice / lemon juice / egg white",
+        "de": "Gin / Maraschino / Holunderblütenlikör / Veilchensirup / Greyfruitsaft / Zitronensaft / Eiweiß",
+        "fr": "Gin / Maraschino / liqueur de sureau / sirop de violette / jus de pamplemousse / jus de citron / blanc d'œuf",
+        "es": "Ginebra / Maraschino / licor de saúco / sirope de violeta / zumo de pomelo / zumo de limón / clara de huevo",
+        "ua": "Джин / Maraschino / лікер бузини / фіалковий сироп / грейпфрутовий сік / лимонний сік / яєчний білок"
+    },
+    "Arbuz Spritz": {
+        "en": "Watermelon Spritz",
+        "de": "Wassermelone Spritz",
+        "fr": "Spritz à la Pastèque",
+        "es": "Spritz de Sandía",
+        "ua": "Кавуновий Спритц"
+    },
+    "Aperol / Triple Sec / Aperitivo Eden / Grenadyna / sok z arbuza / sok z cytryny / tonik różowy": {
+        "en": "Aperol / Triple Sec / Aperitivo Eden / Grenadine / watermelon juice / lemon juice / pink tonic",
+        "de": "Aperol / Triple Sec / Aperitivo Eden / Grenadine / Wassermelonensaft / Zitronensaft / rosa Tonic",
+        "fr": "Aperol / Triple Sec / Aperitivo Eden / Grenadine / jus de pastèque / jus de citron / tonic rose",
+        "es": "Aperol / Triple Sec / Aperitivo Eden / Granadina / zumo de sandía / zumo de limón / tónica rosa",
+        "ua": "Aperol / Triple Sec / Aperitivo Eden / Гренадин / кавуновий сік / лимонний сік / рожевий тонік"
+    },
+    "Malinowe Rumieńce": {
+        "en": "Raspberry Blushes",
+        "de": "Himbeer-Erröten",
+        "fr": "Rougeurs à la Framboise",
+        "es": "Sonrojos de Frambuesa",
+        "ua": "Малинові рум'янці"
+    },
+    "Rum malinowy / likier z czarnego bzu / Aperitivo Eden / purée malinowe / sok z limonki / tonik różowy": {
+        "en": "Raspberry rum / elderflower liqueur / Aperitivo Eden / raspberry purée / lime juice / pink tonic",
+        "de": "Himbeer-Rum / Holunderblütenlikör / Aperitivo Eden / Himbeerpüree / Limettensaft / rosa Tonic",
+        "fr": "Rhum framboise / liqueur de sureau / Aperitivo Eden / purée de framboise / jus de lime / tonic rose",
+        "es": "Ron de frambuesa / licor de saúco / Aperitivo Eden / puré de frambuesa / zumo de lima / tónica rosa",
+        "ua": "Малиновий ром / лікер бузини / Aperitivo Eden / малинове пюре / сік лайма / рожевий тонік"
+    },
+    "Sok NFC": {
+        "en": "NFC Juice",
+        "de": "NFC Saft",
+        "fr": "Jus NFC",
+        "es": "Zumo NFC",
+        "ua": "Сік прямого віджиму (NFC)"
+    },
+    "Belvedere Forrest": {
+        "en": "Belvedere Forrest",
+        "de": "Belvedere Forrest",
+        "fr": "Belvedere Forrest",
+        "es": "Belvedere Forrest",
+        "ua": "Бельведер Форест"
+    },
+    "Macallan 15YO Double Cask": {
+        "en": "Macallan 15YO Double Cask",
+        "de": "Macallan 15YO Double Cask",
+        "fr": "Macallan 15YO Double Cask",
+        "es": "Macallan 15YO Double Cask",
+        "ua": "Макаллан 15 Років Дабл Каск"
+    },
+    "Tanqueray": {
+        "en": "Tanqueray",
+        "de": "Tanqueray",
+        "fr": "Tanqueray",
+        "es": "Tanqueray",
+        "ua": "Танкерей"
+    },
+    "Clase Azul Reposado": {
+        "en": "Clase Azul Reposado",
+        "de": "Clase Azul Reposado",
+        "fr": "Clase Azul Reposado",
+        "es": "Clase Azul Reposado",
+        "ua": "Класе Азул Репосадо"
+    },
+    "pulpa z mango": {
+        "en": "mango pulp",
+        "de": "Mangofleisch",
+        "fr": "pulpe de mangue",
+        "es": "pulpa de mango",
+        "ua": "пульпа манго"
+    },
+    "kordiał limonkowy": {
+        "en": "lime cordial",
+        "de": "Limetten-Cordial",
+        "fr": "cordial de lime",
+        "es": "cordial de lima",
+        "ua": "лаймовий кордіал"
+    },
+    "syrop falernum": {
+        "en": "falernum syrup",
+        "de": "Falernum-Sirup",
+        "fr": "sirop de falernum",
+        "es": "sirope de falernum",
+        "ua": "сироп фалернум"
+    },
+    "napar z zielonej herbaty": {
+        "en": "green tea infusion",
+        "de": "Grüntee-Aufguss",
+        "fr": "infusion de thé vert",
+        "es": "infusión de té verde",
+        "ua": "настій зеленого чаю"
+    },
+    "syrop z zielonej herbaty": {
+        "en": "green tea syrup",
+        "de": "Grünteesirup",
+        "fr": "sirop de thé vert",
+        "es": "sirope de té verde",
+        "ua": "сироп зеленого чаю"
+    },
+    "likier z czarnego bzu": {
+        "en": "elderflower liqueur",
+        "de": "Holunderblütenlikör",
+        "fr": "liqueur de sureau",
+        "es": "licor de saúco",
+        "ua": "лікер бузини"
+    },
+    "kordiał ananasowy": {
+        "en": "pineapple cordial",
+        "de": "Ananas-Cordial",
+        "fr": "cordial d'ananas",
+        "es": "cordial de piña",
+        "ua": "ананасовий кордіал"
+    },
+    "purée z ananasa": {
+        "en": "pineapple purée",
+        "de": "Ananaspüree",
+        "fr": "purée d'ananas",
+        "es": "puré de piña",
+        "ua": "пюре ананаса"
+    },
+    "sok z arbuza": {
+        "en": "watermelon juice",
+        "de": "Wassermelonensaft",
+        "fr": "jus de pastèque",
+        "es": "zumo de sandía",
+        "ua": "кавуновий сік"
+    },
+    "likier jeżynowy": {
+        "en": "blackberry liqueur",
+        "de": "Brombeerlikör",
+        "fr": "liqueur de mûre",
+        "es": "licor de mora",
+        "ua": "ожиновий лікер"
+    },
+    "tonik różowy": {
+        "en": "pink tonic",
+        "de": "rosa Tonic",
+        "fr": "tonic rose",
+        "es": "tónica rosa",
+        "ua": "рожевий тонік"
     }
 };
