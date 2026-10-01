@@ -14,28 +14,27 @@ export async function loadInstagramFeed() {
     if (data && data.posts) {
         container.innerHTML = ''; // Clear placeholders
         data.posts.forEach(post => {
-            // Determine Media URL (prefer medium size for performance, fall back to mediaUrl)
-            let imgUrl = post.mediaUrl;
+            // Determine Media URL
+            let imgUrl = null;
             let width = null;
             let height = null;
 
             if (post.sizes && post.sizes.medium) {
-                imgUrl = post.sizes.medium.mediaUrl;
                 width = post.sizes.medium.width;
                 height = post.sizes.medium.height;
             } else if (post.sizes && post.sizes.large) {
-                // Fallback if medium missing
                 width = post.sizes.large.width;
                 height = post.sizes.large.height;
             }
 
-            // Handle Video Thumbnails ONLY if we don't already have a valid imgUrl (from Behold sizes)
-            if (post.mediaType === 'VIDEO' && post.thumbnailUrl && !imgUrl) {
-                imgUrl = post.thumbnailUrl;
+            if (post.mediaType === 'VIDEO') {
+                imgUrl = post.thumbnailUrl || post.mediaUrl || (post.sizes && post.sizes.medium && post.sizes.medium.mediaUrl);
+            } else {
+                imgUrl = post.mediaUrl || (post.sizes && post.sizes.medium && post.sizes.medium.mediaUrl);
             }
 
-            // Calculate Aspect Ratio or default to 9/16 video format
-            let aspectRatio = '9/16';
+            // Calculate Aspect Ratio or default to 1/1 square format (or 9/16 for video)
+            let aspectRatio = post.mediaType === 'VIDEO' ? '9/16' : '1/1';
             if (width && height) {
                 aspectRatio = `${width}/${height}`;
             }
