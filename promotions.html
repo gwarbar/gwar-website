@@ -14,7 +14,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Bar Gwar - Promocje</title>
-    <link rel="stylesheet" href="css/style.css">
+    <!-- Oswald: heading font for Ukrainian (JeanLuc has no Cyrillic) -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Oswald:wght@600&subset=cyrillic&display=swap">
+    <link rel="stylesheet" href="css/style.css?v=3">
 </head>
 
 <body>
@@ -33,6 +35,18 @@
             </div>
             <div class="flag-btn" data-lang="en" title="English" style="cursor:pointer;">
                 <img src="https://flagcdn.com/w40/gb.png" alt="EN" style="width:24px; height:auto;">
+            </div>
+            <div class="flag-btn" data-lang="de" title="Deutsch" style="cursor:pointer;">
+                <img src="https://flagcdn.com/w40/de.png" alt="DE" style="width:24px; height:auto;">
+            </div>
+            <div class="flag-btn" data-lang="fr" title="Français" style="cursor:pointer;">
+                <img src="https://flagcdn.com/w40/fr.png" alt="FR" style="width:24px; height:auto;">
+            </div>
+            <div class="flag-btn" data-lang="es" title="Español" style="cursor:pointer;">
+                <img src="https://flagcdn.com/w40/es.png" alt="ES" style="width:24px; height:auto;">
+            </div>
+            <div class="flag-btn" data-lang="ua" title="Українська" style="cursor:pointer;">
+                <img src="https://flagcdn.com/w40/ua.png" alt="UA" style="width:24px; height:auto;">
             </div>
         </div>
 
@@ -57,95 +71,93 @@
     </nav>
 
     <!-- HERO -->
-    <section class="hero small-hero" style="height: 40vh; min-height: 300px;">
+    <section class="hero promo-hero">
         <h1 data-i18n="promo_title">PROMOCJE</h1>
         <p data-i18n="promo_subtitle">Najlepsze okazje w mieście</p>
     </section>
 
     <!-- CONTENT -->
-    <section id="promos-list" style="padding: 50px 0; background-color: var(--bg-color); color: var(--text-color);">
-        <div class="container"
-            style="display:grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap:30px;">
-
-            <!-- 
-                ABY DODAĆ PROMOCJĘ, SKOPIUJ PONIŻSZY BLOK "PROMO ITEM"
-            -->
+    <!--
+        ABY DODAĆ PROMOCJĘ, SKOPIUJ BLOK "PROMO ITEM".
+        data-days = dni tygodnia promocji (0 = niedziela, 1 = poniedziałek ... 6 = sobota),
+        dzisiejsza promocja dostaje znaczek "DZIŚ".
+    -->
+    <section id="promos-list">
+        <div class="container promo-grid">
 
             <!-- PROMO ITEM START -->
-            <div class="promo-item"
-                style="background:#111; padding:30px; border-top:3px solid var(--primary-color); position:relative; overflow:hidden;">
-                <img src="images/promo_tuesday.jpg" alt="Wtorek - Spritze"
-                    style="width:100%; height:auto; border-radius:8px; margin-bottom:20px;">
-                <h3 style="color:var(--primary-color); font-family:var(--font-heading); margin-top:0;"
-                    data-i18n="promo_tue_title">WTOREK - SPRITZE
-                    🍹</h3>
-                <p style="font-size:1.2rem; font-weight:bold;" data-i18n="promo_tue_deal">Wszystkie Spritze za 20 PLN!
-                </p>
-                <hr style="border:0; border-top:1px solid #333; margin:20px 0;">
-                <p data-i18n="promo_tue_desc">Wpadajcie do nas w każdy wtorek!</p>
-                <p><strong data-i18n="promo_when_label">Kiedy:</strong> <span data-i18n="promo_tue_when">Każdy
-                        wtorek</span></p>
-            </div>
+            <article class="promo-card" data-days="2">
+                <div class="promo-media">
+                    <img src="images/promo_tuesday.jpg" alt="Wtorek - Spritze">
+                </div>
+                <div class="promo-body">
+                    <span class="promo-today" data-i18n="promo_today">DZIŚ</span>
+                    <h3 data-i18n="promo_tue_title">WTOREK - SPRITZE 🍹</h3>
+                    <p class="promo-deal" data-i18n="promo_tue_deal">Wszystkie Spritze za 20 PLN!</p>
+                    <p class="promo-desc" data-i18n="promo_tue_desc">Wpadajcie do nas w każdy wtorek!</p>
+                    <p class="promo-when"><strong data-i18n="promo_when_label">Kiedy:</strong> <span data-i18n="promo_tue_when">Każdy wtorek</span></p>
+                </div>
+            </article>
             <!-- PROMO ITEM END -->
 
             <!-- PROMO ITEM START -->
-            <div class="promo-item"
-                style="background:#111; padding:30px; border-top:3px solid var(--primary-color); position:relative; overflow:hidden;">
-                <img src="images/promo_wednesday.jpg" alt="Środa - Drinki Autorskie"
-                    style="width:100%; height:auto; border-radius:8px; margin-bottom:20px;">
-                <h3 style="color:var(--primary-color); font-family:var(--font-heading); margin-top:0;"
-                    data-i18n="promo_wed_title">ŚRODA - DRINKI
-                    AUTORSKIE 🍸</h3>
-                <p style="font-size:1.2rem; font-weight:bold;" data-i18n="promo_wed_deal">Drugi drink za 1 PLN!</p>
-                <hr style="border:0; border-top:1px solid #333; margin:20px 0;">
-                <p data-i18n="promo_wed_desc1">Kupując jednego drinka autorskiego, drugi za 1 PLN!</p>
-                <p data-i18n="promo_wed_desc2">Wpadaj ze znajomymi i skorzystaj z zimowej wkładki drinków autorskich!
-                </p>
-                <p><strong data-i18n="promo_when_label">Kiedy:</strong> <span data-i18n="promo_wed_when">W każdą
-                        środę</span></p>
-            </div>
+            <article class="promo-card" data-days="3">
+                <div class="promo-media">
+                    <img src="images/promo_wednesday.jpg" alt="Środa - Drinki Autorskie">
+                </div>
+                <div class="promo-body">
+                    <span class="promo-today" data-i18n="promo_today">DZIŚ</span>
+                    <h3 data-i18n="promo_wed_title">ŚRODA - DRINKI AUTORSKIE 🍸</h3>
+                    <p class="promo-deal" data-i18n="promo_wed_deal">Drugi drink za 1 PLN!</p>
+                    <p class="promo-desc" data-i18n="promo_wed_desc1">Kupując jednego drinka autorskiego, drugi za 1 PLN!</p>
+                    <p class="promo-desc" data-i18n="promo_wed_desc2">Wpadaj ze znajomymi i skorzystaj z zimowej wkładki drinków autorskich!</p>
+                    <p class="promo-when"><strong data-i18n="promo_when_label">Kiedy:</strong> <span data-i18n="promo_wed_when">W każdą środę</span></p>
+                </div>
+            </article>
             <!-- PROMO ITEM END -->
 
             <!-- PROMO ITEM START -->
-            <div class="promo-item"
-                style="background:#111; padding:30px; border-top:3px solid var(--primary-color); position:relative; overflow:hidden;">
-                <img src="images/promo_thursday.jpg" alt="Czwartek - Pornstar Martini"
-                    style="width:100%; height:auto; border-radius:8px; margin-bottom:20px;">
-                <h3 style="color:var(--primary-color); font-family:var(--font-heading); margin-top:0;"
-                    data-i18n="promo_thu_title">CZWARTEK -
-                    PORNSTAR MARTINI 🍸</h3>
-                <p style="font-size:1.2rem; font-weight:bold;" data-i18n="promo_thu_deal">Tylko 25 zł!</p>
-                <hr style="border:0; border-top:1px solid #333; margin:20px 0;">
-                <p data-i18n="promo_thu_desc">Idealny pretekst, żeby wpaść ze znajomymi i zacząć weekend trochę
-                    wcześniej.</p>
-                <p><strong data-i18n="promo_when_label">Kiedy:</strong> <span data-i18n="promo_thu_when">W każdy
-                        czwartek</span></p>
-            </div>
+            <article class="promo-card" data-days="4">
+                <div class="promo-media">
+                    <img src="images/promo_thursday.jpg" alt="Czwartek - Pornstar Martini">
+                </div>
+                <div class="promo-body">
+                    <span class="promo-today" data-i18n="promo_today">DZIŚ</span>
+                    <h3 data-i18n="promo_thu_title">CZWARTEK - PORNSTAR MARTINI 🍸</h3>
+                    <p class="promo-deal" data-i18n="promo_thu_deal">Tylko 25 zł!</p>
+                    <p class="promo-desc" data-i18n="promo_thu_desc">Idealny pretekst, żeby wpaść ze znajomymi i zacząć weekend trochę wcześniej.</p>
+                    <p class="promo-when"><strong data-i18n="promo_when_label">Kiedy:</strong> <span data-i18n="promo_thu_when">W każdy czwartek</span></p>
+                </div>
+            </article>
             <!-- PROMO ITEM END -->
 
             <!-- PROMO ITEM START -->
-            <div class="promo-item"
-                style="background:#111; padding:30px; border-top:3px solid var(--primary-color); position:relative; overflow:hidden;">
-                <img src="images/promo_friday.jpg" alt="Piątek i Sobota - Shoty"
-                    style="width:100%; height:auto; border-radius:8px; margin-bottom:20px;">
-                <h3 style="color:var(--primary-color); font-family:var(--font-heading); margin-top:0;"
-                    data-i18n="promo_fri_title">PIĄTEK I SOBOTA -
-                    SHOTY 🥃</h3>
-                <p style="font-size:1.2rem; font-weight:bold;" data-i18n="promo_fri_deal">Drugi shot za 1 PLN!</p>
-                <hr style="border:0; border-top:1px solid #333; margin:20px 0;">
-                <p data-i18n="promo_fri_desc1">Kupując 1 shot, drugi otrzymujesz za 1 PLN!</p>
-                <p data-i18n="promo_fri_desc2">Zapraszamy na shota 🤍</p>
-                <p><strong data-i18n="promo_when_label">Kiedy:</strong> <span data-i18n="promo_fri_when">Każdy piątek i
-                        sobota</span></p>
-            </div>
+            <article class="promo-card" data-days="5,6">
+                <div class="promo-media">
+                    <img src="images/promo_friday.jpg" alt="Piątek i Sobota - Shoty">
+                </div>
+                <div class="promo-body">
+                    <span class="promo-today" data-i18n="promo_today">DZIŚ</span>
+                    <h3 data-i18n="promo_fri_title">PIĄTEK I SOBOTA - SHOTY 🥃</h3>
+                    <p class="promo-deal" data-i18n="promo_fri_deal">Drugi shot za 1 PLN!</p>
+                    <p class="promo-desc" data-i18n="promo_fri_desc1">Kupując 1 shot, drugi otrzymujesz za 1 PLN!</p>
+                    <p class="promo-desc" data-i18n="promo_fri_desc2">Zapraszamy na shota 🤍</p>
+                    <p class="promo-when"><strong data-i18n="promo_when_label">Kiedy:</strong> <span data-i18n="promo_fri_when">Każdy piątek i sobota</span></p>
+                </div>
+            </article>
             <!-- PROMO ITEM END -->
 
+        </div>
+
+        <div class="promo-cta">
+            <p data-i18n="promo_cta">Wpadnij ze znajomymi – stolik najlepiej zarezerwować wcześniej.</p>
+            <a href="index.html#reservation" class="hero-reserve" data-i18n="promo_cta_btn">ZAREZERWUJ STOLIK</a>
         </div>
     </section>
 
     <footer>
         <img src="images/Logotypy/Wektor/Gwar_logotype_green_no-bg.svg" alt="Bar Gwar" class="footer-logo">
-        <p>&copy; 2026 Bar Gwar. <span data-i18n="footer_rights">Wszelkie prawa zastrzeżone.</span></p>
+        <p data-i18n="footer_rights">&copy; 2026 Bar Gwar. Wszelkie prawa zastrzeżone.</p>
     </footer>
 
     <script type="module" src="js/main.js"></script>

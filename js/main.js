@@ -1,5 +1,5 @@
 import { loadInstagramFeed, loadGoogleReviews, loadTravelTime, loadWeather } from './api.js?v=17';
-import { TRANSLATIONS, MENU_DICTIONARY } from './translations.js?v=refresh2';
+import { TRANSLATIONS, MENU_DICTIONARY } from './translations.js?v=refresh3';
 
 // PDF Handling
 let pdfDoc = null;
@@ -21,6 +21,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
     loadGoogleReviews();
     loadTravelTime();
+
+    // Promotions page: highlight today's promo
+    const today = String(new Date().getDay());
+    document.querySelectorAll('.promo-card[data-days]').forEach(card => {
+        card.classList.toggle('is-today', card.dataset.days.split(',').includes(today));
+    });
 
     // Mobile Menu Toggle
     const hamburger = document.querySelector('.hamburger');
@@ -167,6 +173,7 @@ async function setSiteLanguage(lang, init = false) {
 
     currentLang = lang;
     localStorage.setItem('gwar_language', lang);
+    document.documentElement.lang = lang === 'ua' ? 'uk' : lang;
 
     // Update active state ONLY for navbar flags
     document.querySelectorAll('.lang-switch .flag-btn').forEach(btn => {
