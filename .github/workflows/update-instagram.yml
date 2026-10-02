@@ -68,7 +68,7 @@ jobs:
         if: always()
         run: |
           # Counted from when the previous reminder was closed (= you logged in to Behold)
-          last=$(gh issue list --state all --search "in:title \"$REMINDER_TITLE\"" --json state,closedAt -L 1 -q '.[0] | "\(.state) \(.closedAt)"')
+          last=$(gh issue list --state all --search "in:title \"$REMINDER_TITLE\"" --json state,closedAt -L 1 -q '.[0] // empty | "\(.state) \(.closedAt)"')
           state=${last%% *}; closed=${last#* }
           if [ "$state" = "OPEN" ]; then
             echo "Reminder already open."
