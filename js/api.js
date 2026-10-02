@@ -95,7 +95,7 @@ function createInstaItem(container, imgUrl, link, isVideo, aspectRatio) {
 // Reviews are fetched once a day by .github/workflows/update-reviews.yml
 // (scripts/fetch-reviews.mjs) and saved to data/reviews.json - no API key in the browser.
 const REVIEWS_LINK = 'https://www.google.com/maps/place/Bar+Gwar/@50.048033,19.946036,15z/data=!4m8!3m7!1s0x47165bdfaaf2021b:0x960543b90ef2cad3!8m2!3d50.0480326!4d19.9460358!9m1!1b1!16s%2Fg%2F11kq00tlpl?hl=pl&entry=ttu&g_ep=EgoyMDI2MDYwMy4xIKXMDSoASAFQAw%3D%3D';
-const GOOGLE_LOGO = 'https://upload.wikimedia.org/wikipedia/commons/5/53/Google_%22G%22_Logo.svg';
+const GOOGLE_LOGO = 'images/google-g.svg';
 
 function escapeHtml(str) {
     return String(str ?? '').replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));

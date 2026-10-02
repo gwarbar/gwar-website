@@ -1,4 +1,4 @@
-import { loadInstagramFeed, loadGoogleReviews, loadTravelTime, loadWeather } from './api.js?v=15';
+import { loadInstagramFeed, loadGoogleReviews, loadTravelTime, loadWeather } from './api.js?v=16';
 import { TRANSLATIONS, MENU_DICTIONARY } from './translations.js?v=refresh1';
 
 // PDF Handling
