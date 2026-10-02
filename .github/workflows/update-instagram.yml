@@ -53,7 +53,7 @@ jobs:
             echo "Alert already open."
             exit 0
           fi
-          gh issue create --title "$ALERT_TITLE" --assignee "${{ github.repository_owner }}" --body "Feed Instagrama na stronie nie aktualizuje się od kilku dni albo Behold zwraca błąd (kod: ${{ steps.sync.outputs.code }}).
+          gh issue create --title "$ALERT_TITLE" --body "Feed Instagrama na stronie nie aktualizuje się od kilku dni albo Behold zwraca błąd (kod: ${{ steps.sync.outputs.code }}).
 
           Zaloguj się na https://behold.so – po zalogowaniu feed wznowi odświeżanie, a to zgłoszenie zamknie się samo przy następnym udanym odświeżeniu (najpóźniej następnego dnia).
 
@@ -80,7 +80,7 @@ jobs:
           if [ "$days" -lt "$REMINDER_EVERY_DAYS" ]; then
             exit 0
           fi
-          gh issue create --title "$REMINDER_TITLE" --assignee "${{ github.repository_owner }}" --body "Darmowy plan Behold wymaga logowania raz w miesiącu, inaczej feed Instagrama na stronie przestaje się odświeżać. Masz ok. 3 dni.
+          gh issue create --title "$REMINDER_TITLE" --body "Darmowy plan Behold wymaga logowania raz w miesiącu, inaczej feed Instagrama na stronie przestaje się odświeżać. Masz ok. 3 dni.
 
           1. Zaloguj się na https://behold.so
           2. Zamknij to zgłoszenie (przycisk „Close issue” na dole) – kolejne przypomnienie przyjdzie za 28 dni."

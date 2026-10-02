@@ -42,7 +42,7 @@ pdf/                # Menu PDFs
 ### Instagram Feed (automatic)
 `.github/workflows/update-instagram.yml` runs daily: copies the **Behold** feed (`https://feeds.behold.so/oQn5QE77nlwKbBhGPy83`) into `data/instagram.json` + `images/instagram/`, commits and redeploys. The site only reads repo files, so images never expire.
 
-- Behold free plan needs a **login once a month**. The workflow opens a GitHub issue (assigned to `gwarbar` → email) **every 28 days**, counted from when the previous reminder was closed. Log in to behold.so, then close the issue.
+- Behold free plan needs a **login once a month**. The workflow opens a GitHub issue (repo owner `gwarbar` gets an email) **every 28 days**, counted from when the previous reminder was closed. Log in to behold.so, then close the issue.
 - If likes/followers don't change for 7 days (= Behold paused) or the feed errors, it opens an alert issue, which closes itself once the feed refreshes again.
 - Meta for Developers / Instagram API was tried before and didn't work well – that's why Behold.
 
