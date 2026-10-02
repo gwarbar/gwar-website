@@ -1,57 +1,24 @@
-/* INSTAGRAM API */
-import { INSTAGRAM_DATA } from './instagram_data.js?v=2';
-
-// Live Behold feed - Behold refreshes it automatically, no manual updates needed.
-// INSTAGRAM_DATA is only a fallback if the live feed is unreachable.
-const BEHOLD_FEED_URL = 'https://feeds.behold.so/oQn5QE77nlwKbBhGPy83';
-
+/* INSTAGRAM */
+// data/instagram.json + images/instagram/ are synced daily from Behold by
+// .github/workflows/update-instagram.yml (scripts/sync-instagram.mjs), so images never expire.
 export async function loadInstagramFeed() {
     const container = document.querySelector('#gallery .carousel-container');
     if (!container) return;
 
-    let data = INSTAGRAM_DATA;
     try {
-        const response = await fetch(BEHOLD_FEED_URL);
+        const response = await fetch(`data/instagram.json?d=${new Date().toISOString().slice(0, 10)}`);
         if (!response.ok) throw new Error(`HTTP ${response.status}`);
-        const live = await response.json();
-        if (live && live.posts && live.posts.length > 0) data = live;
-    } catch (error) {
-        console.warn('[GWAR-API] Live Behold feed failed, using static fallback:', error);
-    }
+        const data = await response.json();
+        if (!data.posts || data.posts.length === 0) return;
 
-    if (data && data.posts) {
         container.innerHTML = ''; // Clear placeholders
         data.posts.forEach(post => {
-            // Determine Media URL
-            let imgUrl = null;
-            let width = null;
-            let height = null;
-
-            if (post.sizes && post.sizes.medium) {
-                width = post.sizes.medium.width;
-                height = post.sizes.medium.height;
-            } else if (post.sizes && post.sizes.large) {
-                width = post.sizes.large.width;
-                height = post.sizes.large.height;
-            }
-
-            // Prefer Behold-hosted sizes (permanent) over raw Instagram CDN URLs (expire after a few weeks)
-            const beholdUrl = (post.sizes && post.sizes.medium && post.sizes.medium.mediaUrl) ||
-                (post.sizes && post.sizes.large && post.sizes.large.mediaUrl);
-            if (post.mediaType === 'VIDEO') {
-                imgUrl = beholdUrl || post.thumbnailUrl || post.mediaUrl;
-            } else {
-                imgUrl = beholdUrl || post.mediaUrl;
-            }
-
-            // Calculate Aspect Ratio or default to 1/1 square format (or 9/16 for video)
-            let aspectRatio = post.mediaType === 'VIDEO' ? '9/16' : '1/1';
-            if (width && height) {
-                aspectRatio = `${width}/${height}`;
-            }
-
-            createInstaItem(container, imgUrl, post.permalink, post.mediaType === 'VIDEO', aspectRatio);
+            const isVideo = post.mediaType === 'VIDEO';
+            const aspectRatio = post.width && post.height ? `${post.width}/${post.height}` : (isVideo ? '9/16' : '1/1');
+            createInstaItem(container, post.image, post.permalink, isVideo, aspectRatio);
         });
+    } catch (error) {
+        console.error('[GWAR-API] Instagram feed load error:', error);
     }
 }
 

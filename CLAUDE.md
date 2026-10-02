@@ -24,26 +24,30 @@ confirm.html        # Reservation confirmation page
 css/style.css       # Global styles
 js/
   main.js           # Main JS entrypoint (imports, DOM logic)
-  api.js            # API integrations: Instagram feed, Google Reviews, Weather, Travel time
-  instagram_data.js # Static Instagram feed data (from Behold, manually refreshed)
-  configuration.js  # API keys (Google Maps, etc.)
+  api.js            # Instagram feed, Google Reviews (both from data/*.json), Weather, Travel time
   translations.js   # All UI text translations (pl, en, de, fr, es, ua) + MENU_DICTIONARY
 images/             # Logos, photos
+images/instagram/   # Instagram images synced from Behold (auto-updated, don't edit)
+data/
+  instagram.json    # Instagram posts synced from Behold (auto-updated)
+  reviews.json      # 5-star Google reviews (auto-updated)
+scripts/
+  sync-instagram.mjs  # Behold feed -> data/instagram.json + images/instagram/
+  fetch-reviews.mjs   # Google Places API (New) -> data/reviews.json
 pdf/                # Menu PDFs
 ```
 
 ## Key Workflows
 
-### Refreshing Instagram Feed
-The site uses **Behold** (behold.pictures) to cache Instagram data. When the Behold token expires:
-1. Generate a new JSON payload from Behold dashboard
-2. Paste the JSON into `js/instagram_data.js`, wrapping it as:
-   ```js
-   export const INSTAGRAM_DATA = { ...json... };
-   ```
-3. Commit and push.
+### Instagram Feed (automatic)
+`.github/workflows/update-instagram.yml` runs daily: copies the **Behold** feed (`https://feeds.behold.so/oQn5QE77nlwKbBhGPy83`) into `data/instagram.json` + `images/instagram/`, commits and redeploys. The site only reads repo files, so images never expire.
 
-The `loadInstagramFeed()` function in `api.js` reads from `INSTAGRAM_DATA` — it uses `post.mediaUrl` for images and `post.thumbnailUrl` for videos.
+- Behold free plan needs a **login once a month**. The workflow opens a GitHub issue (assigned to `gwarbar` → email) **every 28 days**, counted from when the previous reminder was closed. Log in to behold.so, then close the issue.
+- If likes/followers don't change for 7 days (= Behold paused) or the feed errors, it opens an alert issue, which closes itself once the feed refreshes again.
+- Meta for Developers / Instagram API was tried before and didn't work well – that's why Behold.
+
+### Google Reviews (automatic)
+`.github/workflows/update-reviews.yml` runs daily: `scripts/fetch-reviews.mjs` calls Places API (New), keeps only **5-star** reviews, merges with saved ones (max 12) and saves `data/reviews.json`. No API key in the browser – the key is the repo secret `GOOGLE_API_KEY` (repo is public, never commit keys). Google returns max 5 reviews per call.
 
 ### Updating the Menu
 - Polish menu: edit `menu.html` directly (HTML structure) and update `pdf/menu_pl.pdf`
@@ -62,10 +66,11 @@ GitHub Pages auto-deploys on push to `main`. Changes are live at https://bar.gwa
 
 | Service | Config location |
 |---|---|
-| Google Maps (embed + reviews) | `js/configuration.js` → `GOOGLE_API_KEY`, `GOOGLE_PLACE_ID` |
+| Google Maps embed | iframe in `index.html` (no key) |
+| Google Reviews | repo secret `GOOGLE_API_KEY` (Places API (New)), used only by GitHub Action |
 | Google Ads | hardcoded in `index.html` (`gtag`) |
 | Weather | `wttr.in` (no key needed) |
-| Behold (Instagram cache) | `js/instagram_data.js` (static, refreshed manually) |
+| Behold (Instagram) | public feed URL in `scripts/sync-instagram.mjs` |
 | Reservations form | Google Apps Script endpoint in `main.js` |
 
 ## Language Support
@@ -79,5 +84,4 @@ The site supports: **pl, en, de, fr, es, ua**
 ## Notes
 
 - The menu PDF (`pdf/menu_pl.pdf`) is rendered via PDF.js
-- Google Reviews are fetched live via the Google Places API
 - The `test*.mjs` files are dev-only scripts for checking translation coverage

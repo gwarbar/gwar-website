@@ -1,0 +1,86 @@
+name: Update Instagram feed
+
+on:
+  schedule:
+    - cron: "0 6 * * *"  # daily, 06:00 UTC
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  actions: write
+  issues: write
+
+env:
+  GH_TOKEN: ${{ github.token }}
+  GH_REPO: ${{ github.repository }}
+  ALERT_TITLE: "Instagram: feed Behold przestał się odświeżać"
+  REMINDER_TITLE: "Przypomnienie: zaloguj się do Behold"
+  REMINDER_EVERY_DAYS: 28
+  # Used only before the first reminder is ever closed
+  REMINDER_CYCLE_START: "2026-10-02"
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - name: Sync Behold feed into repo
+        id: sync
+        run: |
+          set +e
+          node scripts/sync-instagram.mjs
+          echo "code=$?" >> "$GITHUB_OUTPUT"
+      - name: Commit and redeploy if changed
+        run: |
+          if [ -z "$(git status --porcelain data/instagram.json images/instagram)" ]; then
+            echo "No changes."
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898729+github-actions[bot]@users.noreply.github.com"
+          git add data/instagram.json images/instagram
+          git commit -m "Update Instagram feed"
+          git push
+          # Pushes made with GITHUB_TOKEN don't trigger other workflows, so start the deploy explicitly
+          gh workflow run deploy.yml --ref main
+      - name: Open alert issue (emails the repo owner)
+        if: steps.sync.outputs.code != '0'
+        run: |
+          if [ -n "$(gh issue list --state open --search "in:title \"$ALERT_TITLE\"" --json number -q '.[].number')" ]; then
+            echo "Alert already open."
+            exit 0
+          fi
+          gh issue create --title "$ALERT_TITLE" --assignee "${{ github.repository_owner }}" --body "Feed Instagrama na stronie nie aktualizuje się od kilku dni albo Behold zwraca błąd (kod: ${{ steps.sync.outputs.code }}).
+
+          Zaloguj się na https://behold.so – po zalogowaniu feed wznowi odświeżanie, a to zgłoszenie zamknie się samo przy następnym udanym odświeżeniu (najpóźniej następnego dnia).
+
+          Do tego czasu strona pokazuje ostatnie zapisane posty – nic nie jest zepsute."
+      - name: Close alert issue when feed is fresh again
+        if: steps.sync.outputs.code == '0'
+        run: |
+          for n in $(gh issue list --state open --search "in:title \"$ALERT_TITLE\"" --json number -q '.[].number'); do
+            gh issue close "$n" --comment "Feed znów się odświeża 👍"
+          done
+      - name: Behold login reminder every 28 days (emails the repo owner)
+        if: always()
+        run: |
+          # Counted from when the previous reminder was closed (= you logged in to Behold)
+          last=$(gh issue list --state all --search "in:title \"$REMINDER_TITLE\"" --json state,closedAt -L 1 -q '.[0] | "\(.state) \(.closedAt)"')
+          state=${last%% *}; closed=${last#* }
+          if [ "$state" = "OPEN" ]; then
+            echo "Reminder already open."
+            exit 0
+          fi
+          [ -z "$last" ] && closed=$REMINDER_CYCLE_START
+          days=$(( ( $(date +%s) - $(date -d "$closed" +%s) ) / 86400 ))
+          echo "Days since last Behold login: $days"
+          if [ "$days" -lt "$REMINDER_EVERY_DAYS" ]; then
+            exit 0
+          fi
+          gh issue create --title "$REMINDER_TITLE" --assignee "${{ github.repository_owner }}" --body "Darmowy plan Behold wymaga logowania raz w miesiącu, inaczej feed Instagrama na stronie przestaje się odświeżać. Masz ok. 3 dni.
+
+          1. Zaloguj się na https://behold.so
+          2. Zamknij to zgłoszenie (przycisk „Close issue” na dole) – kolejne przypomnienie przyjdzie za 28 dni."
