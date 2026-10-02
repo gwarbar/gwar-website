@@ -83,7 +83,8 @@ export async function loadGoogleReviews() {
         reviews.forEach(review => {
             const card = document.createElement('a');
             card.className = 'carousel-item review-card';
-            card.href = REVIEWS_LINK;
+            // Direct link to this review on Google Maps (googleMapsUri); older saved reviews fall back to the list.
+            card.href = /^https:\/\/(www\.)?google\.[a-z.]+\/maps\//.test(review.url || '') ? review.url : REVIEWS_LINK;
             card.target = '_blank';
             card.style.textDecoration = 'none';
             card.style.color = 'inherit';
