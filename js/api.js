@@ -1,15 +1,23 @@
-import { CONFIG } from './configuration.js?v=5';
-
 /* INSTAGRAM API */
-import { INSTAGRAM_DATA } from './instagram_data.js';
+import { INSTAGRAM_DATA } from './instagram_data.js?v=2';
 
-/* INSTAGRAM API */
+// Live Behold feed - Behold refreshes it automatically, no manual updates needed.
+// INSTAGRAM_DATA is only a fallback if the live feed is unreachable.
+const BEHOLD_FEED_URL = 'https://feeds.behold.so/oQn5QE77nlwKbBhGPy83';
+
 export async function loadInstagramFeed() {
     const container = document.querySelector('#gallery .carousel-container');
     if (!container) return;
 
-    // Use local data instead of API
-    const data = INSTAGRAM_DATA;
+    let data = INSTAGRAM_DATA;
+    try {
+        const response = await fetch(BEHOLD_FEED_URL);
+        if (!response.ok) throw new Error(`HTTP ${response.status}`);
+        const live = await response.json();
+        if (live && live.posts && live.posts.length > 0) data = live;
+    } catch (error) {
+        console.warn('[GWAR-API] Live Behold feed failed, using static fallback:', error);
+    }
 
     if (data && data.posts) {
         container.innerHTML = ''; // Clear placeholders
@@ -27,10 +35,13 @@ export async function loadInstagramFeed() {
                 height = post.sizes.large.height;
             }
 
+            // Prefer Behold-hosted sizes (permanent) over raw Instagram CDN URLs (expire after a few weeks)
+            const beholdUrl = (post.sizes && post.sizes.medium && post.sizes.medium.mediaUrl) ||
+                (post.sizes && post.sizes.large && post.sizes.large.mediaUrl);
             if (post.mediaType === 'VIDEO') {
-                imgUrl = post.thumbnailUrl || post.mediaUrl || (post.sizes && post.sizes.medium && post.sizes.medium.mediaUrl);
+                imgUrl = beholdUrl || post.thumbnailUrl || post.mediaUrl;
             } else {
-                imgUrl = post.mediaUrl || (post.sizes && post.sizes.medium && post.sizes.medium.mediaUrl);
+                imgUrl = beholdUrl || post.mediaUrl;
             }
 
             // Calculate Aspect Ratio or default to 1/1 square format (or 9/16 for video)
@@ -80,168 +91,59 @@ function createInstaItem(container, imgUrl, link, isVideo, aspectRatio) {
     container.appendChild(item);
 }
 
-/* GOOGLE REVIEWS API */
-export async function loadGoogleReviews() {
-    console.log('[GWAR-API] loadGoogleReviews starting...');
-    const container = document.querySelector('#reviews .carousel-container');
+/* GOOGLE REVIEWS */
+// Reviews are fetched once a day by .github/workflows/update-reviews.yml
+// (scripts/fetch-reviews.mjs) and saved to data/reviews.json - no API key in the browser.
+const REVIEWS_LINK = 'https://www.google.com/maps/place/Bar+Gwar/@50.048033,19.946036,15z/data=!4m8!3m7!1s0x47165bdfaaf2021b:0x960543b90ef2cad3!8m2!3d50.0480326!4d19.9460358!9m1!1b1!16s%2Fg%2F11kq00tlpl?hl=pl&entry=ttu&g_ep=EgoyMDI2MDYwMy4xIKXMDSoASAFQAw%3D%3D';
+const GOOGLE_LOGO = 'https://upload.wikimedia.org/wikipedia/commons/5/53/Google_%22G%22_Logo.svg';
 
-    if (!container) {
-        console.error('[GWAR-API] No #reviews .carousel-container found in DOM');
-        return;
-    }
-
-    try {
-        console.log('[GWAR-API] Attempting to import places library...');
-        if (!window.google || !window.google.maps) {
-            console.error('[GWAR-API] google.maps not available yet');
-            return;
-        }
-
-        const { Place } = await google.maps.importLibrary("places");
-        console.log('[GWAR-API] Places library imported successfully');
-
-        const place = new Place({
-            id: CONFIG.GOOGLE_PLACE_ID
-        });
-
-        console.log('[GWAR-API] Fetching fields for Place ID:', CONFIG.GOOGLE_PLACE_ID);
-        await place.fetchFields({
-            fields: ['reviews', 'rating', 'displayName']
-        });
-
-        console.log('[GWAR-API] Place data received:', place);
-
-        if (place.reviews && place.reviews.length > 0) {
-            // Filter: Prefer 5-star, but take anything 4+ if none found to stay "fresh"
-            let reviews = place.reviews
-                .filter(review => (review.rating || 0) >= 5)
-                .sort((a, b) => (b.publishTime || 0) - (a.publishTime || 0));
-
-            if (reviews.length === 0) {
-                console.warn('[GWAR-API] No 5-star reviews. Relaxing filter to 4+ stars...');
-                reviews = place.reviews
-                    .filter(review => (review.rating || 0) >= 4)
-                    .sort((a, b) => (b.publishTime || 0) - (a.publishTime || 0));
-            }
-
-            if (reviews.length === 0) {
-                console.warn('[GWAR-API] Still no reviews found in sample.');
-                return;
-            }
-
-            container.innerHTML = ''; // ONLY CLEAR IF WE HAVE DATA
-            reviews.forEach((review, index) => {
-                const author = review.authorAttribution;
-                console.log(`[GWAR-API] Review ${index + 1} author:`, author);
-
-                const card = document.createElement('a');
-                card.className = 'carousel-item review-card';
-                card.href = `https://www.google.com/maps/place/Bar+Gwar/@50.048033,19.946036,15z/data=!4m8!3m7!1s0x47165bdfaaf2021b:0x960543b90ef2cad3!8m2!3d50.0480326!4d19.9460358!9m1!1b1!16s%2Fg%2F11kq00tlpl?hl=pl&entry=ttu&g_ep=EgoyMDI2MDYwMy4xIKXMDSoASAFQAw%3D%3D`;
-                card.target = '_blank';
-                card.style.textDecoration = 'none';
-                card.style.color = 'inherit';
-
-                const stars = '★'.repeat(5);
-                const authorName = author?.displayName || 'Gość';
-
-                // Fix: Google New API uses photoURI (uppercase URI)
-                const photoUrl = author?.photoURI || author?.photoUri || 'https://upload.wikimedia.org/wikipedia/commons/5/53/Google_%22G%22_Logo.svg';
-                const text = review.text || '';
-
-                card.innerHTML = `
-                    <div class="review-header" style="display:flex; align-items:center; gap:10px; margin-bottom:10px;">
-                        <img src="${photoUrl}" alt="${authorName}" style="width:40px; height:40px; border-radius:50%; object-fit:cover;" onerror="this.src='https://upload.wikimedia.org/wikipedia/commons/5/53/Google_%22G%22_Logo.svg'">
-                        <div>
-                            <div class="review-author" style="font-weight:bold;">${authorName}</div>
-                            <div class="stars" style="color:gold; font-size:0.9em;">${stars}</div>
-                        </div>
-                    </div>
-                    <div class="review-text" style="font-size:0.9em; line-height:1.4;">"${text.length > 150 ? text.substring(0, 150) + '...' : text}"</div>
-                    <div class="google-badge" style="position:absolute; bottom:15px; right:15px; width:18px; height:18px; opacity:0.6;">
-                        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l3.66-2.84z" fill="#FBBC05"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.66l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 12-4.53z" fill="#EA4335"/></svg>
-                    </div>
-                `;
-
-                container.appendChild(card);
-            });
-            console.log('[GWAR-API] All 5-star reviews rendered successfully');
-        } else {
-            console.warn('[GWAR-API] No reviews returned from Google for this Place ID');
-        }
-    } catch (error) {
-        console.error('[GWAR-API] Modern Google Reviews Error:', error);
-        console.log('[GWAR-API] Falling back to Legacy Places Service...');
-        loadGoogleReviewsLegacy(container);
-    }
+function escapeHtml(str) {
+    return String(str ?? '').replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
 }
 
-/**
- * Fallback to Legacy Places Service
- */
-function loadGoogleReviewsLegacy(container) {
-    if (!window.google || !window.google.maps || !window.google.maps.places) {
-        console.error('[GWAR-API] Legacy Places Library not available');
-        return;
+export async function loadGoogleReviews() {
+    const container = document.querySelector('#reviews .carousel-container');
+    if (!container) return;
+
+    try {
+        const response = await fetch(`data/reviews.json?d=${new Date().toISOString().slice(0, 10)}`);
+        if (!response.ok) throw new Error(`HTTP ${response.status}`);
+        const data = await response.json();
+        const reviews = (data.reviews || []).filter(r => r.rating === 5 && r.text);
+        if (reviews.length === 0) return;
+
+        container.innerHTML = '';
+        reviews.forEach(review => {
+            const card = document.createElement('a');
+            card.className = 'carousel-item review-card';
+            card.href = REVIEWS_LINK;
+            card.target = '_blank';
+            card.style.textDecoration = 'none';
+            card.style.color = 'inherit';
+
+            const stars = '★'.repeat(Math.round(review.rating || 5));
+            const authorName = escapeHtml(review.author || 'Gość');
+            const photoUrl = escapeHtml(review.photo || GOOGLE_LOGO);
+            const text = review.text.length > 150 ? review.text.substring(0, 150) + '...' : review.text;
+
+            card.innerHTML = `
+                <div class="review-header" style="display:flex; align-items:center; gap:10px; margin-bottom:10px;">
+                    <img src="${photoUrl}" alt="${authorName}" referrerpolicy="no-referrer" style="width:40px; height:40px; border-radius:50%; object-fit:cover;" onerror="this.src='${GOOGLE_LOGO}'">
+                    <div>
+                        <div class="review-author" style="font-weight:bold;">${authorName}</div>
+                        <div class="stars" style="color:gold; font-size:0.9em;">${stars}</div>
+                    </div>
+                </div>
+                <div class="review-text" style="font-size:0.9em; line-height:1.4;">"${escapeHtml(text)}"</div>
+                <div class="google-badge" style="position:absolute; bottom:15px; right:15px; width:18px; height:18px; opacity:0.6;">
+                    <img src="${GOOGLE_LOGO}" alt="Google" style="width:100%; height:100%;">
+                </div>
+            `;
+            container.appendChild(card);
+        });
+    } catch (error) {
+        console.error('[GWAR-API] Reviews load error:', error);
     }
-
-    const service = new google.maps.places.PlacesService(document.createElement('div'));
-    const request = {
-        placeId: CONFIG.GOOGLE_PLACE_ID,
-        fields: ['reviews', 'rating']
-    };
-
-    console.log('[GWAR-API] Calling Legacy getDetails (Fallback)...');
-    service.getDetails(request, (place, status) => {
-        if (status === google.maps.places.PlacesServiceStatus.OK && place && place.reviews) {
-            container.innerHTML = '';
-
-            // Filter: Prefer 5-star, then 4+
-            let reviews = place.reviews
-                .filter(review => (review.rating || 0) >= 5)
-                .sort((a, b) => (b.time || 0) - (a.time || 0))
-                .slice(0, 5);
-
-            if (reviews.length === 0) {
-                reviews = place.reviews
-                    .filter(review => (review.rating || 0) >= 4)
-                    .sort((a, b) => (b.time || 0) - (a.time || 0))
-                    .slice(0, 5);
-            }
-
-            if (reviews.length === 0) return;
-
-            container.innerHTML = '';
-            reviews.forEach(review => {
-                const card = document.createElement('a');
-                card.className = 'carousel-item review-card';
-                card.href = `https://www.google.com/maps/place/Bar+Gwar/@50.048033,19.946036,15z/data=!4m8!3m7!1s0x47165bdfaaf2021b:0x960543b90ef2cad3!8m2!3d50.0480326!4d19.9460358!9m1!1b1!16s%2Fg%2F11kq00tlpl?hl=pl&entry=ttu&g_ep=EgoyMDI2MDYwMy4xIKXMDSoASAFQAw%3D%3D`;
-                card.target = '_blank';
-                card.style.textDecoration = 'none';
-                card.style.color = 'inherit';
-
-                const stars = '★'.repeat(5);
-                const photoUrl = review.profile_photo_url || 'https://upload.wikimedia.org/wikipedia/commons/5/53/Google_%22G%22_Logo.svg';
-
-                card.innerHTML = `
-                    <div class="review-header" style="display:flex; align-items:center; gap:10px; margin-bottom:10px;">
-                        <img src="${photoUrl}" alt="${review.author_name}" style="width:40px; height:40px; border-radius:50%; object-fit:cover;" onerror="this.src='https://upload.wikimedia.org/wikipedia/commons/5/53/Google_%22G%22_Logo.svg'">
-                        <div>
-                            <div class="review-author" style="font-weight:bold;">${review.author_name}</div>
-                            <div class="stars" style="color:gold; font-size:0.9em;">${stars}</div>
-                        </div>
-                    </div>
-                    <div class="review-text" style="font-size:0.9em; line-height:1.4;">"${review.text.length > 150 ? review.text.substring(0, 150) + '...' : review.text}"</div>
-                    <div class="google-badge" style="position:absolute; bottom:15px; right:15px; width:18px; height:18px; opacity:0.6;">
-                        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l3.66-2.84z" fill="#FBBC05"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.66l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 12-4.53z" fill="#EA4335"/></svg>
-                    </div>
-                `;
-                container.appendChild(card);
-            });
-            console.log('[GWAR-API] Legacy 5-star reviews rendered successfully');
-        } else {
-            console.error('[GWAR-API] Legacy fallback failed. Status:', status);
-        }
-    });
 }
 
 /**

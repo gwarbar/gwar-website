@@ -1,4 +1,4 @@
-import { loadInstagramFeed, loadGoogleReviews, loadTravelTime, loadWeather } from './api.js?v=13';
+import { loadInstagramFeed, loadGoogleReviews, loadTravelTime, loadWeather } from './api.js?v=15';
 import { TRANSLATIONS, MENU_DICTIONARY } from './translations.js?v=refresh1';
 
 // PDF Handling
@@ -19,16 +19,8 @@ document.addEventListener('DOMContentLoaded', () => {
     loadInstagramFeed();
     loadWeather();
 
-    // Google Social & Maps Loading Strategy
-    if (window.isGoogleMapsLoaded && window.google) {
-        loadGoogleReviews();
-        loadTravelTime();
-    } else {
-        window.onMapsLoadedCallback = () => {
-            loadGoogleReviews();
-            loadTravelTime();
-        };
-    }
+    loadGoogleReviews();
+    loadTravelTime();
 
     // Mobile Menu Toggle
     const hamburger = document.querySelector('.hamburger');

@@ -39,13 +39,6 @@
         // PDF.js worker setup
         pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.16.105/pdf.worker.min.js';
 
-        // Google Maps Global Buffer
-        window.initMap = function () {
-            window.isGoogleMapsLoaded = true;
-            if (window.onMapsLoadedCallback) {
-                window.onMapsLoadedCallback();
-            }
-        };
     </script>
 </head>
 
@@ -151,32 +144,7 @@
         <div class="container">
             <h2 data-i18n="reviews_title">OPINIE GOOGLE</h2>
             <div class="carousel-container">
-                <a href="https://www.google.com/maps/place/Bar+Gwar/@50.048033,19.946036,15z/data=!4m8!3m7!1s0x47165bdfaaf2021b:0x960543b90ef2cad3!8m2!3d50.0480326!4d19.9460358!9m1!1b1!16s%2Fg%2F11kq00tlpl?hl=pl&entry=ttu&g_ep=EgoyMDI2MDYwMy4xIKXMDSoASAFQAw%3D%3D" target="_blank"
-                    class="carousel-item review-card" style="text-decoration:none; color:inherit;">
-                    <div class="stars">★★★★★</div>
-                    <div class="review-text">"Najlepsze drinki w mieście! Klimat nie do podrobienia, a obsługa to
-                        złoto."</div>
-                    <div class="review-author">- Anna K.</div>
-                </a>
-                <a href="https://www.google.com/maps/place/Bar+Gwar/@50.048033,19.946036,15z/data=!4m8!3m7!1s0x47165bdfaaf2021b:0x960543b90ef2cad3!8m2!3d50.0480326!4d19.9460358!9m1!1b1!16s%2Fg%2F11kq00tlpl?hl=pl&entry=ttu&g_ep=EgoyMDI2MDYwMy4xIKXMDSoASAFQAw%3D%3D" target="_blank"
-                    class="carousel-item review-card" style="text-decoration:none; color:inherit;">
-                    <div class="stars">★★★★★</div>
-                    <div class="review-text">"Super miejsce na spotkanie ze znajomymi. Muzyka, wystrój, wszystko gra."
-                    </div>
-                    <div class="review-author">- Piotr W.</div>
-                </a>
-                <a href="https://www.google.com/maps/place/Bar+Gwar/@50.048033,19.946036,15z/data=!4m8!3m7!1s0x47165bdfaaf2021b:0x960543b90ef2cad3!8m2!3d50.0480326!4d19.9460358!9m1!1b1!16s%2Fg%2F11kq00tlpl?hl=pl&entry=ttu&g_ep=EgoyMDI2MDYwMy4xIKXMDSoASAFQAw%3D%3D" target="_blank"
-                    class="carousel-item review-card" style="text-decoration:none; color:inherit;">
-                    <div class="stars">★★★★★</div>
-                    <div class="review-text">"Bardzo polecam! Drinki autorskie to mistrzostwo świata."</div>
-                    <div class="review-author">- Magda L.</div>
-                </a>
-                <a href="https://www.google.com/maps/place/Bar+Gwar/@50.048033,19.946036,15z/data=!4m8!3m7!1s0x47165bdfaaf2021b:0x960543b90ef2cad3!8m2!3d50.0480326!4d19.9460358!9m1!1b1!16s%2Fg%2F11kq00tlpl?hl=pl&entry=ttu&g_ep=EgoyMDI2MDYwMy4xIKXMDSoASAFQAw%3D%3D" target="_blank"
-                    class="carousel-item review-card" style="text-decoration:none; color:inherit;">
-                    <div class="stars">★★★★★</div>
-                    <div class="review-text">"Luźna atmosfera i profesjonalne podejście barmanów. Wrócę na pewno."</div>
-                    <div class="review-author">- Tomek S.</div>
-                </a>
+                <!-- Filled by loadGoogleReviews() with real Google reviews only -->
             </div>
             <div style="text-align:center; margin-top:30px;">
                 <a href="https://www.google.com/maps/place/Bar+Gwar/@50.048033,19.946036,15z/data=!4m8!3m7!1s0x47165bdfaaf2021b:0x960543b90ef2cad3!8m2!3d50.0480326!4d19.9460358!9m1!1b1!16s%2Fg%2F11kq00tlpl?hl=pl&entry=ttu&g_ep=EgoyMDI2MDYwMy4xIKXMDSoASAFQAw%3D%3D" target="_blank" 
@@ -312,10 +280,6 @@
         <p>&copy; 2026 Bar Gwar. <span data-i18n="footer_rights">Wszelkie prawa zastrzeżone.</span></p>
     </footer>
 
-    <!-- Google Maps API (REQUIRED FOR REVIEWS) -->
-    <script
-        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDHS1YkQvLke6n18kjP3IxdhZq5-7fsc9c&libraries=places&v=weekly&callback=initMap"
-        async defer></script>
     <!-- LIGHTBOX -->
     <div id="lightbox">
         <div class="close-btn">&times;</div>
