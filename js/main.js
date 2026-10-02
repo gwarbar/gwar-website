@@ -173,6 +173,7 @@ async function setSiteLanguage(lang, init = false) {
 
     currentLang = lang;
     localStorage.setItem('gwar_language', lang);
+    document.documentElement.lang = lang === 'ua' ? 'uk' : lang;
 
     // Update active state ONLY for navbar flags
     document.querySelectorAll('.lang-switch .flag-btn').forEach(btn => {
