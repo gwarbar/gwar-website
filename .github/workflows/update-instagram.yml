@@ -80,7 +80,17 @@ jobs:
           if [ "$days" -lt "$REMINDER_EVERY_DAYS" ]; then
             exit 0
           fi
-          gh issue create --title "$REMINDER_TITLE" --body "Darmowy plan Behold wymaga logowania raz w miesiącu, inaczej feed Instagrama na stronie przestaje się odświeżać. Masz ok. 3 dni.
+          gh issue create --title "$REMINDER_TITLE" --body-file - <<'BODY'
+          Darmowy plan Behold wymaga logowania raz w miesiącu – inaczej galeria Instagrama na stronie przestanie pokazywać nowe posty. Masz ok. 3 dni.
 
-          1. Zaloguj się na https://behold.so
-          2. Zamknij to zgłoszenie (przycisk „Close issue” na dole) – kolejne przypomnienie przyjdzie za 28 dni."
+          **Co zrobić (2 minuty), żeby zresetować licznik 28 dni:**
+
+          1. Wejdź na https://behold.so i zaloguj się na konto Bar Gwar.
+          2. Wróć do tego maila i kliknij link **„View it on GitHub”** na dole (otworzy się to zgłoszenie).
+          3. Zaloguj się na GitHub jako **gwarbar**, jeśli trzeba.
+          4. Przewiń na dół strony i kliknij **„Close issue”**.
+
+          Gotowe – licznik liczy się od momentu zamknięcia, kolejne przypomnienie przyjdzie za 28 dni.
+
+          ⚠️ Dopóki to zgłoszenie jest otwarte, nowe przypomnienia nie przychodzą.
+          BODY
