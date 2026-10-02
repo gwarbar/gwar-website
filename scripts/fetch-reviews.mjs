@@ -27,6 +27,7 @@ const fresh = (place.reviews || [])
         text: (r.originalText || r.text || {}).text || '',
         author: r.authorAttribution?.displayName || '',
         photo: r.authorAttribution?.photoUri || '',
+        url: r.googleMapsUri || '',
         publishTime: r.publishTime
     }))
     .filter(r => r.text);
