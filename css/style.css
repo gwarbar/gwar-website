@@ -668,3 +668,147 @@ footer {
 #lightbox .close-btn:hover {
   color: var(--primary-color);
 }
+/* PROMOTIONS PAGE */
+.promo-hero {
+  height: auto;
+  padding: 140px 20px 50px;
+}
+
+.promo-hero h1 {
+  font-size: clamp(3.5rem, 12vw, 6rem);
+}
+
+#promos-list {
+  padding: 20px 0 80px;
+}
+
+.promo-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 24px;
+}
+
+.promo-card {
+  display: flex;
+  flex-direction: column;
+  background: #111;
+  border: 1px solid #222;
+  border-radius: 14px;
+  overflow: hidden;
+  transition: transform 0.3s, border-color 0.3s, box-shadow 0.3s;
+}
+
+.promo-card:hover {
+  transform: translateY(-4px);
+  border-color: rgba(218, 51, 101, 0.6);
+  box-shadow: 0 10px 30px rgba(218, 51, 101, 0.15);
+}
+
+.promo-card.is-today {
+  border-color: var(--primary-color);
+  box-shadow: 0 0 25px rgba(218, 51, 101, 0.35);
+}
+
+.promo-media {
+  position: relative;
+  aspect-ratio: 4 / 5;
+  overflow: hidden;
+}
+
+.promo-media img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.6s;
+}
+
+.promo-card:hover .promo-media img {
+  transform: scale(1.04);
+}
+
+.promo-today {
+  display: none;
+  align-self: flex-start;
+  margin-bottom: 12px;
+  padding: 5px 14px;
+  border-radius: 999px;
+  background: var(--primary-color);
+  color: #fff;
+  font-family: var(--font-heading);
+  letter-spacing: 0.05em;
+}
+
+.promo-card.is-today .promo-today {
+  display: block;
+}
+
+.promo-body {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  padding: 22px 22px 24px;
+}
+
+.promo-body h3 {
+  margin: 0 0 10px;
+  color: var(--primary-color);
+  font-size: 1.15rem;
+  line-height: 1.25;
+}
+
+.promo-deal {
+  margin: 0 0 14px;
+  font-size: 1.35rem;
+  font-weight: bold;
+  line-height: 1.25;
+}
+
+.promo-desc {
+  margin: 0 0 10px;
+  color: #aaa;
+  font-size: 0.95rem;
+  line-height: 1.5;
+}
+
+.promo-when {
+  margin: auto 0 0;
+  padding-top: 16px;
+  border-top: 1px solid #262626;
+  color: #ccc;
+  font-size: 0.9rem;
+}
+
+.promo-when strong {
+  color: var(--primary-color);
+}
+
+.promo-cta {
+  margin: 60px auto 0;
+  padding: 0 20px;
+  max-width: 600px;
+  text-align: center;
+}
+
+.promo-cta p {
+  margin: 0 0 20px;
+  color: #ccc;
+  font-size: 1.1rem;
+}
+
+@media (max-width: 1100px) {
+  .promo-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 640px) {
+  .promo-hero {
+    padding: 110px 20px 30px;
+  }
+
+  .promo-grid {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+}

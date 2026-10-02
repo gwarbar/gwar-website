@@ -73,7 +73,10 @@ export const TRANSLATIONS = {
         "promo_fri_desc1": "Kupując 1 shot, drugi otrzymujesz za 1 PLN!",
         "promo_fri_desc2": "Zapraszamy na shota 🤍",
         "promo_fri_when": "Każdy piątek i sobota",
-        "promo_when_label": "Kiedy:"
+        "promo_when_label": "Kiedy:",
+        "promo_today": "DZIŚ",
+        "promo_cta": "Wpadnij ze znajomymi – stolik najlepiej zarezerwować wcześniej.",
+        "promo_cta_btn": "ZAREZERWUJ STOLIK"
     },
     "en": {
         "nav_about": "ABOUT US",
@@ -150,6 +153,9 @@ export const TRANSLATIONS = {
         "promo_fri_desc2": "Join us for a shot 🤍",
         "promo_fri_when": "Every Friday and Saturday",
         "promo_when_label": "When:",
+        "promo_today": "TODAY",
+        "promo_cta": "Bring your friends – it's best to book a table in advance.",
+        "promo_cta_btn": "BOOK A TABLE",
         "menu_seasonal": "GWAR SPRING (Signature Cocktails)",
         "menu_spritz": "SPRITZ MENU",
         "menu_signatures": "GWAR COCKTAILS",
