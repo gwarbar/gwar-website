@@ -32,10 +32,16 @@ jobs:
         uses: actions/checkout@v4
       - name: Setup Pages
         uses: actions/configure-pages@v5
+      - name: Collect website files
+        # Publish only what the site needs - the repo is public, but dev files,
+        # scripts, source PDFs (pdfy/) and .claude/ don't belong on bar.gwar.bar
+        run: |
+          mkdir _site
+          cp *.html CNAME _site/
+          cp -R css js images data pdf JeanLuc-Webfonts _site/
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          # Upload entire repository
-          path: '.'
+          path: '_site'
       - name: Deploy to GitHub Pages
         uses: actions/deploy-pages@v4
