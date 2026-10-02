@@ -22,10 +22,12 @@ document.addEventListener('DOMContentLoaded', () => {
     loadGoogleReviews();
     loadTravelTime();
 
-    // Promotions page: highlight today's promo
+    // Promotions page: highlight today's promo and move it to the top
     const today = String(new Date().getDay());
     document.querySelectorAll('.promo-card[data-days]').forEach(card => {
-        card.classList.toggle('is-today', card.dataset.days.split(',').includes(today));
+        const isToday = card.dataset.days.split(',').includes(today);
+        card.classList.toggle('is-today', isToday);
+        if (isToday) card.parentElement.prepend(card);
     });
 
     // Mobile Menu Toggle
