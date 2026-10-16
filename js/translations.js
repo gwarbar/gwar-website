@@ -1541,5 +1541,264 @@ export const MENU_DICTIONARY = {
         "fr": "tonic rose",
         "es": "tónica rosa",
         "ua": "рожевий тонік"
+    },
+    "GWARNA JESIEŃ 2026 (Koktajle Autorskie)": {
+        "en": "GWAR AUTUMN 2026 (Signature Cocktails)",
+        "de": "GWAR HERBST 2026 (Signature-Cocktails)",
+        "fr": "AUTOMNE GWAR 2026 (Cocktails Signature)",
+        "es": "OTOÑO GWAR 2026 (Cócteles de Autor)",
+        "ua": "ГВАРНА ОСІНЬ 2026 (Авторські коктейлі)"
+    },
+    "Golden Hour": {
+        "en": "Golden Hour",
+        "de": "Golden Hour",
+        "fr": "Golden Hour",
+        "es": "Golden Hour",
+        "ua": "Золота година"
+    },
+    "Gin blood orange / Triple Sec / purée z marakui / syrop blood orange / sour / bitter pomarańczowy": {
+        "en": "Blood orange gin / Triple Sec / passion fruit purée / blood orange syrup / sour / orange bitters",
+        "de": "Blutorangen-Gin / Triple Sec / Maracujapüree / Blutorangensirup / Sour / Orangenbitter",
+        "fr": "Gin à l'orange sanguine / Triple Sec / purée de fruit de la passion / sirop d'orange sanguine / sour / bitter à l'orange",
+        "es": "Ginebra de naranja sanguina / Triple Sec / puré de maracuyá / sirope de naranja sanguina / sour / bitter de naranja",
+        "ua": "Джин з червоним апельсином / Triple Sec / пюре маракуї / сироп червоного апельсина / сауер / апельсиновий біттер"
+    },
+    "Cherry Blossom": {
+        "en": "Cherry Blossom",
+        "de": "Cherry Blossom",
+        "fr": "Cherry Blossom",
+        "es": "Cherry Blossom",
+        "ua": "Вишневий цвіт"
+    },
+    "Bacardi Spiced / herbata czarna / wiśniówka / Martini Fiero / syrop czereśniowy / sour": {
+        "en": "Bacardi Spiced / black tea / cherry liqueur / Martini Fiero / sweet cherry syrup / sour",
+        "de": "Bacardi Spiced / Schwarztee / Kirschlikör / Martini Fiero / Süßkirschsirup / Sour",
+        "fr": "Bacardi Spiced / thé noir / liqueur de cerise / Martini Fiero / sirop de cerise / sour",
+        "es": "Bacardi Spiced / té negro / licor de guinda / Martini Fiero / sirope de cereza / sour",
+        "ua": "Bacardi Spiced / чорний чай / вишнівка / Martini Fiero / черешневий сироп / сауер"
+    },
+    "Jesień na poziomie": {
+        "en": "Wild Strawberry Autumn",
+        "de": "Walderdbeer-Herbst",
+        "fr": "Automne des fraises des bois",
+        "es": "Otoño de fresas silvestres",
+        "ua": "Осінь на суничках"
+    },
+    "Wódka poziomkowa / Aperitivo Eden / likier z czarnego bzu / syrop poziomkowy / sour / tonik różowy": {
+        "en": "Wild strawberry vodka / Aperitivo Eden / elderflower liqueur / wild strawberry syrup / sour / pink tonic",
+        "de": "Walderdbeer-Wodka / Aperitivo Eden / Holunderblütenlikör / Walderdbeersirup / Sour / rosa Tonic",
+        "fr": "Vodka aux fraises des bois / Aperitivo Eden / liqueur de fleur de sureau / sirop de fraises des bois / sour / tonic rose",
+        "es": "Vodka de fresa silvestre / Aperitivo Eden / licor de flor de saúco / sirope de fresa silvestre / sour / tónica rosa",
+        "ua": "Сунична горілка / Aperitivo Eden / лікер з бузини / суничний сироп / сауер / рожевий тонік"
+    },
+    "Jagodzianki": {
+        "en": "Blueberry Buns",
+        "de": "Heidelbeerbrötchen",
+        "fr": "Brioches aux myrtilles",
+        "es": "Bollos de arándanos",
+        "ua": "Ягідні булочки"
+    },
+    "Gin / Aperitivo Eden / purée borówkowe / syrop poziomkowy / syrop z yuzu / sok z limonki / Prosecco": {
+        "en": "Gin / Aperitivo Eden / blueberry purée / wild strawberry syrup / yuzu syrup / lime juice / Prosecco",
+        "de": "Gin / Aperitivo Eden / Heidelbeerpüree / Walderdbeersirup / Yuzusirup / Limettensaft / Prosecco",
+        "fr": "Gin / Aperitivo Eden / purée de myrtilles / sirop de fraises des bois / sirop de yuzu / jus de lime / Prosecco",
+        "es": "Ginebra / Aperitivo Eden / puré de arándanos / sirope de fresa silvestre / sirope de yuzu / zumo de lima / Prosecco",
+        "ua": "Джин / Aperitivo Eden / чорничне пюре / суничний сироп / сироп юдзу / сік лайма / Просекко"
+    },
+    "Pamiętasz, była jesień": {
+        "en": "Remember, It Was Autumn",
+        "de": "Weißt du noch, es war Herbst",
+        "fr": "Tu te souviens, c'était l'automne",
+        "es": "¿Recuerdas? Era otoño",
+        "ua": "Пам'ятаєш, була осінь"
+    },
+    "Wódka śliwkowa / gin / syrop falernum / purée śliwkowe / sour / Prosecco": {
+        "en": "Plum vodka / gin / falernum syrup / plum purée / sour / Prosecco",
+        "de": "Pflaumenwodka / Gin / Falernum-Sirup / Pflaumenpüree / Sour / Prosecco",
+        "fr": "Vodka à la prune / gin / sirop de falernum / purée de prune / sour / Prosecco",
+        "es": "Vodka de ciruela / ginebra / sirope de falernum / puré de ciruela / sour / Prosecco",
+        "ua": "Сливова горілка / джин / сироп фалернум / сливове пюре / сауер / Просекко"
+    },
+    "Fall for Me": {
+        "en": "Fall for Me",
+        "de": "Fall for Me",
+        "fr": "Fall for Me",
+        "es": "Fall for Me",
+        "ua": "Закохайся в мене"
+    },
+    "Bacardi Spiced / sok z pigwy / syrop Earl Grey / herbata Earl Grey / sour / bitter pomarańczowy": {
+        "en": "Bacardi Spiced / quince juice / Earl Grey syrup / Earl Grey tea / sour / orange bitters",
+        "de": "Bacardi Spiced / Quittensaft / Earl-Grey-Sirup / Earl-Grey-Tee / Sour / Orangenbitter",
+        "fr": "Bacardi Spiced / jus de coing / sirop Earl Grey / thé Earl Grey / sour / bitter à l'orange",
+        "es": "Bacardi Spiced / zumo de membrillo / sirope Earl Grey / té Earl Grey / sour / bitter de naranja",
+        "ua": "Bacardi Spiced / сік айви / сироп Earl Grey / чай Earl Grey / сауер / апельсиновий біттер"
+    },
+    "Nokturn": {
+        "en": "Nocturne",
+        "de": "Nocturne",
+        "fr": "Nocturne",
+        "es": "Nocturno",
+        "ua": "Ноктюрн"
+    },
+    "Gin / Sambuca / czarny syrop cukrowy / syrop falernum / sok z limonki / piwo imbirowe": {
+        "en": "Gin / Sambuca / black sugar syrup / falernum syrup / lime juice / ginger beer",
+        "de": "Gin / Sambuca / schwarzer Zuckersirup / Falernum-Sirup / Limettensaft / Ginger Beer",
+        "fr": "Gin / Sambuca / sirop de sucre noir / sirop de falernum / jus de lime / ginger beer",
+        "es": "Ginebra / Sambuca / sirope de azúcar negro / sirope de falernum / zumo de lima / ginger beer",
+        "ua": "Джин / Самбука / чорний цукровий сироп / сироп фалернум / сік лайма / імбирне пиво"
+    },
+    "W każdą środę, przy zamówieniu koktajlu autorskiego, drugi taki sam za złotówkę!": {
+        "en": "Every Wednesday: order a signature cocktail and get a second one for 1 PLN!",
+        "de": "Jeden Mittwoch: Bestelle einen Signature-Cocktail und erhalte einen zweiten für 1 PLN!",
+        "fr": "Chaque mercredi : pour un cocktail signature commandé, le deuxième à 1 PLN !",
+        "es": "Cada miércoles: pide un cóctel de autor y el segundo te cuesta 1 PLN!",
+        "ua": "Щосереди: замовте авторський коктейль і отримайте другий такий самий за 1 злотий!"
+    },
+    "Aperol Grzany": {
+        "en": "Mulled Aperol",
+        "de": "Glüh-Aperol",
+        "fr": "Aperol chaud",
+        "es": "Aperol caliente",
+        "ua": "Гарячий Апероль"
+    },
+    "Aperol / wino białe / sok tłoczony jabłkowy": {
+        "en": "Aperol / white wine / pressed apple juice",
+        "de": "Aperol / Weißwein / gepresster Apfelsaft",
+        "fr": "Aperol / vin blanc / jus de pomme pressé",
+        "es": "Aperol / vino blanco / zumo de manzana prensado",
+        "ua": "Апероль / біле вино / віджатий яблучний сік"
+    },
+    "Cydr Grzany": {
+        "en": "Mulled Cider",
+        "de": "Glüh-Cidre",
+        "fr": "Cidre chaud",
+        "es": "Sidra caliente",
+        "ua": "Гарячий сидр"
+    },
+    "Cydr półwytrawny / sok tłoczony z pigwy / miód / angostura / calvados": {
+        "en": "Semi-dry cider / pressed quince juice / honey / angostura / calvados",
+        "de": "Halbtrockener Cidre / gepresster Quittensaft / Honig / Angostura / Calvados",
+        "fr": "Cidre demi-sec / jus de coing pressé / miel / angostura / calvados",
+        "es": "Sidra semiseca / zumo de membrillo prensado / miel / angostura / calvados",
+        "ua": "Напівсухий сидр / віджатий сік айви / мед / ангостура / кальвадос"
+    },
+    "Piernik Spritz": {
+        "en": "Gingerbread Spritz",
+        "de": "Lebkuchen Spritz",
+        "fr": "Spritz pain d'épices",
+        "es": "Spritz de jengibre",
+        "ua": "Пряниковий Спритц"
+    },
+    "Bacardi Spiced / amaretto / bitter's kakao / syrop piernikowy / sok NFC gruszka / prosecco": {
+        "en": "Bacardi Spiced / amaretto / cocoa bitters / gingerbread syrup / NFC pear juice / prosecco",
+        "de": "Bacardi Spiced / Amaretto / Kakaobitter / Lebkuchensirup / NFC-Birnensaft / Prosecco",
+        "fr": "Bacardi Spiced / amaretto / bitter cacao / sirop de pain d'épices / jus de poire NFC / prosecco",
+        "es": "Bacardi Spiced / amaretto / bitter de cacao / sirope de pan de jengibre / zumo de pera NFC / prosecco",
+        "ua": "Bacardi Spiced / амаретто / какао-біттер / пряниковий сироп / грушевий сік NFC / просекко"
+    },
+    "Wtorki ze Spritzem! Wybrany Spritz z listy za 20 PLN.": {
+        "en": "Spritz Tuesdays! Any Spritz from the list for 20 PLN.",
+        "de": "Spritz-Dienstage! Jeder Spritz von der Liste für 20 PLN.",
+        "fr": "Mardis Spritz ! Le Spritz de votre choix à 20 PLN.",
+        "es": "¡Martes de Spritz! Cualquier Spritz de la lista por 20 PLN.",
+        "ua": "Вівторки зі Спритцем! Будь-який Спритц зі списку за 20 злотих."
+    },
+    "Rum / malibu / puree kokosowe / puree ananasowe": {
+        "en": "Rum / malibu / coconut purée / pineapple purée",
+        "de": "Rum / Malibu / Kokospüree / Ananaspüree",
+        "fr": "Rhum / malibu / purée de coco / purée d'ananas",
+        "es": "Ron / malibu / puré de coco / puré de piña",
+        "ua": "Ром / малібу / кокосове пюре / ананасове пюре"
+    },
+    "Wódka / likier brzoskwiniowy / malibu / puree kokosowe / sok pomarańczowy / sok żurawinowy / sok ananasowy": {
+        "en": "Vodka / peach liqueur / malibu / coconut purée / orange juice / cranberry juice / pineapple juice",
+        "de": "Wodka / Pfirsichlikör / Malibu / Kokospüree / Orangensaft / Cranberrysaft / Ananassaft",
+        "fr": "Vodka / liqueur de pêche / malibu / purée de coco / jus d'orange / jus de canneberge / jus d'ananas",
+        "es": "Vodka / licor de melocotón / malibu / puré de coco / zumo de naranja / zumo de arándano rojo / zumo de piña",
+        "ua": "Горілка / персиковий лікер / малібу / кокосове пюре / апельсиновий сік / журавлинний сік / ананасовий сік"
+    },
+    "Wódka / Lucano likier kawowy / espresso": {
+        "en": "Vodka / Lucano coffee liqueur / espresso",
+        "de": "Wodka / Lucano Kaffeelikör / Espresso",
+        "fr": "Vodka / liqueur de café Lucano / espresso",
+        "es": "Vodka / licor de café Lucano / espresso",
+        "ua": "Горілка / кавовий лікер Lucano / еспресо"
+    },
+    "Wódka / sok imbirowy / sok z cytryny": {
+        "en": "Vodka / ginger juice / lemon juice",
+        "de": "Wodka / Ingwersaft / Zitronensaft",
+        "fr": "Vodka / jus de gingembre / jus de citron",
+        "es": "Vodka / zumo de jengibre / zumo de limón",
+        "ua": "Горілка / імбирний сік / лимонний сік"
+    },
+    "Lemoniada Borówkowa": {
+        "en": "Blueberry Lemonade",
+        "de": "Heidelbeer-Limonade",
+        "fr": "Limonade à la myrtille",
+        "es": "Limonada de arándanos",
+        "ua": "Чорничний лимонад"
+    },
+    "Woda mineralna niegazowana": {
+        "en": "Still mineral water",
+        "de": "Stilles Mineralwasser",
+        "fr": "Eau minérale plate",
+        "es": "Agua mineral sin gas",
+        "ua": "Негазована мінеральна вода"
+    },
+    "Woda mineralna gazowana": {
+        "en": "Sparkling mineral water",
+        "de": "Mineralwasser mit Kohlensäure",
+        "fr": "Eau minérale gazeuse",
+        "es": "Agua mineral con gas",
+        "ua": "Газована мінеральна вода"
+    },
+    "Sok NFC Jabłkowy": {
+        "en": "NFC apple juice",
+        "de": "NFC-Apfelsaft",
+        "fr": "Jus de pomme NFC",
+        "es": "Zumo de manzana NFC",
+        "ua": "Яблучний сік NFC"
+    },
+    "Sok NFC Pomarańczowy": {
+        "en": "NFC orange juice",
+        "de": "NFC-Orangensaft",
+        "fr": "Jus d'orange NFC",
+        "es": "Zumo de naranja NFC",
+        "ua": "Апельсиновий сік NFC"
+    },
+    "Sok NFC Grejpfrut": {
+        "en": "NFC grapefruit juice",
+        "de": "NFC-Grapefruitsaft",
+        "fr": "Jus de pamplemousse NFC",
+        "es": "Zumo de pomelo NFC",
+        "ua": "Грейпфрутовий сік NFC"
+    },
+    "Sok NFC Żurawina": {
+        "en": "NFC cranberry juice",
+        "de": "NFC-Cranberrysaft",
+        "fr": "Jus de canneberge NFC",
+        "es": "Zumo de arándano rojo NFC",
+        "ua": "Журавлинний сік NFC"
+    },
+    "w oliwie czosnkowo-ziołowej": {
+        "en": "in garlic and herb olive oil",
+        "de": "in Knoblauch-Kräuter-Olivenöl",
+        "fr": "à l'huile d'olive ail et herbes",
+        "es": "en aceite de oliva con ajo y hierbas",
+        "ua": "в часниково-трав'яній олії"
+    },
+    "nadziewane serkiem, w oliwie": {
+        "en": "stuffed with cream cheese, in olive oil",
+        "de": "mit Frischkäse gefüllt, in Olivenöl",
+        "fr": "farcis au fromage frais, à l'huile d'olive",
+        "es": "rellenos de queso crema, en aceite de oliva",
+        "ua": "фаршировані сиром, в олії"
+    },
+    "zapiekane z serem i salsą": {
+        "en": "baked with cheese and salsa",
+        "de": "überbacken mit Käse und Salsa",
+        "fr": "gratinés au fromage et à la salsa",
+        "es": "gratinados con queso y salsa",
+        "ua": "запечені з сиром і сальсою"
     }
 };
